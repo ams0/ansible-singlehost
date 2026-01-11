@@ -3,6 +3,11 @@ output "instance_id" {
   value       = oci_core_instance.this.id
 }
 
+output "tags" {
+  description = "Tags"
+  value       = oci_core_instance.this.freeform_tags
+}
+
 output "instance_public_ip" {
   description = "Public IP address of the compute instance (empty if disabled)."
   value       = oci_core_instance.this.public_ip
