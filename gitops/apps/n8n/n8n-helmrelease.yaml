@@ -31,7 +31,7 @@ spec:
       dataStorage:
         enabled: false
     image:
-      tag: "2.1.1"
+      tag: "2.1.1" # renovate: datasource=docker depName=n8nio/n8n
     # Database configuration
     config:
       database:
