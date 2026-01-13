@@ -50,7 +50,7 @@
   changed_when: false
 
 - name: Install Flux in cluster
-  shell: flux install --namespace={{ flux_namespace }}
+  shell: flux install --namespace={{ flux_namespace }} --components-extra=image-reflector-controller,image-automation-controller
   environment:
     KUBECONFIG: /var/lib/k0s/pki/admin.conf
   when: flux_namespace_exists.rc != 0
