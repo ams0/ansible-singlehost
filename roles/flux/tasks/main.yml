@@ -57,7 +57,7 @@
   register: flux_install
 
 - name: Upgrade Flux in cluster if CLI was upgraded
-  shell: flux install --namespace={{ flux_namespace }}
+  shell: flux install --namespace={{ flux_namespace }} --components-extra=image-reflector-controller,image-automation-controller
   environment:
     KUBECONFIG: /var/lib/k0s/pki/admin.conf
   when:
