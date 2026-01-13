@@ -10,3 +10,4 @@
 - [ ] Element Community (https://github.com/element-hq/ess-helm)
 - [ ] Pretalx
 - [ ] Harbor
+- [ ] https://github.com/hackmdio/CodiMD
