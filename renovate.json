@@ -1,13 +1,44 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
+  "extends": [
+    "config:recommended",
+    ":disableRateLimiting"
+  ],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 0,
+  "semanticCommits": "enabled",
+  "separateMinorPatch": true,
+  "labels": ["dependencies", "renovate"],
+  "schedule": ["every weekend"],
+  "flux": {
+    "fileMatch": ["gitops/.+\\.yaml$"]
+  },
+  "kubernetes": {
+    "fileMatch": ["gitops/.+\\.yaml$"]
+  },
   "regexManagers": [
     {
-      "fileMatch": ["n8n-helmrelease\\.yaml$"],
+      "fileMatch": ["gitops/apps/.+\\.yaml$"],
       "matchStrings": [
-        "image:\\s*?tag:\\s*?(?<currentValue>.*?) # renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\s"
+        "tag:\\s*[\"']?(?<currentValue>[^\"'\\s]+)[\"']?\\s*#\\s*renovate:\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)"
       ],
       "datasourceTemplate": "docker"
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "Auto-merge patch updates",
+      "matchUpdateTypes": ["patch"],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
+    },
+    {
+      "description": "Group all n8n updates",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["n8nio/n8n"],
+      "groupName": "n8n",
+      "commitMessageTopic": "n8n"
     }
   ]
 }
