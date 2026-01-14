@@ -1,0 +1,8 @@
+version: "2"
+stacks:
+  cloudlab:
+    project_root: ./terraform
+    administrative: false
+    autodeploy: true
+    labels:
+      - terraform
