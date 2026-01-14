@@ -23,12 +23,6 @@ spec:
     remediation:
       retries: 3
   values:
-    main:
-      config:
-        webhook_url: "https://n8n.vps.kubespaces.cloud"
-        n8n:
-          proxy_hops: "1"
-          editor_base_url: "https://n8n.vps.kubespaces.cloud"
     valkey:
       enabled: true
       replicaCount: 1
@@ -52,6 +46,11 @@ spec:
               name: n8n-n8n-database-cluster-app
               key: password
     main:
+      config:
+        webhook_url: "https://n8n.vps.kubespaces.cloud"
+        n8n:
+          proxy_hops: "1"
+          editor_base_url: "https://n8n.vps.kubespaces.cloud"
       # Persistence for n8n data
       persistence:
         enabled: true
