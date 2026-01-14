@@ -8,17 +8,29 @@
   "prHourlyLimit": 0,
   "semanticCommits": "enabled",
   "separateMinorPatch": true,
-  "labels": ["dependencies", "renovate"],
-  "schedule": ["every weekend"],
+  "labels": [
+    "dependencies",
+    "renovate"
+  ],
+  "schedule": [
+    "every weekend"
+  ],
   "flux": {
-    "fileMatch": ["gitops/.+\\.yaml$"]
+    "managerFilePatterns": [
+      "/gitops/.+\\.yaml$/"
+    ]
   },
   "kubernetes": {
-    "fileMatch": ["gitops/.+\\.yaml$"]
+    "managerFilePatterns": [
+      "/gitops/.+\\.yaml$/"
+    ]
   },
-  "regexManagers": [
+  "customManagers": [
     {
-      "fileMatch": ["gitops/apps/.+\\.yaml$"],
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/gitops/apps/.+\\.yaml$/"
+      ],
       "matchStrings": [
         "tag:\\s*[\"']?(?<currentValue>[^\"'\\s]+)[\"']?\\s*#\\s*renovate:\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)"
       ],
@@ -28,15 +40,21 @@
   "packageRules": [
     {
       "description": "Auto-merge patch updates",
-      "matchUpdateTypes": ["patch"],
+      "matchUpdateTypes": [
+        "patch"
+      ],
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "squash"
     },
     {
       "description": "Group all n8n updates",
-      "matchDatasources": ["docker"],
-      "matchPackageNames": ["n8nio/n8n"],
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "n8nio/n8n"
+      ],
       "groupName": "n8n",
       "commitMessageTopic": "n8n"
     }
