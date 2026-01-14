@@ -28,6 +28,9 @@ spec:
       retries: 3
   releaseName: minecraft
   values:
+    image:
+      repository: itzg/minecraft-server
+      tag: latest
     persistence:
       dataDir:
         enabled: true
