@@ -1,4 +1,4 @@
-# Oracle Single VM Terraform
+# Oracle Single VM Terraform module
 
 This directory contains a minimal Terraform configuration that provisions the
 networking components and a single Compute instance in Oracle Cloud Infrastructure
