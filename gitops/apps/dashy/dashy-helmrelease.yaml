@@ -26,6 +26,11 @@ spec:
     remediation:
       retries: 3
   values:
+    image:
+      repository: lissy93/dashy
+      pullPolicy: IfNotPresent
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: "latest"
     static:
       # If set to true, configuration will be overwritten on every new releases.
       enabled: true
