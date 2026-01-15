@@ -17,5 +17,5 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: dashy-dashy-http
+        - name: dashy-dashy
           port: 8080
