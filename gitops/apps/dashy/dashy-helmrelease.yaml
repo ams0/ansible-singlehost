@@ -12,7 +12,7 @@ spec:
   targetNamespace: dashy
   chart:
     spec:
-      chart: 
+      chart: dashy
       sourceRef:
         kind: HelmRepository
         name: dashy
