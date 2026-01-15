@@ -2,7 +2,7 @@
 
 - [X] Minecraft server
 - [ ] Move Minecraft to use [PaperMC](https://papermc.io/)
-- [ ] Dashy
+- [X] Dashy
 - [ ] Grafana/Prometheus
 - [X] Forgejo 
 - [X] Mailer and runners for ForgeJo
@@ -11,3 +11,4 @@
 - [ ] Pretalx
 - [ ] Harbor
 - [ ] https://github.com/hackmdio/CodiMD
+- [ ] https://github.com/documenso/documenso
