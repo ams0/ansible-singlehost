@@ -1,0 +1,83 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: dashy
+  namespace: flux-system
+  labels:
+    app: dashy
+spec:
+  interval: 10m
+  timeout: 5m
+  targetNamespace: dashy
+  chart:
+    spec:
+      chart: 
+      sourceRef:
+        kind: HelmRepository
+        name: dashy
+        namespace: flux-system
+      interval: 5m0s
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    static:
+      # If set to true, configuration will be overwritten on every new releases.
+      enabled: true
+
+      # -- Set this to the name of a secret to load configuration from. If defined, values in the secret will override values in configs
+      existingSecret: ""
+
+      # Customize config.yaml https://github.com/Lissy93/dashy/blob/master/docs/configuring.md for more information.
+      configMapContent:
+        conf: |-
+          # Page meta info, like heading, footer text and nav links
+          pageInfo:
+            title: Dashy
+            description: Welcome to your new dashboard!
+            navLinks:
+              - title: GitHub
+                path: https://github.com/ams0/cloudlab
+              - title: Documentation
+                path: https://dashy.to/docs
+      
+          # Optional app settings and configuration
+          appConfig:
+            theme: colorful
+      
+          # Main content - An array of sections, each containing an array of items
+          sections:
+            - name: Getting Started
+              icon: fas fa-rocket
+              items:
+                - title: Dashy Live
+                  description: Development a project management links for Dashy
+                  icon: https://i.ibb.co/qWWpD0v/astro-dab-128.png
+                  url: https://live.dashy.to/
+                  target: newtab
+                - title: GitHub
+                  description: Source Code, Issues and Pull Requests
+                  url: https://github.com/lissy93/dashy
+                  icon: favicon
+                - title: Docs
+                  description: Configuring & Usage Documentation
+                  provider: Dashy.to
+                  icon: far fa-book
+                  url: https://dashy.to/docs
+                - title: Showcase
+                  description: See how others are using Dashy
+                  url: https://github.com/Lissy93/dashy/blob/master/docs/showcase.md
+                  icon: far fa-grin-hearts
+                - title: Config Guide
+                  description: See full list of configuration options
+                  url: https://github.com/Lissy93/dashy/blob/master/docs/configuring.md
+                  icon: fas fa-wrench
+                - title: Support
+                  description: Get help with Dashy, raise a bug, or get in contact
+                  url: https://github.com/Lissy93/dashy/blob/master/.github/SUPPORT.md
+                  icon: far fa-hands-helping
