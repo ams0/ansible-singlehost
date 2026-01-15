@@ -6,4 +6,4 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1h
-  url: hhttps://vyrtualsynthese.github.io/selfhosted-helmcharts/
+  url: https://vyrtualsynthese.github.io/selfhosted-helmcharts/
