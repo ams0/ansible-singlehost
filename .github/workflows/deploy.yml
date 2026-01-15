@@ -1,6 +1,12 @@
 name: Deploy with Ansible
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'ingress/**'
+      - 'roles/**'
   workflow_dispatch:
     inputs:
       tags:
