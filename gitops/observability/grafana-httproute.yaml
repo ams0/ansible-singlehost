@@ -17,6 +17,6 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: kube-prometheus-stack-grafana  # Update this if using a different release name
+        - name: observability-prometheus-stack-grafana  # Update this if using a different release name
           port: 80
           weight: 1
