@@ -107,6 +107,11 @@ spec:
 
     # Grafana configuration
     grafana:
+      grafana.ini:
+        auth.anonymous:
+          enabled: true
+          org_name: Main Org.
+          org_role: Viewer
       enabled: true
       namespaceOverride: "observability"
 
