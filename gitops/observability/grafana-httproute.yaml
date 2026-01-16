@@ -1,0 +1,22 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: grafana
+  namespace: observability
+spec:
+  parentRefs:
+    - name: gateway
+      namespace: istio-system
+      sectionName: http
+  hostnames:
+    - "grafana.vps.kubespaces.cloud"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: kube-prometheus-stack-grafana  # Update this if using a different release name
+          port: 80
+          weight: 1
