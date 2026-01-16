@@ -39,6 +39,17 @@ prometheus:
         cluster: "kubespaces"
         prometheus_replica: "$(POD_NAME)"
 
+      # Volume mounts for Thanos sidecar
+      volumeMounts:
+        - name: thanos-store
+          mountPath: /thanos/store
+
+    # Volumes for Thanos local storage
+    volumes:
+      - name: thanos-store
+        persistentVolumeClaim:
+          claimName: thanos-store
+
     # Storage configuration for Prometheus
     storageSpec:
       volumeClaimTemplate:
