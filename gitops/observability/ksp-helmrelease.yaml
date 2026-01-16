@@ -34,7 +34,7 @@ spec:
       prometheusSpec:
         # Enable OTLP receiver for OpenTelemetry metrics
         otlp:
-          promoteResourceAttributes: []
+          # promoteResourceAttributes: []  # Removed: empty array causes validation error - must have at least 1 item
           keepIdentifyingResourceAttributes: false
           translationStrategy: NoUTF8EscapingWithSuffixes
           convertHistogramsToNHCB: false
