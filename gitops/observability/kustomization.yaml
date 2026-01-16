@@ -4,3 +4,6 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - kps-ocirepository.yaml
+- thanos-objstore-config.yaml
+- thanos-storage-pvc.yaml
+- grafana-httproute.yaml
