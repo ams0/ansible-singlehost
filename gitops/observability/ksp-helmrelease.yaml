@@ -34,7 +34,24 @@ spec:
       prometheusSpec:
         # Enable OTLP receiver for OpenTelemetry metrics
         otlp:
-          # promoteResourceAttributes: []  # Removed: empty array causes validation error - must have at least 1 item
+          promoteResourceAttributes:
+          - service.instance.id
+          - service.name
+          - service.namespace
+          - cloud.availability_zone
+          - cloud.region
+          - container.name
+          - deployment.environment.name
+          - k8s.cluster.name
+          - k8s.container.name
+          - k8s.cronjob.name
+          - k8s.daemonset.name
+          - k8s.deployment.name
+          - k8s.job.name
+          - k8s.namespace.name
+          - k8s.pod.name
+          - k8s.replicaset.name
+          - k8s.statefulset.name
           keepIdentifyingResourceAttributes: false
           translationStrategy: NoUTF8EscapingWithSuffixes
           convertHistogramsToNHCB: false
