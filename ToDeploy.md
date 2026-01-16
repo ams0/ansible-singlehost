@@ -12,3 +12,4 @@
 - [ ] Harbor
 - [ ] https://github.com/hackmdio/CodiMD
 - [ ] https://github.com/documenso/documenso
+- [ ] Sync secrets from external source (like forgejo-smtp secret)

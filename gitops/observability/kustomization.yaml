@@ -6,4 +6,5 @@ resources:
 - kps-ocirepository.yaml
 - thanos-objstore-config.yaml
 - thanos-storage-pvc.yaml
+- ksp-helmrelease.yaml
 - grafana-httproute.yaml
