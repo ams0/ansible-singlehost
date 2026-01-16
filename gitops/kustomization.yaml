@@ -6,6 +6,7 @@ resources:
 - flux-receiver
 - gateway-api/experimental-install-v1.4.0.yaml
 - istio
+- observability
 - cnpg
 - databases
 - apps
