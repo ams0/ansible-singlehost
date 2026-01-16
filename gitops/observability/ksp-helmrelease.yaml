@@ -34,6 +34,7 @@ spec:
       prometheusSpec:
         # Enable OTLP receiver for OpenTelemetry metrics
         otlp:
+          # https://github.com/prometheus-community/helm-charts/issues/5080
           promoteResourceAttributes:
           - service.instance.id
           - service.name
