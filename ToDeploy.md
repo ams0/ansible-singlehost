@@ -10,6 +10,9 @@
 - [ ] Element Community (https://github.com/element-hq/ess-helm)
 - [ ] Pretalx
 - [ ] Harbor
+- [ ] Velero+restic to replace Borg
 - [ ] https://github.com/hackmdio/CodiMD
 - [ ] https://github.com/documenso/documenso
 - [ ] Sync secrets from external source (like forgejo-smtp secret)
+- [ ] Cloud lab velero forgejo recovery lint traefik
+- [ ] BorgUI and alerts
