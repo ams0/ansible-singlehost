@@ -3,6 +3,8 @@
 - [X] Minecraft server
 - [ ] Move Minecraft to use [PaperMC](https://papermc.io/)
 - [X] Dashy
+- [ ] Keycloak
+- [ ] https://github.com/open-webui/helm-charts or https://www.librechat.ai
 - [ ] Grafana/Prometheus
 - [X] Forgejo 
 - [X] Mailer and runners for ForgeJo
@@ -11,8 +13,18 @@
 - [ ] Pretalx
 - [ ] Harbor
 - [ ] Velero+restic to replace Borg
+- [ ] Restic Browser
+- [ ] Borgwarehouse / Backrest / https://github.com/axelhahn/restic-http-server-for-synology
 - [ ] https://github.com/hackmdio/CodiMD
 - [ ] https://github.com/documenso/documenso
 - [ ] Sync secrets from external source (like forgejo-smtp secret)
 - [ ] Cloud lab velero forgejo recovery lint traefik
 - [ ] BorgUI and alerts
+- [ ] ArgoCD w/ agents
+- [ ] Argo Workflows, Notifications
+- [ ] Garage Operator: https://github.com/rajsinghtech/garage-operator 
+- [ ] NocoDB or Baserow (Airtable alternative)
+- [ ] Appwrite (Supabase alternative)
+- [ ] https://github.com/OvenMediaLabs/OvenMediaEngine
+- [ ] temporal.io
+- [ ] Kubernetes login with github
