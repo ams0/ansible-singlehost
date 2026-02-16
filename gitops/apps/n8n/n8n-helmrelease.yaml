@@ -63,33 +63,30 @@ spec:
         type: existing
         existingClaim: n8n-pvc
 
+      # Service configuration
+      service:
+        type: ClusterIP
+        port: 5678
+
+      # Resources
+      resources:
+        limits:
+          cpu: 1000m
+          memory: 1Gi
+        requests:
+          cpu: 100m
+          memory: 256Mi
+
+      # Security context - using podSecurityContext as per chart defaults
+      podSecurityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+
     worker:
       enabled: false
-      persistence:
-        enabled: true
-        type: dynamic
-        size: 10Gi
 
     # Ingress configuration (disabled for now, will use Gateway API)
     ingress:
       enabled: false
-
-    # Service configuration
-    service:
-      type: ClusterIP
-      port: 5678
-
-    # Resources
-    resources:
-      limits:
-        cpu: 1000m
-        memory: 1Gi
-      requests:
-        cpu: 100m
-        memory: 256Mi
-
-    # Security context
-    securityContext:
-      runAsNonRoot: true
-      runAsUser: 1000
-      fsGroup: 1000
