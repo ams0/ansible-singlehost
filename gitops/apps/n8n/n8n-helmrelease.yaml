@@ -61,10 +61,7 @@ spec:
         existingClaim: n8n-pvc
 
     worker:
-      enabled: true
-      extraEnv:
-        N8N_REDIS_HOST:
-          value: n8n-n8n-valkey
+      enabled: false
       persistence:
         enabled: true
         type: dynamic
