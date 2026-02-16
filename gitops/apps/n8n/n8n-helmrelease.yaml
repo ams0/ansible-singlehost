@@ -57,7 +57,7 @@ spec:
         type: existing
         existingClaim: n8n-pvc
     worker:
-      enabled: false
+      enabled: true
       persistence: 
         enabled: true
         type: dynamic
