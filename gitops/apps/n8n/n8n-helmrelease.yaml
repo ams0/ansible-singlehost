@@ -34,26 +34,29 @@ spec:
     image:
       tag: "2.7.5" # renovate: datasource=docker depName=n8nio/n8n
 
-    # Database configuration
-    config:
-      database:
-        type: postgresdb
-        postgresdb:
-          host: n8n-n8n-database-cluster-rw
-          port: 5432
-          database: n8n
-          user: n8n
-          password:
-            fromSecret:
-              name: n8n-n8n-database-cluster-app
-              key: password
-
     main:
+      # Database configuration
       config:
+        db:
+          type: postgresdb
+          postgresdb:
+            host: n8n-n8n-database-cluster-rw
+            port: 5432
+            database: n8n
+            user: n8n
         webhook_url: "https://n8n.vps.kubespaces.cloud"
         n8n:
           proxy_hops: "1"
           editor_base_url: "https://n8n.vps.kubespaces.cloud"
+
+      # Reference password from secret
+      extraEnv:
+        DB_POSTGRESDB_PASSWORD:
+          valueFrom:
+            secretKeyRef:
+              name: n8n-n8n-database-cluster-app
+              key: password
+
       # Persistence for n8n data
       persistence:
         enabled: true
