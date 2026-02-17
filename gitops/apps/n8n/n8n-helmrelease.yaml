@@ -63,6 +63,8 @@ spec:
             secretKeyRef:
               name: n8n-n8n-database-cluster-app
               key: password
+        OFFLOAD_MANUAL_EXECUTIONS_TO_WORKERS:
+          value: "true"
 
       # Persistence for n8n data
       persistence:
