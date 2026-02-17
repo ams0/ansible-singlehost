@@ -85,7 +85,10 @@ spec:
         fsGroup: 1000
 
     worker:
-      enabled: false
+      enabled: true
+      extraEnv:
+        N8N_REDIS_HOST:
+          value: n8n-n8n-valkey
 
     # Ingress configuration (disabled for now, will use Gateway API)
     ingress:
