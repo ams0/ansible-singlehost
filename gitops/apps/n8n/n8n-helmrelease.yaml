@@ -86,14 +86,6 @@ spec:
 
     worker:
       enabled: true
-      config:
-        db:
-          type: postgresdb
-          postgresdb:
-            host: n8n-n8n-database-cluster-rw
-            port: 5432
-            database: n8n
-            user: n8n
       extraEnv:
         DB_POSTGRESDB_PASSWORD:
           valueFrom:
