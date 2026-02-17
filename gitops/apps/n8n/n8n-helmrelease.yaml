@@ -43,7 +43,7 @@ spec:
         queue:
           bull:
             redis:
-              host: "{{ .Release.Name }}-valkey-master"
+              host: n8n-n8n-valkey
         db:
           type: postgresdb
           postgresdb:
