@@ -3,6 +3,9 @@
 - [X] Minecraft server
 - [ ] Move Minecraft to use [PaperMC](https://papermc.io/)
 - [X] Dashy
+- [ ] XWiki
+- [ ] https://goauthentik.io
+- [ ] https://github.com/openSUSE/osem/blob/master/INSTALL.md
 - [ ] Keycloak
 - [ ] https://github.com/open-webui/helm-charts or https://www.librechat.ai
 - [ ] Grafana/Prometheus

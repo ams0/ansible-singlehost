@@ -25,6 +25,7 @@ spec:
   values:
     valkey:
       enabled: true
+      architecture: standalone
       replicaCount: 1
       auth:
         enabled: false
@@ -37,14 +38,12 @@ spec:
     main:
       # Database configuration
       config:
+        executions:
+          mode: queue
         queue:
-          health:
-            check:
-              active: true
           bull:
             redis:
-              host: n8n-n8n-valkey
-              port: 6379
+              host: "{{ .Release.Name }}-valkey-master"
         db:
           type: postgresdb
           postgresdb:
@@ -94,6 +93,8 @@ spec:
 
     worker:
       enabled: true
+      replicaCount: 1
+      concurrency: 10  # parallel jobs per worker
       config:
         queue:
           health:
