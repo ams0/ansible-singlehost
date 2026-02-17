@@ -37,6 +37,14 @@ spec:
     main:
       # Database configuration
       config:
+        queue:
+          health:
+            check:
+              active: true
+          bull:
+            redis:
+              host: n8n-n8n-valkey
+              port: 6379
         db:
           type: postgresdb
           postgresdb:
