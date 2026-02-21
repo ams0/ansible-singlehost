@@ -9,7 +9,7 @@ metadata:
 spec:
   interval: 10m
   timeout: 5m
-  targetNamespace: rancher
+  targetNamespace: cattle-system
   chart:
     spec:
       chart: rancher
