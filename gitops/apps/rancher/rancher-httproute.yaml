@@ -17,5 +17,5 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: rancher-rancher
+        - name: cattle-system-rancher
           port: 80
