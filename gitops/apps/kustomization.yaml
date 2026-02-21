@@ -8,3 +8,4 @@ resources:
   - forgejo
   - dashy
   - rancher
+  - actual

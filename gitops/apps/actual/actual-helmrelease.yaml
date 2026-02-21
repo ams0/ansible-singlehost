@@ -1,0 +1,33 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: actual
+  namespace: flux-system
+  labels:
+    app: actual
+spec:
+  interval: 10m
+  timeout: 5m
+  targetNamespace: actual
+  chart:
+    spec:
+      chart: actualbudget
+      sourceRef:
+        kind: HelmRepository
+        name: actual
+        namespace: flux-system
+      interval: 5m0s
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    ingress:
+      enabled: false
+    persistence:
+      enabled: true
+      existingClaim: actual-pvc
