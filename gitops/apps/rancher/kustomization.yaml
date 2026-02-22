@@ -6,3 +6,4 @@ resources:
   - rancher-helmrepo.yaml
   - rancher-helmrelease.yaml
   - rancher-httproute.yaml
+  - rancher-destinationrule.yaml

@@ -1,0 +1,12 @@
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: rancher-tls
+  namespace: cattle-system
+spec:
+  host: cattle-system-rancher.cattle-system.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: SIMPLE
+      insecureSkipVerify: true
