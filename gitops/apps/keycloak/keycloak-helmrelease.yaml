@@ -11,12 +11,10 @@ spec:
   interval: 10m
   timeout: 5m
   targetNamespace: keycloak
-  chart:
-    spec:
-      chartRef:
-        kind: OCIRepository
-        name: keycloak-ocirepo
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: keycloak-ocirepo
+    namespace: flux-system
   install:
     createNamespace: true
     remediation:
