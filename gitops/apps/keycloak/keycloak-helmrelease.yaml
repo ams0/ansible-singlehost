@@ -25,8 +25,7 @@ spec:
   values:
     args:
       - start
-    hostname:
-      hostname: auth.vps.kubespaces.cloud
+      - --hostname=auth.vps.kubespaces.cloud
     database:
       existingSecret: "keycloak-keycloak-database-cluster-app"
       existingSecretKey: "password"
