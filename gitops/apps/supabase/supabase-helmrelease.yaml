@@ -29,6 +29,8 @@ spec:
     environment:
       auth:
         API_EXTERNAL_URL: https://supabase.vps.kubespaces.cloud
+      studio:
+        SUPABASE_PUBLIC_URL: https://supabase.vps.kubespaces.cloud
     ingress:
       enabled: false
     secret:
@@ -38,4 +40,4 @@ spec:
         openAiApiKey: "key_super_secret"
     deployment:
       kong:
-        enabled: false
+        enabled: true
