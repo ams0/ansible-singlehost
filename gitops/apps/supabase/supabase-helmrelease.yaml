@@ -35,8 +35,7 @@ spec:
       enabled: false
     secret:
       dashboard:
-        username: "supabase"
-        password: "this_password_is_insecure_and_should_be_updated"
+        secretRef: supabase-dashboard-creds
         openAiApiKey: "key_super_secret"
     deployment:
       kong:
