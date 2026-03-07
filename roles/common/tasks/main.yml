@@ -122,6 +122,17 @@
   failed_when: false
   ignore_errors: yes
 
+- name: Increase inotify limits for Kubernetes
+  sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    state: present
+    sysctl_file: /etc/sysctl.d/99-kubernetes.conf
+    reload: yes
+  loop:
+    - { name: fs.inotify.max_user_watches, value: "524288" }
+    - { name: fs.inotify.max_user_instances, value: "512" }
+
 - name: Save iptables rules
   shell: netfilter-persistent save
   changed_when: false

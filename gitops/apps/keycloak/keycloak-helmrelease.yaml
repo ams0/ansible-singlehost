@@ -23,6 +23,10 @@ spec:
     remediation:
       retries: 3
   values:
+    command:
+      - start
+    hostname:
+      hostname: auth.vps.kubespaces.cloud
     database:
       existingSecret: "keycloak-keycloak-database-cluster-app"
       existingSecretKey: "password"
