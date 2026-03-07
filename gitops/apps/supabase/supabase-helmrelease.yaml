@@ -36,6 +36,9 @@ spec:
     secret:
       dashboard:
         secretRef: supabase-dashboard-creds
+        secretRefKey:
+          username: username
+          password: password
         openAiApiKey: "key_super_secret"
     deployment:
       kong:
