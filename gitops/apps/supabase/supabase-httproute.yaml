@@ -15,21 +15,42 @@ spec:
     - matches:
         - path:
             type: PathPrefix
-            value: /studio
-      backendRefs:
-        - name: supabase-supabase-supabase-studio
-          port: 3000
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /auth
+            value: /auth/v1
       backendRefs:
         - name: supabase-supabase-supabase-auth
           port: 9999
     - matches:
         - path:
             type: PathPrefix
-            value: /analytics
+            value: /rest/v1
       backendRefs:
-        - name: supabase-supabase-supabase-analytics
+        - name: supabase-supabase-supabase-rest
+          port: 3000
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /realtime/v1
+      backendRefs:
+        - name: supabase-supabase-supabase-realtime
           port: 4000
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /storage/v1
+      backendRefs:
+        - name: supabase-supabase-supabase-storage
+          port: 5000
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /functions/v1
+      backendRefs:
+        - name: supabase-supabase-supabase-functions
+          port: 9000
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: supabase-supabase-supabase-studio
+          port: 3000

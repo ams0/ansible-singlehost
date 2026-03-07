@@ -28,7 +28,7 @@ spec:
   values:
     environment:
       auth:
-        API_EXTERNAL_URL: http://supabase.vps.kubespaces.cloud  # Change this to your actual domain
+        API_EXTERNAL_URL: https://supabase.vps.kubespaces.cloud
     ingress:
       enabled: false
     secret:
