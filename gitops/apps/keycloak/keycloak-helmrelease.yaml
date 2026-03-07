@@ -30,6 +30,16 @@ spec:
         value: auth.vps.kubespaces.cloud
       - name: KC_HOSTNAME_STRICT
         value: "false"
+      - name: KC_BOOTSTRAP_ADMIN_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: keycloak-bootstrap-admin
+            key: username
+      - name: KC_BOOTSTRAP_ADMIN_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: keycloak-bootstrap-admin
+            key: password
     database:
       existingSecret: "keycloak-keycloak-database-cluster-app"
       existingSecretKey: "password"

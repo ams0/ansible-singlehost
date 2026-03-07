@@ -130,3 +130,16 @@
 - name: Display Flux status
   debug:
     msg: "{{ flux_status.stdout_lines }}"
+
+- name: Check if keycloak bootstrap admin secret exists
+  shell: kubectl -n keycloak get secret keycloak-bootstrap-admin
+  register: keycloak_secret_check
+  failed_when: false
+  changed_when: false
+
+- name: Create keycloak bootstrap admin secret
+  shell: |
+    kubectl -n keycloak create secret generic keycloak-bootstrap-admin \
+      --from-literal=username=admin \
+      --from-literal=password={{ keycloak_admin_password }}
+  when: keycloak_secret_check.rc != 0
