@@ -26,6 +26,8 @@ spec:
     remediation:
       retries: 3
   values:
+    image:
+      tag: "26.3.0"
     ingress:
       enabled: false
     persistence:
