@@ -39,7 +39,7 @@ spec:
         secretRefKey:
           username: username
           password: password
-        openAiApiKey: "key_super_secret"
+          openAiApiKey: openAiApiKey
     deployment:
       kong:
         enabled: true
