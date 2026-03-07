@@ -23,7 +23,7 @@ spec:
     remediation:
       retries: 3
   values:
-    command:
+    args:
       - start
     hostname:
       hostname: auth.vps.kubespaces.cloud
