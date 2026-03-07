@@ -7,4 +7,3 @@ resources:
   - supabase-helmrepo.yaml
   - supabase-helmrelease.yaml
   - supabase-httproute.yaml
-  - supabase-destinationrule.yaml
