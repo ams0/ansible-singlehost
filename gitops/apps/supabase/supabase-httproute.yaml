@@ -15,7 +15,7 @@ spec:
     - matches:
         - path:
             type: PathPrefix
-            value: /
+            value: /studio
       filters:
         - type: RequestHeaderModifier
           requestHeaderModifier:
@@ -23,5 +23,31 @@ spec:
               - name: X-Forwarded-Proto
                 value: https
       backendRefs:
-        - name: supabase
-          port: 443
+        - name: supabase-supabase-supabase-studio
+          port: 3000
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /auth
+      filters:
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            set:
+              - name: X-Forwarded-Proto
+                value: https
+      backendRefs:
+        - name: supabase-supabase-supabase-auth
+          port: 9999
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /analytics
+      filters:
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            set:
+              - name: X-Forwarded-Proto
+                value: https
+      backendRefs:
+        - name: supabase-supabase-supabase-analytics
+          port: 4000
