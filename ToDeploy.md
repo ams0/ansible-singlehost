@@ -3,8 +3,9 @@
 - [X] Minecraft server
 - [ ] Move Minecraft to use [PaperMC](https://papermc.io/)
 - [X] Dashy
-- [ ] XWiki
-- [ ] 
+- [X] XWiki
+- [X] OpenWebUI
+- [X] stakater
 - [ ] https://goauthentik.io
 - [ ] https://github.com/openSUSE/osem/blob/master/INSTALL.md
 - [X] Keycloak

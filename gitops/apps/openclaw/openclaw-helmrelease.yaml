@@ -27,6 +27,7 @@ spec:
       retries: 3
   values:
     app-template:
+      configMode: overwrite
       controllers:
         main:
           initContainers:

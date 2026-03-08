@@ -1,0 +1,53 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: authentik
+  namespace: flux-system
+  labels:
+    app: authentik
+spec:
+  interval: 10m
+  timeout: 5m
+  targetNamespace: authentik
+  chart:
+    spec:
+      chart: authentik
+      sourceRef:
+        kind: HelmRepository
+        name: authentik
+        namespace: flux-system
+      interval: 5m0s
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    authentik:
+      postgresql:
+        host: postgres.domain.tld
+        user: file:///postgres-creds/username
+        password: file:///postgres-creds/password
+    server:
+      volumes:
+        - name: postgres-creds
+          secret:
+            secretName: authentik-postgres-credentials
+      volumeMounts:
+        - name: postgres-creds
+          mountPath: /postgres-creds
+          readOnly: true
+      gateway:
+          enabled: false
+    worker:
+      volumes:
+        - name: postgres-creds
+          secret:
+            secretName: authentik-postgres-credentials
+      volumeMounts:
+        - name: postgres-creds
+          mountPath: /postgres-creds
+          readOnly: true
