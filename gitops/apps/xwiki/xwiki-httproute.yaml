@@ -17,5 +17,5 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: xwiki-xwiki-xwiki
+        - name: xwiki-xwiki
           port: 80

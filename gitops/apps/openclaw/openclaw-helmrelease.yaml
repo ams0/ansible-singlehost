@@ -113,7 +113,7 @@ spec:
                     log "WARNING: Failed to install skill after $attempts attempts: $skill"
                     return 1
                   }
-                  for skill in weather gog; do
+                  for skill in agent-browser tavily-search find-skills proactive-agent humanizer api-gateway skill-vetter auto-updater free-ride automation-workflows weather gog; do
                     install_skill "$skill" || true
                   done
                   log "Skills initialization complete"

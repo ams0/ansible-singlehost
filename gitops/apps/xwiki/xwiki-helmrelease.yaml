@@ -27,11 +27,11 @@ spec:
       retries: 3
   values:
     externalDB:
-      host: ''
-      database: ''
-      user: ''
+      host: xwiki-xwiki-database-cluster-rw
+      database: xwiki
+      user: xwiki
       password: ''
       customKeyRef:
         enable: true
-        name: ''
-        key: ''
+        name: xwiki-xwiki-database-cluster-app
+        key: password
