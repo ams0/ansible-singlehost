@@ -5,6 +5,7 @@ resources:
   - keycloak
   - n8n
   - minecraft
+  - stakater
   - garage
   - forgejo
   - dashy
