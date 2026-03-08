@@ -17,5 +17,5 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: openwebui-openwebui
-          port: 9099
+        - name: openwebui-openwebui-open-webui
+          port: 80
