@@ -29,6 +29,8 @@ spec:
     externalURL: "https://registry.vps.kubespaces.cloud"  # Change this to your actual domain
     expose:
       type: clusterIP
+      tls:
+        enabled: false
     persistence:
       enabled: true
       persistentVolumeClaim:
