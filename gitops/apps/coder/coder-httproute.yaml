@@ -17,5 +17,5 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: coder-coder
-          port: 18789
+        - name: coder
+          port: 80
