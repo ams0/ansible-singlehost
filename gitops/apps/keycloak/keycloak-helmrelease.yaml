@@ -27,7 +27,7 @@ spec:
       - start
     extraEnv: |
       - name: KC_HOSTNAME
-        value: auth.vps.kubespaces.cloud
+        value: https://auth.vps.kubespaces.cloud
       - name: KC_HOSTNAME_STRICT
         value: "false"
       - name: KC_BOOTSTRAP_ADMIN_USERNAME
