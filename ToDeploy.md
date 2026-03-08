@@ -12,8 +12,8 @@
 - [ ] Nextcloud
 - [ ] Keycloak theme
 - [X] Openclaw
-- [ ] Coder https://github.com/Azure-Samples/aks-kueue-sample/blob/main/coder/
-- [ ] https://github.com/open-webui/helm-charts or https://www.librechat.ai
+- [X] Coder https://github.com/Azure-Samples/aks-kueue-sample/blob/main/coder/
+- [X] https://github.com/open-webui/helm-charts or https://www.librechat.ai
 - [ ] Grafana/Prometheus
 - [X] Forgejo 
 - [X] Mailer and runners for ForgeJo
