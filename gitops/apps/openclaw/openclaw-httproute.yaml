@@ -17,5 +17,5 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: openclaw
-          port: 443
+        - name: openclaw-openclaw
+          port: 18789
