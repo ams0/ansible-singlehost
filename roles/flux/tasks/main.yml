@@ -183,4 +183,7 @@
     kubectl -n openclaw create secret generic openclaw-env-secret \
       --from-literal=ANTHROPIC_API_KEY={{ vault_openclaw_anthropic_api_key }} \
       --from-literal=OPENCLAW_GATEWAY_TOKEN={{ vault_openclaw_gateway_token }}
-  when: openclaw_secret_check.rc != 0
+  when:
+    - openclaw_secret_check.rc != 0
+    - vault_openclaw_anthropic_api_key is defined
+    - vault_openclaw_gateway_token is defined
