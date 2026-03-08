@@ -1,3 +1,9 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(KUBECONFIG=/Users/alessandro/repos/production/cloudlab/kubeconfig-remote kubectl exec -n keycloak keycloak-keycloak-database-cluster-1 -- psql -U keycloak -d keycloak -c \"SELECT username, realm_id, enabled FROM user_entity WHERE realm_id = ''master'';\")",
+      "Bash(KUBECONFIG=/Users/alessandro/repos/production/cloudlab/kubeconfig-remote kubectl exec -n keycloak keycloak-keycloak-database-cluster-1 -- psql -U postgres -d keycloak -c \"SELECT username, realm_id, enabled FROM user_entity WHERE realm_id = ''master'';\")"
+    ]
+  },
   "enableAllProjectMcpServers": false
 }

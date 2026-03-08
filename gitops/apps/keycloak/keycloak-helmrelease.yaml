@@ -42,6 +42,23 @@ spec:
           secretKeyRef:
             name: keycloak-bootstrap-admin
             key: password
+      - name: KC_SMTP_HOST
+        value: smtp-relay.gmail.com
+      - name: KC_SMTP_PORT
+        value: "587"
+      - name: KC_SMTP_FROM
+        value: alessandro@kubespaces.io
+      - name: KC_SMTP_USER
+        value: alessandro@kubespaces.io
+      - name: KC_SMTP_AUTH
+        value: "true"
+      - name: KC_SMTP_STARTTLS
+        value: "true"
+      - name: KC_SMTP_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: keycloak-smtp
+            key: password
     database:
       existingSecret: "keycloak-keycloak-database-cluster-app"
       existingSecretKey: "password"
