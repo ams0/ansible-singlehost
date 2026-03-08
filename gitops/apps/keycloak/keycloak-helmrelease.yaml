@@ -25,6 +25,8 @@ spec:
   values:
     args:
       - start
+    http:
+      relativePath: "/"
     extraEnv: |
       - name: KC_HOSTNAME
         value: https://auth.vps.kubespaces.cloud
