@@ -1,0 +1,47 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: coder
+  namespace: flux-system
+  labels:
+    app: coder
+spec:
+  interval: 10m
+  timeout: 5m
+  targetNamespace: coder
+  chart:
+    spec:
+      chart: coder
+      sourceRef:
+        kind: HelmRepository
+        name: coder
+        namespace: flux-system
+      interval: 5m0s
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    coder:
+      # ---------------------------------------------------------------------------
+      # Environment variables for the Coder control plane
+      # ---------------------------------------------------------------------------
+      env:
+        # Access URL — the external URL users will use to reach Coder.
+        # For demo: override at deploy time with the actual LoadBalancer IP or
+        # use `kubectl port-forward` and set to http://localhost:8080.
+        - name: CODER_ACCESS_URL
+          value: "https://coder.vps.kubespaces.cloud"  # Change this to your actual domain
+
+        # No CODER_PG_CONNECTION_URL is set — Coder will automatically use its
+        # embedded PostgreSQL database. This is intentional for the demo.
+        # For production, uncomment and configure:
+        - name: CODER_PG_CONNECTION_URL
+          valueFrom:
+            secretKeyRef:
+              name: coder-db-credentials
+              key: url
