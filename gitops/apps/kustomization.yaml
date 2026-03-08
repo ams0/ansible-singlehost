@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - keycloak
   - n8n
+  - harbor
   - minecraft
   - stakater
   - garage
