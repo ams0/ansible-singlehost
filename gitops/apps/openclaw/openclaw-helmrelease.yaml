@@ -34,3 +34,73 @@ spec:
               envFrom:
                 - secretRef:
                     name: openclaw-env-secret
+      configMaps:
+        config:
+          data:
+            openclaw.json: |
+              {
+                "gateway": {
+                  "port": 18789,
+                  "mode": "local",
+                  "trustedProxies": ["10.244.0.169"],
+                  "controlUi": {
+                    "allowedOrigins": ["https://claw.vps.kubespaces.cloud"]
+                  }
+                },
+                "browser": {
+                  "enabled": true,
+                  "defaultProfile": "default",
+                  "profiles": {
+                    "default": {
+                      "cdpUrl": "http://localhost:9222",
+                      "color": "#4285F4"
+                    }
+                  }
+                },
+                "agents": {
+                  "defaults": {
+                    "workspace": "/home/node/.openclaw/workspace",
+                    "model": {
+                      "primary": "anthropic/claude-opus-4-6"
+                    },
+                    "userTimezone": "UTC",
+                    "timeoutSeconds": 600,
+                    "maxConcurrent": 1
+                  },
+                  "list": [
+                    {
+                      "id": "main",
+                      "default": true,
+                      "identity": {
+                        "name": "OpenClaw",
+                        "emoji": "🦞"
+                      }
+                    }
+                  ]
+                },
+                "session": {
+                  "scope": "per-sender",
+                  "store": "/home/node/.openclaw/sessions",
+                  "reset": {
+                    "mode": "idle",
+                    "idleMinutes": 60
+                  }
+                },
+                "logging": {
+                  "level": "info",
+                  "consoleLevel": "info",
+                  "consoleStyle": "compact",
+                  "redactSensitive": "tools"
+                },
+                "tools": {
+                  "profile": "full",
+                  "web": {
+                    "search": {
+                      "enabled": false
+                    },
+                    "fetch": {
+                      "enabled": true
+                    }
+                  }
+                }
+              }
