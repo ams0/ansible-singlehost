@@ -11,3 +11,4 @@ resources:
   - rancher
   - actual
   - supabase
+  - openclaw

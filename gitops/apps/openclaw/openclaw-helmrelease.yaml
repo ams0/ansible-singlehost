@@ -26,10 +26,11 @@ spec:
     remediation:
       retries: 3
   values:
-    ingress:
-      enabled: false
-    hostname: claw.vps.kubespaces.cloud
-    replicas: 1
-    service:
-      type: ClusterIP
-    tls: external
+    app-template:
+      controllers:
+        main:
+          containers:
+            main:
+              envFrom:
+                - secretRef:
+                    name: openclaw-env-secret
