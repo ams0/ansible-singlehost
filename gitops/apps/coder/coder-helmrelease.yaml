@@ -27,6 +27,13 @@ spec:
       retries: 3
   values:
     coder:
+    resources:
+      # limits:
+      #  cpu: 2000m
+      #  memory: 4096Mi
+      requests:
+        cpu: 250m
+        memory: 512Mi
       service:
         type: ClusterIP
       # ---------------------------------------------------------------------------
