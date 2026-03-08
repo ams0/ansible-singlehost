@@ -167,3 +167,20 @@
     kubectl -n keycloak create secret generic keycloak-smtp \
       --from-literal=password={{ vault_forgejo_smtp_password }}
   when: keycloak_smtp_secret_check.rc != 0
+
+- name: Create openclaw namespace if not exists
+  shell: kubectl create namespace openclaw --dry-run=client -o yaml | kubectl apply -f -
+  changed_when: false
+
+- name: Check if openclaw env secret exists
+  shell: kubectl -n openclaw get secret openclaw-env-secret
+  register: openclaw_secret_check
+  failed_when: false
+  changed_when: false
+
+- name: Create openclaw env secret
+  shell: |
+    kubectl -n openclaw create secret generic openclaw-env-secret \
+      --from-literal=ANTHROPIC_API_KEY={{ vault_openclaw_anthropic_api_key }} \
+      --from-literal=OPENCLAW_GATEWAY_TOKEN={{ vault_openclaw_gateway_token }}
+  when: openclaw_secret_check.rc != 0

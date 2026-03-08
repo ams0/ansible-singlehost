@@ -7,7 +7,10 @@
 - [ ] 
 - [ ] https://goauthentik.io
 - [ ] https://github.com/openSUSE/osem/blob/master/INSTALL.md
-- [ ] Keycloak
+- [X] Keycloak
+- [ ] Nextcloud
+- [ ] Keycloak theme
+- [ ] Openclaw
 - [ ] Coder https://github.com/Azure-Samples/aks-kueue-sample/blob/main/coder/
 - [ ] https://github.com/open-webui/helm-charts or https://www.librechat.ai
 - [ ] Grafana/Prometheus
