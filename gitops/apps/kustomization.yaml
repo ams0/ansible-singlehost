@@ -12,3 +12,4 @@ resources:
   - actual
   - supabase
   - openclaw
+  - openwebui

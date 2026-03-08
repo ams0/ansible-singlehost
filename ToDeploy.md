@@ -10,7 +10,7 @@
 - [X] Keycloak
 - [ ] Nextcloud
 - [ ] Keycloak theme
-- [ ] Openclaw
+- [X] Openclaw
 - [ ] Coder https://github.com/Azure-Samples/aks-kueue-sample/blob/main/coder/
 - [ ] https://github.com/open-webui/helm-charts or https://www.librechat.ai
 - [ ] Grafana/Prometheus

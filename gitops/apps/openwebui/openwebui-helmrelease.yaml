@@ -1,0 +1,30 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: openwebui
+  namespace: flux-system
+  labels:
+    app: openwebui
+spec:
+  interval: 10m
+  timeout: 5m
+  targetNamespace: openwebui
+  chart:
+    spec:
+      chart: openwebui
+      sourceRef:
+        kind: HelmRepository
+        name: openwebui
+        namespace: flux-system
+      interval: 5m0s
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    ingress:
+      enabled: false
