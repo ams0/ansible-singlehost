@@ -42,3 +42,6 @@
 - [ ] https://github.com/OvenMediaLabs/OvenMediaEngine
 - [ ] temporal.io
 - [ ] Kubernetes login with github
+
+
+More stuff to consider: https://github.com/MaximUltimatum/talos-homelab/
