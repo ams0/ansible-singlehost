@@ -38,6 +38,11 @@ spec:
             secretKeyRef:
               name: authentik-authentik-database-cluster-app
               key: password
+        - name: AUTHENTIK_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: authentik-secret
+              key: secret-key
       gateway:
         enabled: false
     worker:
@@ -47,3 +52,8 @@ spec:
             secretKeyRef:
               name: authentik-authentik-database-cluster-app
               key: password
+        - name: AUTHENTIK_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: authentik-secret
+              key: secret-key
