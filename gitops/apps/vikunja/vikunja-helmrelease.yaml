@@ -10,14 +10,10 @@ spec:
   interval: 10m
   timeout: 5m
   targetNamespace: vikunja
-  chart:
-    spec:
-      chart: vikunja
-      sourceRef:
-        kind: HelmRepository
-        name: vikunja
-        namespace: flux-system
-      interval: 5m0s
+  chartRef:
+    kind: OCIRepository
+    name: vikunja-ocirepo
+    namespace: flux-system
   install:
     createNamespace: true
     remediation:
@@ -46,14 +42,22 @@ spec:
           enabled: false
     database:
       type: postgres
-      host: <your-postgres-host>
+      host: vikunja-vikunja-database-cluster-rw
       user: vikunja
-      password: changeme
+      password:
+        valueFrom:
+          secretKeyRef:
+            name: vikunja-vikunja-database-cluster-app
+            key: password
       database: vikunja
     mailer:
       enabled: true
       host: "smtp.gmail.com"
       port: 587
       username: "alessandro@kubespaces.io"
-      password: "ddsada"
+      password:
+        valueFrom:
+          secretKeyRef:
+            name: vikunja-vikunja-database-cluster-app
+            key: mailer-password
       fromemail: "alessandro@kubespaces.io"
