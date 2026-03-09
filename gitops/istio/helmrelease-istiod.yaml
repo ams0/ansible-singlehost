@@ -32,3 +32,6 @@ spec:
     profile: ambient
     meshConfig:
       accessLogFile: /dev/stdout
+      defaultConfig:
+        gatewayTopology:
+          numTrustedProxies: 1
