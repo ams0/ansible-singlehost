@@ -28,26 +28,22 @@ spec:
   values:
     authentik:
       postgresql:
-        host: postgres.domain.tld
-        user: file:///postgres-creds/username
-        password: file:///postgres-creds/password
+        host: authentik-authentik-database-cluster-rw
+        user: authentik
+        name: authentik
     server:
-      volumes:
-        - name: postgres-creds
-          secret:
-            secretName: authentik-postgres-credentials
-      volumeMounts:
-        - name: postgres-creds
-          mountPath: /postgres-creds
-          readOnly: true
+      env:
+        - name: AUTHENTIK_POSTGRESQL__PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: authentik-authentik-database-cluster-app
+              key: password
       gateway:
-          enabled: false
+        enabled: false
     worker:
-      volumes:
-        - name: postgres-creds
-          secret:
-            secretName: authentik-postgres-credentials
-      volumeMounts:
-        - name: postgres-creds
-          mountPath: /postgres-creds
-          readOnly: true
+      env:
+        - name: AUTHENTIK_POSTGRESQL__PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: authentik-authentik-database-cluster-app
+              key: password
