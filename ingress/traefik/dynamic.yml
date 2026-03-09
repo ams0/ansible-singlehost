@@ -13,12 +13,183 @@ http:
             findtime: 10m
             maxretry: "4"
             statuscode: 400,401,403-499
+
   routers:
-    # HTTPS routers for all domains
-    backend:
-      rule: "Host(`authentik.vps.kubespaces.cloud`) || Host(`codimd.vps.kubespaces.cloud`) || Host(`todo.vps.kubespaces.cloud`) || Host(`argocd.vps.kubespaces.cloud`) || Host(`coder.vps.kubespaces.cloud`) || Host(`chat.vps.kubespaces.cloud`) || Host(`talks.vps.kubespaces.cloud`) || Host(`next.vps.kubespaces.cloud`) || Host(`wiki.vps.kubespaces.cloud`) || Host(`claw.vps.kubespaces.cloud`) || Host(`supabase.vps.kubespaces.cloud`) || Host(`auth.vps.kubespaces.cloud`) || Host(`actual.vps.kubespaces.cloud`) || Host(`nginx.vps.kubespaces.cloud`) || Host(`registry.vps.kubespaces.cloud`) || Host(`grafana.vps.kubespaces.cloud`) || Host(`dash.vps.kubespaces.cloud`) || Host(`n8n.vps.kubespaces.cloud`) || Host(`s3.vps.kubespaces.cloud`) || Host(`code.vps.kubespaces.cloud`) || Host(`minecraft.vps.kubespaces.cloud`) || Host(`echo.vps.kubespaces.cloud`) || Host(`webhook.vps.kubespaces.cloud`) || Host(`helix.vps.kubespaces.cloud`) || Host(`rancher.vps.kubespaces.cloud`)"
-      entryPoints:
-        - websecure
+    # Each domain gets its own router so Traefik can request
+    # individual certs dynamically when new domains are added.
+    # To add a new domain: copy any router block, change the name and Host.
+    authentik:
+      rule: "Host(`authentik.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    codimd:
+      rule: "Host(`codimd.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    todo:
+      rule: "Host(`todo.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    argocd:
+      rule: "Host(`argocd.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    coder:
+      rule: "Host(`coder.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    chat:
+      rule: "Host(`chat.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    talks:
+      rule: "Host(`talks.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    next:
+      rule: "Host(`next.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    wiki:
+      rule: "Host(`wiki.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    claw:
+      rule: "Host(`claw.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    supabase:
+      rule: "Host(`supabase.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    auth:
+      rule: "Host(`auth.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    actual:
+      rule: "Host(`actual.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    nginx:
+      rule: "Host(`nginx.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    registry:
+      rule: "Host(`registry.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    grafana:
+      rule: "Host(`grafana.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    dash:
+      rule: "Host(`dash.vps.kubespaces.cloud`)"
+
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    n8n:
+      rule: "Host(`n8n.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    s3:
+      rule: "Host(`s3.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    code:
+      rule: "Host(`code.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    minecraft:
+      rule: "Host(`minecraft.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    echo:
+      rule: "Host(`echo.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    webhook:
+      rule: "Host(`webhook.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    helix:
+      rule: "Host(`helix.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    rancher:
+      rule: "Host(`rancher.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
       service: backend-service
       tls:
         certResolver: letsencrypt
