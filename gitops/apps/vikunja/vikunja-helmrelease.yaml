@@ -23,10 +23,6 @@ spec:
       retries: 3
   values:
     vikunja:
-      persistence:
-        config:
-          type: secret
-          name: vikunja-config
       ingress:
         main:
           enabled: false # set in resources
