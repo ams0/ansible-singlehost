@@ -23,41 +23,39 @@ spec:
       retries: 3
   values:
     vikunja:
+      persistence:
+        config:
+          type: secret
+          name: vikunja-config
+      ingress:
+        main:
+          enabled: false # set in resources
       env:
-        # To utilize a secret in the environment variables, you can do something like the following: https://github.com/bjw-s/helm-charts/blob/a081de53024d8328d1ae9ff7e4f6bc500b0f3a29/charts/library/common/values.yaml#L141-L145
-        # You can use PostgreSQL, MySQL, or SQLite. SQLite is the default for simplicity.
-        # https://vikunja.io/docs/config-options
+        VIKUNJA_SERVICE_PUBLICURL: "https://todo.vps.kubespaces.cloud"
         VIKUNJA_DATABASE_TYPE: "postgres"
-        VIKUNJA_DATABASE_HOST: "vikunja-vikunja-database-cluster-rw"
         VIKUNJA_DATABASE_USER: "vikunja"
         VIKUNJA_DATABASE_PASSWORD:
           valueFrom:
             secretKeyRef:
               name: vikunja-vikunja-database-cluster-app
               key: password
+        VIKUNJA_DATABASE_NAME: vikunja
+        VIKUNJA_DATABASE_DATABASE: vikunja
+        VIKUNJA_DATABASE_HOST: vikunja-vikunja-database-cluster-rw
+        VIKUNJA_DEFAULTSETTINGS_EMAIL_REMINDERS_ENABLED: true
+        VIKUNJA_DEFAULTSETTINGS_WEEK_START: 1
+        VIKUNJA_DEFAULTSETTINGS_OVERDUE_TASKS_REMINDERS_TIME: 7:00
+        VIKUNJA_DEFAULTSETTINGS_DISCOVERABLE_BY_NAME: true
+        VIKUNJA_MAILER_ENABLED: true
+        VIKUNJA_MAILER_HOST: smtp.gmail.com
+        VIKUNJA_MAILER_USERNAME: alessandro@kubespaces.io
+        VIKUNJA_MAILER_PASSWORD:
+          valueFrom:
+            secretKeyRef:
+              name: vikunja-smtp
+              key: password
+        VIKUNJA_MAILER_FROMEMAIL: alessandro@kubespaces.io
 
 
-      ingress:
-        main:
-          enabled: false
-    database:
-      type: postgres
-      host: vikunja-vikunja-database-cluster-rw
-      user: vikunja
-      password:
-        valueFrom:
-          secretKeyRef:
-            name: vikunja-vikunja-database-cluster-app
-            key: password
-      database: vikunja
-    mailer:
-      enabled: true
-      host: "smtp.gmail.com"
-      port: 587
-      username: "alessandro@kubespaces.io"
-      password:
-        valueFrom:
-          secretKeyRef:
-            name: vikunja-vikunja-database-cluster-app
-            key: mailer-password
-      fromemail: "alessandro@kubespaces.io"
+
+
