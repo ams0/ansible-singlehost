@@ -12,7 +12,7 @@ spec:
   targetNamespace: argocd
   chart:
     spec:
-      chart: argocd
+      chart: argo-cd
       sourceRef:
         kind: HelmRepository
         name: argocd
