@@ -26,6 +26,12 @@ spec:
     remediation:
       retries: 3
   values:
+    database:
+      type: internal
+      internal:
+        image:
+          repository: ams0/harbor-db
+          tag: dev
     externalURL: "https://registry.vps.kubespaces.cloud"  # Change this to your actual domain
     expose:
       type: clusterIP
