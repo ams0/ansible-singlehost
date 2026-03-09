@@ -13,6 +13,7 @@ resources:
 - gateways/configmap.yaml
 - gateways/gateway.yaml
 - local-path-provisioner/local-path-provisioner.yaml
+- argocd
 
 # Add more resources here as you create them
 # - deployment.yaml

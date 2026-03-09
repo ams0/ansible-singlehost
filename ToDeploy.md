@@ -9,8 +9,8 @@
 - [ ] BookStack
 - [ ] https://github.com/owncloud/helm-charts
 - [ ] n8n task runners https://docs.n8n.io/hosting/configuration/task-runners/#external-mode
-- [ ] https://go-vikunja.github.io/helm-chart/
-- [ ] https://goauthentik.io
+- [X] https://go-vikunja.github.io/helm-chart/
+- [X] https://goauthentik.io
 - [ ] https://github.com/openSUSE/osem/blob/master/INSTALL.md
 - [X] Keycloak
 - [ ] Nextcloud
@@ -18,7 +18,7 @@
 - [X] Openclaw
 - [X] Coder https://github.com/Azure-Samples/aks-kueue-sample/blob/main/coder/
 - [X] https://github.com/open-webui/helm-charts or https://www.librechat.ai
-- [ ] Grafana/Prometheus
+- [X] Grafana/Prometheus
 - [X] Forgejo 
 - [X] Mailer and runners for ForgeJo
 - [ ] RustFS (https://s3.vps.kubespaces.cloud/)

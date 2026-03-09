@@ -1,0 +1,38 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: argocd
+  namespace: flux-system
+  labels:
+    app: argocd
+spec:
+  interval: 10m
+  timeout: 5m
+  targetNamespace: argocd
+  chart:
+    spec:
+      chart: argocd
+      sourceRef:
+        kind: HelmRepository
+        name: argocd
+        namespace: flux-system
+      interval: 5m0s
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    configs:
+      params:
+        server.insecure: "true"
+    controller:
+      clusterAdminAccess:
+        enabled: false
+    server:
+      clusterAdminAccess:
+        enabled: false
+
