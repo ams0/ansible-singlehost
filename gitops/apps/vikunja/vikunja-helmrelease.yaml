@@ -1,0 +1,59 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: vikunja
+  namespace: flux-system
+  labels:
+    app: vikunja
+spec:
+  interval: 10m
+  timeout: 5m
+  targetNamespace: vikunja
+  chart:
+    spec:
+      chart: vikunja
+      sourceRef:
+        kind: HelmRepository
+        name: vikunja
+        namespace: flux-system
+      interval: 5m0s
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    vikunja:
+      env:
+        # To utilize a secret in the environment variables, you can do something like the following: https://github.com/bjw-s/helm-charts/blob/a081de53024d8328d1ae9ff7e4f6bc500b0f3a29/charts/library/common/values.yaml#L141-L145
+        # You can use PostgreSQL, MySQL, or SQLite. SQLite is the default for simplicity.
+        # https://vikunja.io/docs/config-options
+        VIKUNJA_DATABASE_TYPE: "postgres"
+        VIKUNJA_DATABASE_HOST: "vikunja-postgres"
+        VIKUNJA_DATABASE_USER: "vikunja"
+        VIKUNJA_DATABASE_PASSWORD:
+          valueFrom:
+            secretKeyRef:
+              name: secret-name
+              key: key-name
+
+
+      ingress:
+        main:
+          enabled: false
+    database:
+      type: postgres
+      host: <your-postgres-host>
+      user: vikunja
+      password: changeme
+      database: vikunja
+    mailer:
+      enabled: true
+      host: "smtp.gmail.com"
+      port: 587
+      username: "alessandro@kubespaces.io"
+      password: "ddsada"
+      fromemail: "alessandro@kubespaces.io"

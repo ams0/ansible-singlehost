@@ -1,0 +1,9 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: vikunja
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: https://go-vikunja.github.io/helm-chart/

@@ -6,6 +6,10 @@
 - [X] XWiki
 - [X] OpenWebUI
 - [X] stakater
+- [ ] BookStack
+- [ ] https://github.com/owncloud/helm-charts
+- [ ] n8n task runners https://docs.n8n.io/hosting/configuration/task-runners/#external-mode
+- [ ] https://go-vikunja.github.io/helm-chart/
 - [ ] https://goauthentik.io
 - [ ] https://github.com/openSUSE/osem/blob/master/INSTALL.md
 - [X] Keycloak
