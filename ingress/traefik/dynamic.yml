@@ -18,6 +18,27 @@ http:
     # Each domain gets its own router so Traefik can request
     # individual certs dynamically when new domains are added.
     # To add a new domain: copy any router block, change the name and Host.
+    omni-siderolink:
+      rule: "Host(`omni-siderolink.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    omni-k8s:
+      rule: "Host(`omni-k8s.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
+    omni:
+      rule: "Host(`omni.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
     waha:
       rule: "Host(`waha.vps.kubespaces.cloud`)"
       entryPoints: [websecure]

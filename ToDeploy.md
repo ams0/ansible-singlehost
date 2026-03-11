@@ -1,48 +1,59 @@
 ## To deploy
 
-- [X] Minecraft server
 - [ ] Move Minecraft to use [PaperMC](https://papermc.io/)
 - [ ] https://tailscale.com/docs/features/kubernetes-operator
-- [X] Dashy
-- [X] XWiki
-- [X] OpenWebUI
-- [X] stakater
 - [ ] BookStack
+- [ ] Omni https://github.com/siderolabs/omni/tree/main/deploy/helm/omni
+- [ ] https://alarik.io/docs
+- [ ] https://ozone.apache.org/
 - [ ] https://github.com/owncloud/helm-charts
 - [ ] n8n task runners https://docs.n8n.io/hosting/configuration/task-runners/#external-mode
-- [X] https://go-vikunja.github.io/helm-chart/
-- [X] https://goauthentik.io
 - [ ] https://github.com/openSUSE/osem/blob/master/INSTALL.md
-- [X] Keycloak
 - [ ] Nextcloud
 - [ ] Keycloak theme
-- [X] Openclaw
-- [X] Coder https://github.com/Azure-Samples/aks-kueue-sample/blob/main/coder/
-- [X] https://github.com/open-webui/helm-charts or https://www.librechat.ai
-- [X] Grafana/Prometheus
-- [X] Forgejo 
-- [X] Mailer and runners for ForgeJo
 - [ ] RustFS (https://s3.vps.kubespaces.cloud/)
 - [ ] Element Community (https://github.com/element-hq/ess-helm)
 - [ ] Pretalx
-- [X] Supabase
-- [ ] Harbor
 - [ ] Velero+restic to replace Borg
 - [ ] Restic Browser
 - [ ] Borgwarehouse / Backrest / https://github.com/axelhahn/restic-http-server-for-synology
-- [ ] https://github.com/hackmdio/CodiMD
 - [ ] https://github.com/documenso/documenso
 - [ ] Sync secrets from external source (like forgejo-smtp secret)
 - [ ] Cloud lab velero forgejo recovery lint traefik
 - [ ] BorgUI and alerts
-- [ ] ArgoCD w/ agents
 - [ ] Argo Workflows, Notifications
-- [ ] Garage Operator: https://github.com/rajsinghtech/garage-operator 
+- [ ] Garage Operator: https://github.com/rajsinghtech/garage-operator
 - [ ] NocoDB or Baserow (Airtable alternative)
 - [ ] Appwrite (Supabase alternative)
 - [ ] https://github.com/OvenMediaLabs/OvenMediaEngine
 - [ ] temporal.io
 - [ ] Kubernetes login with github
+
+## Deployed
+
+- [X] Actual (budgeting)
+- [X] Authentik
+- [X] ArgoCD w/ agents
+- [X] Coder
+- [X] CodiMD
+- [X] Dashy
+- [X] Forgejo
+- [X] Mailer and runners for Forgejo
+- [X] Garage (S3)
+- [X] Grafana/Prometheus
+- [X] Harbor
+- [X] Keycloak
+- [X] Matrix
+- [X] Minecraft server
+- [X] n8n
+- [X] Openclaw
+- [X] OpenWebUI
+- [X] Rancher
+- [X] Stakater
+- [X] Supabase
+- [X] Vikunja
+- [X] Waha
+- [X] XWiki
 
 
 More stuff to consider: https://github.com/MaximUltimatum/talos-homelab/

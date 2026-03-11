@@ -1,0 +1,94 @@
+
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: omni
+  namespace: flux-system
+  labels:
+    app: omni
+spec:
+  interval: 10m
+  timeout: 5m
+  targetNamespace: omni
+  chartRef:
+    kind: OCIRepository
+    name: omni-ocirepo
+    namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    config:
+      account:
+        id: "" # TODO: generate once with `uuidgen` — never change after first deploy
+        name: cloudlab
+      auth:
+        auth0:
+          enabled: false
+        oidc:
+          enabled: true
+          providerURL: "https://authentik.vps.kubespaces.cloud/application/o/omni/"
+          clientID: "94lsxFCUSYJxZTun1wgvMKgFCXm6ExJxn7vKhAZH" # TODO: create OAuth2 app in Authentik
+          # clientSecret loaded via additionalConfigSources below
+        initialUsers:
+          - alessandro.vozza@linux.com
+      services:
+        api:
+          advertisedURL: "https://omni.vps.kubespaces.cloud"
+        kubernetesProxy:
+          advertisedURL: "https://omni-k8s.vps.kubespaces.cloud"
+        machineAPI:
+          advertisedURL: "https://omni-siderolink.vps.kubespaces.cloud"
+        siderolink:
+          joinTokensMode: strict
+          eventSinkPort: 8091
+          wireGuard:
+            advertisedEndpoint: "" # TODO: VPS_PUBLIC_IP:30180 (must be IP:PORT, not hostname)
+        workloadProxy:
+          enabled: false
+
+    # Load OIDC client secret from a Kubernetes secret
+    # kubectl create secret generic omni-oidc -n omni --from-literal=config.yaml=$'auth:\n  oidc:\n    clientSecret: YOUR_SECRET'
+    additionalConfigSources:
+      - existingSecret: omni-oidc
+
+    # GPG key for etcd encryption at rest
+    # (export GNUPGHOME=$(mktemp -d); gpg --batch --passphrase '' --quick-gen-key x; gpg -a --export-secret-key > omni.asc; rm -rf $GNUPGHOME)
+    # kubectl create secret generic omni-etcd-encryption-key -n omni --from-file=omni.asc=omni.asc
+    etcdEncryptionKey:
+      existingSecret: omni-etcd-encryption-key
+
+    persistence:
+      enabled: true
+      size: 10Gi
+
+    gatewayApi:
+      ui:
+        enabled: true
+        hostnames:
+          - omni.vps.kubespaces.cloud
+        parentRefs:
+          - name: gateway
+            namespace: istio-system
+            sectionName: http
+      kubernetesProxy:
+        enabled: true
+        hostnames:
+          - omni-k8s.vps.kubespaces.cloud
+        parentRefs:
+          - name: gateway
+            namespace: istio-system
+            sectionName: http
+      siderolinkApi:
+        enabled: true
+        hostnames:
+          - omni-siderolink.vps.kubespaces.cloud
+        parentRefs:
+          - name: gateway
+            namespace: istio-system
+            sectionName: http
