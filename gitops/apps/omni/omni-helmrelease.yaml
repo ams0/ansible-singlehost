@@ -63,6 +63,10 @@ spec:
     etcdEncryptionKey:
       existingSecret: omni-etcd-encryption-key
 
+    storage:
+      sqlite:
+        path: /data/secondary-storage/sqlite.db
+
     persistence:
       enabled: true
       size: 10Gi
