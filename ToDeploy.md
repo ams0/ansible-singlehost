@@ -2,6 +2,7 @@
 
 - [X] Minecraft server
 - [ ] Move Minecraft to use [PaperMC](https://papermc.io/)
+- [ ] https://tailscale.com/docs/features/kubernetes-operator
 - [X] Dashy
 - [X] XWiki
 - [X] OpenWebUI

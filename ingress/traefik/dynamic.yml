@@ -18,6 +18,13 @@ http:
     # Each domain gets its own router so Traefik can request
     # individual certs dynamically when new domains are added.
     # To add a new domain: copy any router block, change the name and Host.
+    waha:
+      rule: "Host(`waha.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
     authentik:
       rule: "Host(`authentik.vps.kubespaces.cloud`)"
       entryPoints: [websecure]
@@ -41,13 +48,6 @@ http:
 
     todo:
       rule: "Host(`todo.vps.kubespaces.cloud`)"
-      entryPoints: [websecure]
-      service: backend-service
-      tls:
-        certResolver: letsencrypt
-
-    argocd:
-      rule: "Host(`argocd.vps.kubespaces.cloud`)"
       entryPoints: [websecure]
       service: backend-service
       tls:

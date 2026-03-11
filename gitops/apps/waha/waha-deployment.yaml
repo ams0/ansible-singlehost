@@ -1,0 +1,21 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: waha
+  namespace: waha
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: waha
+  template:
+    metadata:
+      labels:
+        app: waha
+    spec:
+      containers:
+        - name: waha
+          image: devlikeapro/waha:arm # renovate: datasource=docker depName=devlikeapro/waha
+          ports:
+            - containerPort: 3000
