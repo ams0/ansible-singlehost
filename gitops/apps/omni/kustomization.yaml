@@ -6,4 +6,3 @@ resources:
   - omni-ocirepository.yaml
   - omni-pvc.yaml
   - omni-helmrelease.yaml
-  - omni-httproute.yaml
