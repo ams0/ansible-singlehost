@@ -16,13 +16,14 @@
     dest: /tmp/flux.tar.gz
     mode: '0644'
   when: flux_installed_version != flux_target_version
+  register: flux_download
 
 - name: Extract Flux CLI
   unarchive:
     src: /tmp/flux.tar.gz
     dest: /tmp/
     remote_src: yes
-  when: flux_installed_version != flux_target_version
+  when: flux_download is changed
 
 - name: Install/Upgrade Flux CLI
   copy:
@@ -32,7 +33,7 @@
     owner: root
     group: root
     remote_src: yes
-  when: flux_installed_version != flux_target_version
+  when: flux_download is changed
 
 - name: Clean up Flux download files
   file:
@@ -41,7 +42,7 @@
   loop:
     - /tmp/flux.tar.gz
     - /tmp/flux
-  when: flux_installed_version != flux_target_version
+  when: flux_download is changed
 
 - name: Check if Flux is already installed in cluster
   shell: k0s kubectl get namespace {{ flux_namespace }}
