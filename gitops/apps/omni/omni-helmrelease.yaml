@@ -70,6 +70,7 @@ spec:
     persistence:
       enabled: true
       size: 10Gi
+      storageClassName: local-path
 
     gatewayApi:
       ui:

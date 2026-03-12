@@ -4,5 +4,4 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - omni-ocirepository.yaml
-  - omni-pvc.yaml
   - omni-helmrelease.yaml

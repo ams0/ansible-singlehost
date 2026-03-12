@@ -168,6 +168,39 @@
       --from-literal=password={{ vault_forgejo_smtp_password }}
   when: keycloak_smtp_secret_check.rc != 0
 
+- name: Create omni namespace if not exists
+  shell: kubectl create namespace omni --dry-run=client -o yaml | kubectl apply -f -
+  changed_when: false
+
+- name: Check if omni etcd encryption key secret exists
+  shell: kubectl -n omni get secret omni-etcd-encryption-key
+  register: omni_etcd_key_check
+  failed_when: false
+  changed_when: false
+
+- name: Create omni etcd encryption key secret
+  shell: |
+    kubectl -n omni create secret generic omni-etcd-encryption-key \
+      --from-literal=omni.asc="{{ omni_etcd_encryption_key }}"
+  no_log: true
+  when: omni_etcd_key_check.rc != 0
+
+- name: Check if omni OIDC secret exists
+  shell: kubectl -n omni get secret omni-oidc
+  register: omni_oidc_check
+  failed_when: false
+  changed_when: false
+
+- name: Create omni OIDC secret
+  shell: |
+    cat <<'EOF' | kubectl -n omni create secret generic omni-oidc --from-file=config.yaml=/dev/stdin
+    auth:
+      oidc:
+        clientSecret: "{{ omni_oidc_client_secret }}"
+    EOF
+  no_log: true
+  when: omni_oidc_check.rc != 0
+
 - name: Create openclaw namespace if not exists
   shell: kubectl create namespace openclaw --dry-run=client -o yaml | kubectl apply -f -
   changed_when: false

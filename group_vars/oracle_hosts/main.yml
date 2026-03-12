@@ -56,3 +56,7 @@ datadog_tags:
 datadog_logs_enabled: true
 datadog_process_agent_enabled: true
 datadog_apm_enabled: false
+
+# Omni configuration
+omni_oidc_client_secret: "{{ vault_omni_oidc_client_secret }}"
+omni_etcd_encryption_key: "{{ vault_omni_etcd_encryption_key }}"
