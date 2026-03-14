@@ -3,6 +3,10 @@
 - [ ] Move Minecraft to use [PaperMC](https://papermc.io/)
 - [ ] https://tailscale.com/docs/features/kubernetes-operator
 - [ ] BookStack
+- [ ] Excalidraw
+- [ ] Pigsty
+- [ ] Tailscale operator
+- [ ] https://helm-chart.oneuptime.com/
 - [ ] Eclipse Che https://eclipse.dev/che/docs/stable/administration-guide/preparing-the-installation/
 - [ ] Omni https://github.com/siderolabs/omni/tree/main/deploy/helm/omni
 - [ ] https://alarik.io/docs
