@@ -57,6 +57,10 @@ datadog_logs_enabled: true
 datadog_process_agent_enabled: true
 datadog_apm_enabled: false
 
+# Tailscale operator configuration
+tailscale_operator_oauth_client_id: "{{ vault_tailscale_operator_oauth_client_id }}"
+tailscale_operator_oauth_client_secret: "{{ vault_tailscale_operator_oauth_client_secret }}"
+
 # Omni configuration
 omni_oidc_client_secret: "{{ vault_omni_oidc_client_secret }}"
 omni_etcd_encryption_key: "{{ vault_omni_etcd_encryption_key }}"

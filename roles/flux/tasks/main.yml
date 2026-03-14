@@ -202,6 +202,24 @@
   no_log: true
   when: omni_oidc_check.rc != 0
 
+- name: Create tailscale namespace if not exists
+  shell: kubectl create namespace tailscale --dry-run=client -o yaml | kubectl apply -f -
+  changed_when: false
+
+- name: Check if tailscale OAuth secret exists
+  shell: kubectl -n flux-system get secret tailscale-oauth
+  register: tailscale_oauth_check
+  failed_when: false
+  changed_when: false
+
+- name: Create tailscale OAuth secret
+  shell: |
+    kubectl -n flux-system create secret generic tailscale-oauth \
+      --from-literal=oauth.clientId="{{ tailscale_operator_oauth_client_id }}" \
+      --from-literal=oauth.clientSecret="{{ tailscale_operator_oauth_client_secret }}"
+  no_log: true
+  when: tailscale_oauth_check.rc != 0
+
 - name: Create openclaw namespace if not exists
   shell: kubectl create namespace openclaw --dry-run=client -o yaml | kubectl apply -f -
   changed_when: false
