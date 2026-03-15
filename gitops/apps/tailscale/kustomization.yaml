@@ -6,10 +6,4 @@ resources:
   - tailscale-helmrepo.yaml
   - tailscale-helmrelease.yaml
   - tailscale-dnsconfig.yaml
-
-patches:
-  - path: coredns-patch.yaml
-    target:
-      kind: ConfigMap
-      name: coredns
-      namespace: kube-system
+  - coredns-patch.yaml
