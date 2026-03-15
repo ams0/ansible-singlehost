@@ -17,5 +17,5 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: alarik-console
+        - name: alarik-alarik-console
           port: 3000

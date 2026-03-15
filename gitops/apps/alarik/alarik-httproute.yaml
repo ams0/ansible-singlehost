@@ -17,5 +17,5 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: alarik
+        - name: alarik-alarik
           port: 8080
