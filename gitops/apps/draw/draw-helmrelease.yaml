@@ -1,0 +1,31 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: draw
+  namespace: flux-system
+  labels:
+    app: draw
+spec:
+  interval: 10m
+  timeout: 5m
+  targetNamespace: draw
+  chart:
+    spec:
+      chart: excalidraw
+      sourceRef:
+        kind: HelmRepository
+        name: draw
+        namespace: flux-system
+      interval: 5m0s
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    env:
+      - name: "TZ"
+        value: "Europe/Berlin"

@@ -1,0 +1,21 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: draw
+  namespace: draw
+spec:
+  parentRefs:
+    - name: gateway
+      namespace: istio-system
+      sectionName: http
+  hostnames:
+    - "draw.vps.kubespaces.cloud"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: draw-draw
+          port: 8080
