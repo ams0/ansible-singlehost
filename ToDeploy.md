@@ -9,7 +9,7 @@
 - [ ] https://helm-chart.oneuptime.com/
 - [ ] Eclipse Che https://eclipse.dev/che/docs/stable/administration-guide/preparing-the-installation/
 - [X] Omni https://github.com/siderolabs/omni/tree/main/deploy/helm/omni
-- [ ] https://alarik.io/docs
+- [X] https://alarik.io/docs
 - [ ] https://ozone.apache.org/
 - [ ] https://github.com/owncloud/helm-charts
 - [ ] n8n task runners https://docs.n8n.io/hosting/configuration/task-runners/#external-mode
