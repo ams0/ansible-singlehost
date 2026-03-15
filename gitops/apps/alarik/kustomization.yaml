@@ -6,3 +6,5 @@ resources:
   - alarik-ocirepository.yaml
   - alarik-pvc.yaml
   - alarik-helmrelease.yaml
+  - alarik-httproute.yaml
+  - alarik-console-httproute.yaml
