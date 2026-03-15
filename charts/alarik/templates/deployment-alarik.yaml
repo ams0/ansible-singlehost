@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "alarik.fullname" . }}
+  labels:
+    {{- include "alarik.labels" . | nindent 4 }}
+    {{- include "alarik.apiSelectorLabels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.alarik.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "alarik.apiSelectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.alarik.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "alarik.labels" . | nindent 8 }}
+        {{- include "alarik.apiSelectorLabels" . | nindent 8 }}
+        {{- with .Values.alarik.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: alarik
+          image: "{{ .Values.alarik.image.repository }}:{{ .Values.alarik.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.alarik.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: API_BASE_URL
+              value: {{ .Values.alarik.apiBaseUrl | quote }}
+            - name: CONSOLE_BASE_URL
+              value: {{ .Values.alarik.consoleBaseUrl | quote }}
+            - name: ALLOW_ACCOUNT_CREATION
+              value: {{ .Values.alarik.allowAccountCreation | quote }}
+            - name: ADMIN_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "alarik.secretName" . }}
+                  key: ADMIN_USERNAME
+            - name: ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "alarik.secretName" . }}
+                  key: ADMIN_PASSWORD
+            - name: JWT
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "alarik.secretName" . }}
+                  key: JWT
+            - name: DEFAULT_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "alarik.secretName" . }}
+                  key: DEFAULT_ACCESS_KEY
+                  optional: true
+            - name: DEFAULT_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "alarik.secretName" . }}
+                  key: DEFAULT_SECRET_KEY
+                  optional: true
+          {{- if .Values.persistence.enabled }}
+          volumeMounts:
+            - name: storage
+              mountPath: /app/Storage
+          {{- end }}
+          {{- with .Values.alarik.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- if .Values.persistence.enabled }}
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: {{ include "alarik.pvcName" . }}
+      {{- end }}
+      {{- with .Values.alarik.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.alarik.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.alarik.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

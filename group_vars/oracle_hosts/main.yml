@@ -64,3 +64,10 @@ tailscale_operator_oauth_client_secret: "{{ vault_tailscale_operator_oauth_clien
 # Omni configuration
 omni_oidc_client_secret: "{{ vault_omni_oidc_client_secret }}"
 omni_etcd_encryption_key: "{{ vault_omni_etcd_encryption_key }}"
+
+# Alarik configuration
+alarik_admin_username: "{{ vault_alarik_admin_username }}"
+alarik_admin_password: "{{ vault_alarik_admin_password }}"
+alarik_jwt_key: "{{ vault_alarik_jwt_key }}"
+alarik_default_access_key: "{{ vault_alarik_default_access_key }}"
+alarik_default_secret_key: "{{ vault_alarik_default_secret_key }}"

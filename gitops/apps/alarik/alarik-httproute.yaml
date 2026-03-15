@@ -1,0 +1,21 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: alarik
+  namespace: alarik
+spec:
+  parentRefs:
+    - name: gateway
+      namespace: istio-system
+      sectionName: http
+  hostnames:
+    - "alarik.vps.kubespaces.cloud"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: alarik
+          port: 8080

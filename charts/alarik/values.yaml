@@ -1,0 +1,66 @@
+# Default values for alarik.
+
+nameOverride: ""
+fullnameOverride: ""
+
+# -- Alarik API server
+alarik:
+  image:
+    repository: ghcr.io/achtungsoftware/alarik
+    pullPolicy: IfNotPresent
+    tag: ""  # defaults to appVersion
+  replicaCount: 1
+  resources: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  podAnnotations: {}
+  podLabels: {}
+  # -- Base URL where the Alarik API is accessible
+  apiBaseUrl: "http://localhost:8080"
+  # -- Base URL where the console is accessible
+  consoleBaseUrl: "http://localhost:3000"
+  # -- Allow public account creation
+  allowAccountCreation: false
+  service:
+    type: ClusterIP
+    port: 8080
+
+# -- Alarik Console (Nuxt web UI)
+console:
+  image:
+    repository: ghcr.io/achtungsoftware/alarik-console
+    pullPolicy: IfNotPresent
+    tag: ""  # defaults to appVersion
+  replicaCount: 1
+  resources: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  podAnnotations: {}
+  podLabels: {}
+  service:
+    type: ClusterIP
+    port: 3000
+
+# -- Persistent volume claim for Alarik storage
+persistence:
+  enabled: true
+  storageClass: ""
+  accessModes:
+    - ReadWriteOnce
+  size: 10Gi
+  existingClaim: ""
+
+# -- Admin credentials & S3 keys (stored in a Secret)
+# If existingSecret is set, the chart will NOT create a Secret and will
+# reference the named Secret instead.
+auth:
+  existingSecret: ""
+  adminUsername: alarik
+  adminPassword: alarik
+  jwtKey: changeme
+  defaultAccessKey: ""
+  defaultSecretKey: ""
+
+imagePullSecrets: []
