@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "alarik.fullname" . }}
+  labels:
+    {{- include "alarik.labels" . | nindent 4 }}
+    {{- include "alarik.apiSelectorLabels" . | nindent 4 }}
+spec:
+  type: {{ .Values.alarik.service.type }}
+  ports:
+    - port: {{ .Values.alarik.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "alarik.apiSelectorLabels" . | nindent 4 }}

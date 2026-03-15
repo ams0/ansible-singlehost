@@ -1,0 +1,35 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: alarik
+  namespace: flux-system
+  labels:
+    app: alarik
+spec:
+  interval: 10m
+  timeout: 5m
+  targetNamespace: alarik
+  chartRef:
+    kind: OCIRepository
+    name: alarik-ocirepo
+    namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    alarik:
+      apiBaseUrl: "https://alarik.vps.kubespaces.cloud"
+      consoleBaseUrl: "https://alarik-console.vps.kubespaces.cloud"
+      allowAccountCreation: false
+
+    persistence:
+      enabled: true
+      existingClaim: alarik-pvc
+
+    auth:
+      existingSecret: alarik-credentials

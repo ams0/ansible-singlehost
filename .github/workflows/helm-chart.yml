@@ -1,0 +1,32 @@
+name: Build and Push Helm Chart
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'charts/alarik/**'
+  workflow_dispatch:
+
+permissions:
+  packages: write
+  contents: read
+
+jobs:
+  helm-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+
+      - name: Login to GHCR
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | helm registry login ghcr.io -u ams0 --password-stdin
+
+      - name: Package chart
+        run: helm package charts/alarik
+
+      - name: Push chart to GHCR
+        run: helm push alarik-*.tgz oci://ghcr.io/ams0

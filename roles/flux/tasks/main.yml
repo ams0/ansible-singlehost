@@ -239,3 +239,26 @@
     - openclaw_secret_check.rc != 0
     - vault_openclaw_anthropic_api_key is defined
     - vault_openclaw_gateway_token is defined
+
+- name: Create alarik namespace if not exists
+  shell: kubectl create namespace alarik --dry-run=client -o yaml | kubectl apply -f -
+  changed_when: false
+
+- name: Check if alarik credentials secret exists
+  shell: kubectl -n alarik get secret alarik-credentials
+  register: alarik_secret_check
+  failed_when: false
+  changed_when: false
+
+- name: Create alarik credentials secret
+  shell: |
+    kubectl -n alarik create secret generic alarik-credentials \
+      --from-literal=ADMIN_USERNAME={{ alarik_admin_username }} \
+      --from-literal=ADMIN_PASSWORD={{ alarik_admin_password }} \
+      --from-literal=JWT={{ alarik_jwt_key }} \
+      --from-literal=DEFAULT_ACCESS_KEY={{ alarik_default_access_key }} \
+      --from-literal=DEFAULT_SECRET_KEY={{ alarik_default_secret_key }}
+  no_log: true
+  when:
+    - alarik_secret_check.rc != 0
+    - alarik_admin_password is defined
