@@ -5,10 +5,10 @@
 - [ ] BookStack
 - [ ] Excalidraw
 - [ ] Pigsty
-- [ ] Tailscale operator
+- [X] Tailscale operator
 - [ ] https://helm-chart.oneuptime.com/
 - [ ] Eclipse Che https://eclipse.dev/che/docs/stable/administration-guide/preparing-the-installation/
-- [ ] Omni https://github.com/siderolabs/omni/tree/main/deploy/helm/omni
+- [X] Omni https://github.com/siderolabs/omni/tree/main/deploy/helm/omni
 - [ ] https://alarik.io/docs
 - [ ] https://ozone.apache.org/
 - [ ] https://github.com/owncloud/helm-charts
