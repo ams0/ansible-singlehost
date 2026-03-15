@@ -5,3 +5,4 @@ resources:
   - namespace.yaml
   - tailscale-helmrepo.yaml
   - tailscale-helmrelease.yaml
+  - tailscale-dnsconfig.yaml
