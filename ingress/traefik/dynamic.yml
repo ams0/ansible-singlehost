@@ -42,21 +42,21 @@ http:
     omni-siderolink:
       rule: "Host(`omni-siderolink.vps.kubespaces.cloud`)"
       entryPoints: [websecure]
-      service: backend-service
+      service: omni-h2c-service
       tls:
         certResolver: letsencrypt
 
     omni-k8s:
       rule: "Host(`omni-k8s.vps.kubespaces.cloud`)"
       entryPoints: [websecure]
-      service: backend-service
+      service: omni-h2c-service
       tls:
         certResolver: letsencrypt
 
     omni:
       rule: "Host(`omni.vps.kubespaces.cloud`)"
       entryPoints: [websecure]
-      service: backend-service
+      service: omni-h2c-service
       tls:
         certResolver: letsencrypt
 
@@ -249,3 +249,9 @@ http:
       loadBalancer:
         servers:
           - url: "http://host.docker.internal:30963"
+
+    # Omni requires HTTP/2 (h2c) for GRPC communication
+    omni-h2c-service:
+      loadBalancer:
+        servers:
+          - url: "h2c://host.docker.internal:30963"
