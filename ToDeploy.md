@@ -5,6 +5,7 @@
 - [ ] BookStack
 - [ ] Excalidraw
 - [ ] Pigsty
+- [ ] sonar/ nexus
 - [X] Tailscale operator
 - [ ] https://helm-chart.oneuptime.com/
 - [ ] Eclipse Che https://eclipse.dev/che/docs/stable/administration-guide/preparing-the-installation/
