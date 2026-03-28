@@ -19,3 +19,19 @@ spec:
           image: devlikeapro/waha:arm # renovate: datasource=docker depName=devlikeapro/waha
           ports:
             - containerPort: 3000
+          volumeMounts:
+            - name: waha-data
+              mountPath: /app/.sessions
+              subPath: sessions
+            - name: waha-data
+              mountPath: /app/.media
+              subPath: media
+          resources:
+            requests:
+              ephemeral-storage: "256Mi"
+            limits:
+              ephemeral-storage: "512Mi"
+      volumes:
+        - name: waha-data
+          persistentVolumeClaim:
+            claimName: waha-pvc
