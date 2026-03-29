@@ -58,6 +58,7 @@
 - [X] Stakater
 - [X] Supabase
 - [X] Vikunja
+- [X] Uptime Kuma
 - [X] Waha
 - [X] XWiki
 
