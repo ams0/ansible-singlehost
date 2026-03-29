@@ -9,10 +9,10 @@ metadata:
 spec:
   interval: 10m
   timeout: 5m
-  targetNamespace: stakater
+  targetNamespace: uptime-kuma
   chart:
     spec:
-      chart: reloader
+      chart: uptime-kuma
       sourceRef:
         kind: HelmRepository
         name: uptime-kuma
