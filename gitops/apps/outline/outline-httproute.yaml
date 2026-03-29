@@ -17,5 +17,5 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: outline-outline-outline-outline
-          port: 5006
+        - name: outline-outline
+          port: 3000

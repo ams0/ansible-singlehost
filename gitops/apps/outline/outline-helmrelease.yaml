@@ -35,11 +35,11 @@ spec:
     smtp:
       host: "smtp-relay.gmail.com"
       port: 587
-      username: "alessandro@kubespaces.io"
       fromEmail: "outline@kubespaces.io"
       replyEmail: "no-reply@kubespaces.io"
       existingSecret:
           name: "outline-smtp"
+          usernameKey: "username"
           passwordKey: "password"
       secure: true
     fileStorage:
