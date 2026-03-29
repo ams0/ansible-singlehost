@@ -108,6 +108,8 @@ spec:
     # Grafana configuration
     grafana:
       grafana.ini:
+        server:
+          root_url: https://grafana.vps.kubespaces.cloud
         auth.anonymous:
           enabled: false
           org_name: Main Org.
