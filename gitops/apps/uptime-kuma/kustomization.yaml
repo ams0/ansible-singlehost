@@ -1,0 +1,9 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - namespace.yaml
+  - uptime-kuma-helmrepo.yaml
+  - uptime-kuma-pvc.yaml
+  - uptime-kuma-helmrelease.yaml
+  - uptime-kuma-httproute.yaml
