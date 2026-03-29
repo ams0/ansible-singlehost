@@ -26,6 +26,7 @@ spec:
     remediation:
       retries: 3
   values:
+    url: "https://outline.vps.kubespaces.cloud"
     redis:
       enabled: true
       architecture: standalone
