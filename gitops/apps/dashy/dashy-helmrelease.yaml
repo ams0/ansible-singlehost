@@ -115,7 +115,7 @@ spec:
                     stories: beststories
                     limit: 6
 
-            - name: Cluster Overview
+            - name: Node Metrics
               icon: fas fa-chart-line
               displayData:
                 cols: 3
@@ -123,17 +123,7 @@ spec:
               widgets:
                 - type: iframe
                   options:
-                    url: https://grafana.vps.kubespaces.cloud/d/efa86fd1d0c121a26444b636a3f509a8/kubernetes-compute-resources-cluster?orgId=1&refresh=30s&kiosk=1
-
-            - name: Node Health
-              icon: fas fa-heartbeat
-              displayData:
-                cols: 3
-                color: '#c792ea'
-              widgets:
-                - type: iframe
-                  options:
-                    url: https://grafana.vps.kubespaces.cloud/d/7d57716318ee0dddbac5a7f451fb7753/node-exporter-nodes?orgId=1&refresh=30s&kiosk=1
+                    url: https://grafana.vps.kubespaces.cloud/public-dashboards/87f59dc49d464d5a964503c89057db0e
 
             - name: Productivity
               icon: fas fa-briefcase
