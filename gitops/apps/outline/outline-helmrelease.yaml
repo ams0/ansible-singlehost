@@ -1,0 +1,50 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: actual
+  namespace: flux-system
+  labels:
+    app: actual
+spec:
+  interval: 10m
+  timeout: 5m
+  targetNamespace: actual
+  chart:
+    spec:
+      chart: actualbudget
+      sourceRef:
+        kind: HelmRepository
+        name: actual
+        namespace: flux-system
+      interval: 5m0s
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    smtp:
+      host: "smtp-relay.gmail.com"
+      port: 587
+      username: "alessandro@kubespaces.io"
+      fromEmail: "outline@kubespaces.io"
+      replyEmail: "no-reply@kubespaces.io"
+      existingSecret:
+          name: "outline-smtp"
+          passwordKey: "password"
+      secure: true
+    fileStorage:
+      mode: "local"
+
+      local:
+        persistence:
+          enabled: true
+          existingClaim: "outline-pvc"
+    externalPostgresql:
+      host: "outline-outline-database-cluster-rw"
+      database: "outline"
+      existingSecret: "outline-outline-database-cluster-app"
+      passwordSecretKey: "password"

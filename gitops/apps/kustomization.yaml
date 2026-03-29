@@ -24,3 +24,4 @@ resources:
   - tailscale
   - alarik
   - uptime-kuma
+  - outline
