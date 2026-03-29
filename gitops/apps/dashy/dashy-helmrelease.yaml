@@ -152,6 +152,11 @@ spec:
                   url: https://actual.vps.kubespaces.cloud
                   icon: favicon
                   statusCheck: true
+                - title: Outline
+                  description: Team Wiki & Docs
+                  url: https://outline.vps.kubespaces.cloud
+                  icon: favicon
+                  statusCheck: true
 
             - name: AI & Agents
               icon: fas fa-robot
