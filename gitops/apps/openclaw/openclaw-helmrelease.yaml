@@ -133,6 +133,9 @@ spec:
 
           containers:
             main:
+              env:
+                - name: NODE_OPTIONS
+                  value: "--max-old-space-size=1536"
               envFrom:
                 - secretRef:
                     name: openclaw-env-secret
