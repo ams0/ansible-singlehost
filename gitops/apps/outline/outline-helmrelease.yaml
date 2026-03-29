@@ -26,6 +26,12 @@ spec:
     remediation:
       retries: 3
   values:
+    redis:
+      enabled: true
+      architecture: standalone
+      master:
+        persistence:
+          enabled: true
     smtp:
       host: "smtp-relay.gmail.com"
       port: 587
