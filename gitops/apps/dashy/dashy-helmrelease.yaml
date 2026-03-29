@@ -121,9 +121,9 @@ spec:
                 cols: 3
                 color: '#ffcb6b'
               widgets:
-                - type: iframe
+                - type: embed
                   options:
-                    url: https://grafana.vps.kubespaces.cloud/public-dashboards/87f59dc49d464d5a964503c89057db0e
+                    html: '<iframe src="https://grafana.vps.kubespaces.cloud/public-dashboards/87f59dc49d464d5a964503c89057db0e" width="100%" height="450" frameborder="0" style="border:none;border-radius:8px;"></iframe>'
 
             - name: Productivity
               icon: fas fa-briefcase
