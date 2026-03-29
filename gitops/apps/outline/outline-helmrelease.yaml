@@ -5,17 +5,17 @@ metadata:
   name: actual
   namespace: flux-system
   labels:
-    app: actual
+    app: outline
 spec:
   interval: 10m
   timeout: 5m
-  targetNamespace: actual
+  targetNamespace: outline
   chart:
     spec:
-      chart: actualbudget
+      chart: outline
       sourceRef:
         kind: HelmRepository
-        name: actual
+        name: outline
         namespace: flux-system
       interval: 5m0s
   install:
