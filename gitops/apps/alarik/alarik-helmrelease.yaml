@@ -8,7 +8,7 @@ metadata:
     app: alarik
 spec:
   interval: 10m
-  timeout: 5m
+  timeout: 10m
   targetNamespace: alarik
   chartRef:
     kind: OCIRepository

@@ -8,7 +8,7 @@ metadata:
     app: openclaw
 spec:
   interval: 10m
-  timeout: 5m
+  timeout: 10m
   targetNamespace: openclaw
   chart:
     spec:
