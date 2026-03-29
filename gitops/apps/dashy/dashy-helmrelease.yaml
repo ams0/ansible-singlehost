@@ -32,57 +32,254 @@ spec:
       # Overrides the image tag whose default is the chart appVersion.
       tag: "latest"
     static:
-      # If set to true, configuration will be overwritten on every new releases.
       enabled: true
-
-      # -- Set this to the name of a secret to load configuration from. If defined, values in the secret will override values in configs
       existingSecret: ""
-
-      # Customize config.yaml https://github.com/Lissy93/dashy/blob/master/docs/configuring.md for more information.
       configMapContent:
         conf: |-
-          # Page meta info, like heading, footer text and nav links
           pageInfo:
-            title: Dashy
-            description: Welcome to your new dashboard!
+            title: CloudLab
+            description: Oracle Cloud ARM64 · K0s · Flux CD · Istio
             navLinks:
               - title: GitHub
                 path: https://github.com/ams0/cloudlab
-              - title: Documentation
-                path: https://dashy.to/docs
-      
-          # Optional app settings and configuration
+                icon: fab fa-github
+              - title: LinkedIn
+                path: https://www.linkedin.com/in/alessandrovozza
+                icon: fab fa-linkedin
+              - title: Grafana
+                path: https://grafana.vps.kubespaces.cloud
+                icon: fas fa-chart-area
+              - title: Status
+                path: https://uptime.vps.kubespaces.cloud
+                icon: fas fa-heartbeat
+
           appConfig:
-            theme: colorful
-      
-          # Main content - An array of sections, each containing an array of items
+            theme: one-dark
+            layout: auto
+            iconSize: medium
+            colCount: 3
+            statusCheck: true
+            statusCheckInterval: 300
+            faviconApi: iconhorse
+            defaultOpeningMethod: newtab
+            showSplashScreen: false
+            enableFontAwesome: true
+            enableMaterialDesignIcons: true
+            webSearch:
+              searchEngine: duckduckgo
+              openingMethod: newtab
+            customCss: >-
+              .home {
+                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%) !important;
+              }
+
           sections:
-            - name: Getting Started
-              icon: fas fa-rocket
+            - name: Productivity
+              icon: fas fa-briefcase
+              displayData:
+                cols: 1
+                itemSize: medium
+                color: '#7eb6ff'
               items:
-                - title: Dashy Live
-                  description: Development a project management links for Dashy
-                  icon: https://i.ibb.co/qWWpD0v/astro-dab-128.png
-                  url: https://live.dashy.to/
-                  target: newtab
-                - title: GitHub
-                  description: Source Code, Issues and Pull Requests
-                  url: https://github.com/lissy93/dashy
+                - title: n8n
+                  description: Workflow Automation
+                  url: https://n8n.vps.kubespaces.cloud
+                  icon: si-n8n
+                  statusCheck: true
+                - title: Vikunja
+                  description: Task Management
+                  url: https://todo.vps.kubespaces.cloud
                   icon: favicon
-                - title: Docs
-                  description: Configuring & Usage Documentation
-                  provider: Dashy.to
-                  icon: far fa-book
-                  url: https://dashy.to/docs
-                - title: Showcase
-                  description: See how others are using Dashy
-                  url: https://github.com/Lissy93/dashy/blob/master/docs/showcase.md
-                  icon: far fa-grin-hearts
-                - title: Config Guide
-                  description: See full list of configuration options
-                  url: https://github.com/Lissy93/dashy/blob/master/docs/configuring.md
-                  icon: fas fa-wrench
-                - title: Support
-                  description: Get help with Dashy, raise a bug, or get in contact
-                  url: https://github.com/Lissy93/dashy/blob/master/.github/SUPPORT.md
-                  icon: far fa-hands-helping
+                  statusCheck: true
+                - title: XWiki
+                  description: Knowledge Base
+                  url: https://wiki.vps.kubespaces.cloud
+                  icon: favicon
+                  statusCheck: true
+                - title: Actual Budget
+                  description: Personal Finance
+                  url: https://actual.vps.kubespaces.cloud
+                  icon: favicon
+                  statusCheck: true
+
+            - name: AI & Agents
+              icon: fas fa-robot
+              displayData:
+                cols: 1
+                itemSize: medium
+                color: '#c792ea'
+              items:
+                - title: Open WebUI
+                  description: AI Chat Interface
+                  url: https://chat.vps.kubespaces.cloud
+                  icon: favicon
+                  statusCheck: true
+                - title: OpenClaw
+                  description: AI Agent Platform
+                  url: https://claw.vps.kubespaces.cloud
+                  icon: favicon
+                  statusCheck: true
+                - title: Supabase
+                  description: Backend-as-a-Service
+                  url: https://supabase.vps.kubespaces.cloud
+                  icon: si-supabase
+                  statusCheck: true
+
+            - name: Development
+              icon: fas fa-code
+              displayData:
+                cols: 1
+                itemSize: medium
+                color: '#c3e88d'
+              items:
+                - title: Forgejo
+                  description: Git Repositories
+                  url: https://code.vps.kubespaces.cloud
+                  icon: favicon
+                  statusCheck: true
+                - title: ArgoCD
+                  description: GitOps Delivery
+                  url: https://argocd.vps.kubespaces.cloud
+                  icon: si-argo
+                  statusCheck: true
+                - title: Coder
+                  description: Cloud Dev Environments
+                  url: https://coder.vps.kubespaces.cloud
+                  icon: favicon
+                  statusCheck: true
+
+            - name: Infrastructure
+              icon: fas fa-server
+              displayData:
+                cols: 1
+                itemSize: medium
+                color: '#ffcb6b'
+              items:
+                - title: Rancher
+                  description: Kubernetes Management
+                  url: https://rancher.vps.kubespaces.cloud
+                  icon: si-rancher
+                  statusCheck: true
+                - title: Omni
+                  description: Talos Cluster Management
+                  url: https://omni.vps.kubespaces.cloud
+                  icon: favicon
+                  statusCheck: true
+                - title: Garage S3
+                  description: Object Storage
+                  url: https://s3.vps.kubespaces.cloud
+                  icon: fas fa-database
+                  statusCheck: true
+
+            - name: Observability
+              icon: fas fa-eye
+              displayData:
+                cols: 1
+                itemSize: medium
+                color: '#f78c6c'
+              items:
+                - title: Grafana
+                  description: Dashboards & Metrics
+                  url: https://grafana.vps.kubespaces.cloud
+                  icon: si-grafana
+                  statusCheck: true
+                - title: Uptime Kuma
+                  description: Uptime Monitoring
+                  url: https://uptime.vps.kubespaces.cloud
+                  icon: favicon
+                  statusCheck: true
+
+            - name: Auth & Security
+              icon: fas fa-shield-alt
+              displayData:
+                cols: 1
+                itemSize: medium
+                color: '#ff5370'
+              items:
+                - title: Authentik
+                  description: Identity Provider
+                  url: https://authentik.vps.kubespaces.cloud
+                  icon: favicon
+                  statusCheck: true
+                - title: Keycloak
+                  description: IAM & SSO
+                  url: https://auth.vps.kubespaces.cloud
+                  icon: si-keycloak
+                  statusCheck: true
+
+            - name: Communication
+              icon: fas fa-comments
+              displayData:
+                cols: 1
+                itemSize: medium
+                color: '#89ddff'
+              items:
+                - title: Waha
+                  description: WhatsApp API Gateway
+                  url: https://waha.vps.kubespaces.cloud
+                  icon: si-whatsapp
+                  statusCheck: true
+                - title: Alarik
+                  description: Notification Platform
+                  url: https://alarik.vps.kubespaces.cloud
+                  icon: fas fa-bell
+                  statusCheck: true
+                - title: Alarik Console
+                  description: Alarik Management UI
+                  url: https://alarik-console.vps.kubespaces.cloud
+                  icon: fas fa-sliders-h
+                  statusCheck: true
+
+            - name: Other Services
+              icon: fas fa-th
+              displayData:
+                cols: 1
+                itemSize: small
+                color: '#82aaff'
+              items:
+                - title: Dashy
+                  description: This Dashboard
+                  url: https://dash.vps.kubespaces.cloud
+                  icon: favicon
+                - title: Minecraft
+                  description: Game Server
+                  url: https://minecraft.vps.kubespaces.cloud
+                  icon: si-minecraft
+                - title: Echo Server
+                  description: HTTP Debug
+                  url: https://echo.vps.kubespaces.cloud
+                  icon: fas fa-exchange-alt
+                  statusCheck: true
+                - title: Nginx
+                  description: Web Server
+                  url: https://nginx.vps.kubespaces.cloud
+                  icon: si-nginx
+                  statusCheck: true
+                - title: Flux Webhook
+                  description: GitOps Receiver
+                  url: https://webhook.vps.kubespaces.cloud
+                  icon: fas fa-satellite-dish
+
+            - name: Quick Links
+              icon: fas fa-external-link-alt
+              displayData:
+                cols: 2
+                itemSize: small
+                color: '#b2ccd6'
+              items:
+                - title: CloudLab Repo
+                  description: Infrastructure as Code
+                  url: https://github.com/ams0/cloudlab
+                  icon: fab fa-github
+                - title: Alessandro Vozza
+                  description: LinkedIn Profile
+                  url: https://www.linkedin.com/in/alessandrovozza
+                  icon: fab fa-linkedin
+                - title: Kubernetes Docs
+                  description: K8s Reference
+                  url: https://kubernetes.io/docs/
+                  icon: si-kubernetes
+                - title: Flux CD Docs
+                  description: GitOps Toolkit
+                  url: https://fluxcd.io/docs/
+                  icon: favicon
