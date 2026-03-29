@@ -110,8 +110,10 @@ spec:
       grafana.ini:
         server:
           root_url: https://grafana.vps.kubespaces.cloud
+        security:
+          allow_embedding: true
         auth.anonymous:
-          enabled: false
+          enabled: true
           org_name: Main Org.
           org_role: Viewer
       enabled: true
