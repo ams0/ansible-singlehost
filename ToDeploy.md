@@ -50,6 +50,7 @@
 - [X] Harbor
 - [X] Keycloak
 - [X] Matrix
+- [X] Outline
 - [X] Minecraft server
 - [X] n8n
 - [X] Openclaw
