@@ -112,6 +112,8 @@ spec:
             secretKeyRef:
               name: n8n-n8n-database-cluster-app
               key: password
+        N8N_RUNNERS_DISABLED:
+          value: "true"
 
     # Ingress configuration (disabled for now, will use Gateway API)
     ingress:
