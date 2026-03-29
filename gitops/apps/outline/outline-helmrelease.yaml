@@ -53,4 +53,5 @@ spec:
       host: "outline-outline-database-cluster-rw"
       database: "outline"
       existingSecret: "outline-outline-database-cluster-app"
+      userSecretKey: "username"
       passwordSecretKey: "password"
