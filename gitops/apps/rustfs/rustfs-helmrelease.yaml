@@ -34,6 +34,8 @@ spec:
           dataClaim: rustfs-pvc
       distributed:
         enabled: false
+    secret:
+      existingSecret: rustfs-auth
     config:
       rusts:
         region: "eu-oracle-1"
