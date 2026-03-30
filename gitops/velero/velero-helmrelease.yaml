@@ -27,7 +27,7 @@ spec:
       retries: 3
   values:
     initContainers:
-      - name: local-volume-provider
+      - name: velero-plugin-local-volume
         image: replicated/local-volume-provider:v0.6.7
         imagePullPolicy: IfNotPresent
         volumeMounts:
@@ -56,6 +56,7 @@ spec:
     deployNodeAgent: true
 
     nodeAgent:
+      podVolumePath: /var/lib/k0s/kubelet/pods
       resources:
         requests:
           cpu: 100m
