@@ -226,6 +226,11 @@ spec:
                   url: https://s3.vps.kubespaces.cloud
                   icon: fas fa-database
                   statusCheck: true
+                - title: RustFS Console
+                  description: S3-compatible Object Storage
+                  url: https://rustfs.vps.kubespaces.cloud/rustfs/console/
+                  icon: fas fa-bucket
+                  statusCheck: true
 
             - name: Observability
               icon: fas fa-eye
