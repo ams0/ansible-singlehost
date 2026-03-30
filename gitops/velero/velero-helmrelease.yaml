@@ -62,6 +62,15 @@ spec:
           memory: 256Mi
         limits:
           memory: 1Gi
+      extraVolumes:
+        - name: feynman-velero
+          hostPath:
+            path: /mnt/feynman_velero
+            type: ""
+      extraVolumeMounts:
+        - name: feynman-velero
+          mountPath: /mnt/feynman_velero
+          mountPropagation: HostToContainer
 
     resources:
       requests:
@@ -71,15 +80,17 @@ spec:
         memory: 512Mi
 
     # Mount the SSHFS hostPath into the Velero pod
+    # Uses HostToContainer propagation so FUSE mounts are visible inside the container
     extraVolumes:
       - name: feynman-velero
         hostPath:
           path: /mnt/feynman_velero
-          type: Directory
+          type: ""
 
     extraVolumeMounts:
       - name: feynman-velero
         mountPath: /mnt/feynman_velero
+        mountPropagation: HostToContainer
 
     schedules:
       daily-all-apps:
