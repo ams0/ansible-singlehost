@@ -45,7 +45,7 @@ spec:
           default: true
           accessMode: ReadWrite
           config:
-            path: /var/velero-backups
+            path: /mnt/feynman_velero
             resticRepoPrefix: /var/velero-local-volume-provider/velero-backups/restic
 
       volumeSnapshotLocation: []
@@ -65,11 +65,11 @@ spec:
       extraVolumes:
         - name: feynman-velero
           hostPath:
-            path: /var/velero-backups
+            path: /mnt/feynman_velero
             type: DirectoryOrCreate
       extraVolumeMounts:
         - name: feynman-velero
-          mountPath: /var/velero-backups
+          mountPath: /mnt/feynman_velero
 
     resources:
       requests:
@@ -78,16 +78,16 @@ spec:
       limits:
         memory: 512Mi
 
-    # Local hostPath for Velero backups, synced to Mac Mini via rsync cron
+    # CIFS/SMB mount to Mac Mini — kernel-level mount, visible to containers
     extraVolumes:
       - name: feynman-velero
         hostPath:
-          path: /var/velero-backups
+          path: /mnt/feynman_velero
           type: DirectoryOrCreate
 
     extraVolumeMounts:
       - name: feynman-velero
-        mountPath: /var/velero-backups
+        mountPath: /mnt/feynman_velero
 
     schedules:
       daily-all-apps:

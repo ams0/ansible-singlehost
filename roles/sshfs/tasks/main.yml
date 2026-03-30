@@ -1,31 +1,41 @@
 ---
-- name: Install sshfs
+- name: Install cifs-utils
   apt:
-    name: sshfs
+    name: cifs-utils
     state: present
     update_cache: yes
 
-- name: Create SSHFS mount points
+- name: Create SMB credentials file
+  copy:
+    dest: /etc/smb-credentials-{{ item.name }}
+    content: |
+      username={{ item.username }}
+      password={{ smb_password }}
+    mode: "0600"
+  loop: "{{ smb_mounts }}"
+  no_log: true
+
+- name: Create mount points
   file:
     path: "{{ item.local_path }}"
     state: directory
     mode: "0755"
-  loop: "{{ sshfs_mounts }}"
+  loop: "{{ smb_mounts }}"
 
 - name: Deploy systemd mount units
   template:
-    src: sshfs.mount.j2
+    src: smb.mount.j2
     dest: "/etc/systemd/system/{{ item.local_path | regex_replace('^/', '') | regex_replace('/', '-') }}.mount"
     mode: "0644"
-  loop: "{{ sshfs_mounts }}"
+  loop: "{{ smb_mounts }}"
   notify: reload systemd
 
 - name: Deploy systemd automount units
   template:
-    src: sshfs.automount.j2
+    src: smb.automount.j2
     dest: "/etc/systemd/system/{{ item.local_path | regex_replace('^/', '') | regex_replace('/', '-') }}.automount"
     mode: "0644"
-  loop: "{{ sshfs_mounts }}"
+  loop: "{{ smb_mounts }}"
   notify: reload systemd
 
 - name: Flush handlers
@@ -36,23 +46,4 @@
     name: "{{ item.local_path | regex_replace('^/', '') | regex_replace('/', '-') }}.automount"
     enabled: yes
     state: started
-  loop: "{{ sshfs_mounts }}"
-
-- name: Create Velero backup directory
-  file:
-    path: /var/velero-backups
-    state: directory
-    mode: "0755"
-
-- name: Deploy Velero rsync script
-  template:
-    src: velero-rsync.sh.j2
-    dest: /usr/local/bin/velero-rsync.sh
-    mode: "0755"
-
-- name: Configure Velero rsync cron job
-  cron:
-    name: "Sync Velero backups to Mac Mini"
-    minute: "0"
-    hour: "4"
-    job: "/usr/local/bin/velero-rsync.sh >> /var/log/velero-rsync.log 2>&1"
+  loop: "{{ smb_mounts }}"

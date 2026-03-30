@@ -1,0 +1,13 @@
+[Unit]
+Description=SMB mount {{ item.share }}/{{ item.subpath }}
+After=network-online.target tailscaled.service
+Wants=network-online.target
+
+[Mount]
+What={{ item.share }}/{{ item.subpath }}
+Where={{ item.local_path }}
+Type=cifs
+Options=credentials=/etc/smb-credentials-{{ item.name }},uid={{ item.uid }},gid={{ item.gid }},file_mode=0755,dir_mode=0755,vers=3.0,_netdev,nofail
+
+[Install]
+WantedBy=multi-user.target

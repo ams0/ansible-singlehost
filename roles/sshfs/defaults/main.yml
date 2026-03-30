@@ -1,10 +1,9 @@
 ---
-sshfs_mounts:
+smb_mounts:
   - name: feynman-velero
-    remote_path: "/Volumes/Store/Borg/Velero"
-    remote_user: feynam
-    remote_host: feynman.rhino-butterfly.ts.net
+    share: "//feynman.rhino-butterfly.ts.net/Store"
+    subpath: "Borg/Velero"
     local_path: /mnt/feynman_velero
-    ssh_key: /home/ubuntu/.ssh/nas
+    username: feynman
     uid: "1001"
     gid: "1001"

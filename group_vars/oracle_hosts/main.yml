@@ -75,3 +75,6 @@ alarik_default_secret_key: "{{ vault_alarik_default_secret_key }}"
 # RustFS configuration
 rustfs_access_key: "{{ vault_rustfs_access_key }}"
 rustfs_secret_key: "{{ vault_rustfs_secret_key }}"
+
+# SMB mount configuration (Mac Mini)
+smb_password: "{{ vault_smb_password }}"

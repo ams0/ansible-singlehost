@@ -1,5 +1,5 @@
 [Unit]
-Description=Automount SSHFS {{ item.local_path }}
+Description=Automount SMB {{ item.local_path }}
 After=network-online.target tailscaled.service
 Wants=network-online.target
 
