@@ -15,6 +15,13 @@ spec:
     - matches:
         - path:
             type: PathPrefix
+            value: /dashboard
+      backendRefs:
+        - name: rustfs-rustfs-svc
+          port: 9001
+    - matches:
+        - path:
+            type: PathPrefix
             value: /
       backendRefs:
         - name: rustfs-rustfs-svc
