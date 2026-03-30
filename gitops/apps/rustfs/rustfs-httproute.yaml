@@ -17,5 +17,5 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: rustfs-rustfs
-          port: 3000
+        - name: rustfs-rustfs-svc
+          port: 9000
