@@ -25,3 +25,4 @@ resources:
   - alarik
   - uptime-kuma
   - outline
+  - rustfs

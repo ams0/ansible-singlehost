@@ -1,0 +1,42 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: rustfs
+  namespace: flux-system
+  labels:
+    app: rustfs
+spec:
+  interval: 10m
+  timeout: 5m
+  targetNamespace: rustfs
+  chart:
+    spec:
+      chart: rustfs
+      sourceRef:
+        kind: HelmRepository
+        name: rustfs
+        namespace: flux-system
+      interval: 5m0s
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    replicaCount: 1
+    mode:
+      standalone:
+        enabled: true
+        existingClaim:
+          dataClaim: rustfs-pvc
+      distributed:
+        enabled: false
+    config:
+      rusts:
+        domains: "rustfs.vps.kubespaces.cloud"
+        region: "eu-oracle-1"
+    ingress:
+      enabled: false
