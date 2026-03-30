@@ -4,7 +4,7 @@ sshfs_mounts:
     remote_path: "/Volumes/Store/Borg/Velero"
     remote_user: feynam
     remote_host: feynman.rhino-butterfly.ts.net
-    local_path: /mnt/feynman-velero
+    local_path: /mnt/feynman_velero
     ssh_key: /home/ubuntu/.ssh/nas
     uid: "1001"
     gid: "1001"

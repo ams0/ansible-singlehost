@@ -45,7 +45,7 @@ spec:
           default: true
           accessMode: ReadWrite
           config:
-            path: /mnt/feynman-velero
+            path: /mnt/feynman_velero
             resticRepoPrefix: /var/velero-local-volume-provider/velero-backups/restic
 
       volumeSnapshotLocation: []
@@ -74,12 +74,12 @@ spec:
     extraVolumes:
       - name: feynman-velero
         hostPath:
-          path: /mnt/feynman-velero
+          path: /mnt/feynman_velero
           type: Directory
 
     extraVolumeMounts:
       - name: feynman-velero
-        mountPath: /mnt/feynman-velero
+        mountPath: /mnt/feynman_velero
 
     schedules:
       daily-all-apps:
