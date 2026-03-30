@@ -5,7 +5,7 @@
     state: present
     update_cache: yes
 
-- name: Create mount points
+- name: Create SSHFS mount points
   file:
     path: "{{ item.local_path }}"
     state: directory
@@ -38,3 +38,21 @@
     state: started
   loop: "{{ sshfs_mounts }}"
 
+- name: Create Velero backup directory
+  file:
+    path: /var/velero-backups
+    state: directory
+    mode: "0755"
+
+- name: Deploy Velero rsync script
+  template:
+    src: velero-rsync.sh.j2
+    dest: /usr/local/bin/velero-rsync.sh
+    mode: "0755"
+
+- name: Configure Velero rsync cron job
+  cron:
+    name: "Sync Velero backups to Mac Mini"
+    minute: "0"
+    hour: "4"
+    job: "/usr/local/bin/velero-rsync.sh >> /var/log/velero-rsync.log 2>&1"

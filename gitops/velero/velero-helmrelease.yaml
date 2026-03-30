@@ -45,7 +45,7 @@ spec:
           default: true
           accessMode: ReadWrite
           config:
-            path: /mnt/feynman_velero
+            path: /var/velero-backups
             resticRepoPrefix: /var/velero-local-volume-provider/velero-backups/restic
 
       volumeSnapshotLocation: []
@@ -65,12 +65,11 @@ spec:
       extraVolumes:
         - name: feynman-velero
           hostPath:
-            path: /mnt/feynman_velero
-            type: ""
+            path: /var/velero-backups
+            type: DirectoryOrCreate
       extraVolumeMounts:
         - name: feynman-velero
-          mountPath: /mnt/feynman_velero
-          mountPropagation: HostToContainer
+          mountPath: /var/velero-backups
 
     resources:
       requests:
@@ -79,18 +78,16 @@ spec:
       limits:
         memory: 512Mi
 
-    # Mount the SSHFS hostPath into the Velero pod
-    # Uses HostToContainer propagation so FUSE mounts are visible inside the container
+    # Local hostPath for Velero backups, synced to Mac Mini via rsync cron
     extraVolumes:
       - name: feynman-velero
         hostPath:
-          path: /mnt/feynman_velero
-          type: ""
+          path: /var/velero-backups
+          type: DirectoryOrCreate
 
     extraVolumeMounts:
       - name: feynman-velero
-        mountPath: /mnt/feynman_velero
-        mountPropagation: HostToContainer
+        mountPath: /var/velero-backups
 
     schedules:
       daily-all-apps:
