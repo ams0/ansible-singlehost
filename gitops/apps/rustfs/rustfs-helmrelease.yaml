@@ -37,7 +37,12 @@ spec:
     secret:
       existingSecret: rustfs-auth
     config:
-      rusts:
+      rustfs:
         region: "eu-oracle-1"
+    extraEnv:
+      - name: RUSTFS_KMS_ENABLE
+        value: "true"
+      - name: RUSTFS_KMS_BACKEND
+        value: "local"
     ingress:
       enabled: false
