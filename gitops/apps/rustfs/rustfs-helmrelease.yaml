@@ -36,7 +36,6 @@ spec:
         enabled: false
     config:
       rusts:
-        domains: "rustfs.vps.kubespaces.cloud"
         region: "eu-oracle-1"
     ingress:
       enabled: false
