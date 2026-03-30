@@ -7,7 +7,7 @@ Wants=network-online.target
 What={{ item.share }}/{{ item.subpath }}
 Where={{ item.local_path }}
 Type=cifs
-Options=credentials=/etc/smb-credentials-{{ item.name }},uid={{ item.uid }},gid={{ item.gid }},file_mode=0755,dir_mode=0755,vers=3.0,_netdev,nofail
+Options=credentials=/etc/smb-credentials-{{ item.name }},uid=0,gid=0,file_mode=0777,dir_mode=0777,vers=3.0,_netdev,nofail
 
 [Install]
 WantedBy=multi-user.target
