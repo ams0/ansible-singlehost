@@ -19,6 +19,8 @@
       tags: [traefik, ingress]
     - role: tailscale
       tags: [tailscale]
+    - role: sshfs
+      tags: [sshfs, backup]
     - role: borg
       tags: [borg, backup]
     - role: datadog

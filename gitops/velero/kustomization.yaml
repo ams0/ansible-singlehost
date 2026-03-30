@@ -5,4 +5,3 @@ resources:
   - namespace.yaml
   - velero-helmrepo.yaml
   - velero-helmrelease.yaml
-  - velero-httproute.yaml

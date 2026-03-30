@@ -1,0 +1,11 @@
+[Unit]
+Description=Automount SSHFS {{ item.local_path }}
+After=network-online.target tailscaled.service
+Wants=network-online.target
+
+[Automount]
+Where={{ item.local_path }}
+TimeoutIdleSec=0
+
+[Install]
+WantedBy=multi-user.target

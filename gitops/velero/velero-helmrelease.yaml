@@ -26,4 +26,100 @@ spec:
     remediation:
       retries: 3
   values:
-   
+    initContainers:
+      - name: local-volume-provider
+        image: replicated/local-volume-provider:v0.6.7
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - mountPath: /target
+            name: plugins
+
+    credentials:
+      useSecret: false
+
+    configuration:
+      backupStorageLocation:
+        - name: feynman
+          provider: replicated.com/hostpath
+          bucket: velero-backups
+          default: true
+          accessMode: ReadWrite
+          config:
+            path: /mnt/feynman-velero
+            resticRepoPrefix: /var/velero-local-volume-provider/velero-backups/restic
+
+      volumeSnapshotLocation: []
+      defaultVolumesToFsBackup: true
+      uploaderType: kopia
+
+    snapshotsEnabled: false
+    deployNodeAgent: true
+
+    nodeAgent:
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          memory: 1Gi
+
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        memory: 512Mi
+
+    # Mount the SSHFS hostPath into the Velero pod
+    extraVolumes:
+      - name: feynman-velero
+        hostPath:
+          path: /mnt/feynman-velero
+          type: Directory
+
+    extraVolumeMounts:
+      - name: feynman-velero
+        mountPath: /mnt/feynman-velero
+
+    schedules:
+      daily-all-apps:
+        disabled: false
+        schedule: "0 2 * * *"
+        useOwnerReferencesInBackup: false
+        template:
+          ttl: "336h"
+          storageLocation: feynman
+          includedNamespaces:
+            - n8n
+            - forgejo
+            - minecraft
+            - keycloak
+            - actual
+            - alarik
+            - uptime-kuma
+            - outline
+            - waha
+            - rustfs
+          defaultVolumesToFsBackup: true
+          snapshotVolumes: false
+
+      weekly-disaster-recovery:
+        disabled: false
+        schedule: "0 3 * * 0"
+        useOwnerReferencesInBackup: false
+        template:
+          ttl: "2160h"
+          storageLocation: feynman
+          includedNamespaces:
+            - n8n
+            - forgejo
+            - minecraft
+            - keycloak
+            - actual
+            - alarik
+            - uptime-kuma
+            - outline
+            - waha
+            - rustfs
+          defaultVolumesToFsBackup: true
+          snapshotVolumes: false

@@ -1,0 +1,40 @@
+---
+- name: Install sshfs
+  apt:
+    name: sshfs
+    state: present
+    update_cache: yes
+
+- name: Create mount points
+  file:
+    path: "{{ item.local_path }}"
+    state: directory
+    mode: "0755"
+  loop: "{{ sshfs_mounts }}"
+
+- name: Deploy systemd mount units
+  template:
+    src: sshfs.mount.j2
+    dest: "/etc/systemd/system/{{ item.local_path | regex_replace('^/', '') | regex_replace('/', '-') }}.mount"
+    mode: "0644"
+  loop: "{{ sshfs_mounts }}"
+  notify: reload systemd
+
+- name: Deploy systemd automount units
+  template:
+    src: sshfs.automount.j2
+    dest: "/etc/systemd/system/{{ item.local_path | regex_replace('^/', '') | regex_replace('/', '-') }}.automount"
+    mode: "0644"
+  loop: "{{ sshfs_mounts }}"
+  notify: reload systemd
+
+- name: Flush handlers
+  meta: flush_handlers
+
+- name: Enable and start automount units
+  systemd:
+    name: "{{ item.local_path | regex_replace('^/', '') | regex_replace('/', '-') }}.automount"
+    enabled: yes
+    state: started
+  loop: "{{ sshfs_mounts }}"
+
