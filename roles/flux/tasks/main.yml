@@ -240,6 +240,27 @@
     - vault_openclaw_anthropic_api_key is defined
     - vault_openclaw_gateway_token is defined
 
+- name: Create rustfs namespace if not exists
+  shell: kubectl create namespace rustfs --dry-run=client -o yaml | kubectl apply -f -
+  changed_when: false
+
+- name: Check if rustfs auth secret exists
+  shell: kubectl -n rustfs get secret rustfs-auth
+  register: rustfs_secret_check
+  failed_when: false
+  changed_when: false
+
+- name: Create rustfs auth secret
+  shell: |
+    kubectl -n rustfs create secret generic rustfs-auth \
+      --from-literal=RUSTFS_ACCESS_KEY={{ rustfs_access_key }} \
+      --from-literal=RUSTFS_SECRET_KEY={{ rustfs_secret_key }}
+  no_log: true
+  when:
+    - rustfs_secret_check.rc != 0
+    - rustfs_access_key is defined
+    - rustfs_secret_key is defined
+
 - name: Create alarik namespace if not exists
   shell: kubectl create namespace alarik --dry-run=client -o yaml | kubectl apply -f -
   changed_when: false

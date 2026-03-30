@@ -117,3 +117,30 @@ datadog_tags:
 datadog_logs_enabled: true
 datadog_process_agent_enabled: true
 ```
+
+## Kubernetes Secrets Managed by Ansible
+
+The `flux` role creates the following Kubernetes secrets from Ansible Vault variables during deployment. These secrets are **not** managed by Flux/Helm and must exist before their respective HelmReleases can deploy.
+
+| Namespace | Secret Name | Vault Variables | Used By |
+|-----------|------------|-----------------|---------|
+| `datadog` | `datadog-api-key` | `vault_datadog_api_key` | Datadog agent |
+| `keycloak` | `keycloak-bootstrap-admin` | `vault_keycloak_admin_password` | Keycloak |
+| `keycloak` | `keycloak-smtp` | `vault_forgejo_smtp_password` | Keycloak SMTP |
+| `forgejo` | `forgejo-smtp` | `vault_forgejo_smtp_password` | Forgejo SMTP |
+| `omni` | `omni-oidc` | `vault_omni_oidc_client_secret` | Omni OIDC |
+| `omni` | `omni-etcd-encryption-key` | `vault_omni_etcd_encryption_key` | Omni etcd |
+| `flux-system` | `tailscale-oauth` | `vault_tailscale_operator_oauth_client_id/secret` | Tailscale operator |
+| `openclaw` | `openclaw-env-secret` | `vault_openclaw_anthropic_api_key`, `vault_openclaw_gateway_token` | OpenClaw |
+| `alarik` | `alarik-credentials` | `vault_alarik_admin_*`, `vault_alarik_jwt_key`, `vault_alarik_default_*` | Alarik |
+| `rustfs` | `rustfs-auth` | `vault_rustfs_access_key`, `vault_rustfs_secret_key` | RustFS console auth |
+
+To add or update vault secrets:
+
+```bash
+# Edit the encrypted vault file
+ansible-vault edit group_vars/oracle_hosts/vault.yml
+
+# Then re-run the flux role to apply
+ansible-playbook site.yml --tags flux
+```

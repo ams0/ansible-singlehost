@@ -71,3 +71,7 @@ alarik_admin_password: "{{ vault_alarik_admin_password }}"
 alarik_jwt_key: "{{ vault_alarik_jwt_key }}"
 alarik_default_access_key: "{{ vault_alarik_default_access_key }}"
 alarik_default_secret_key: "{{ vault_alarik_default_secret_key }}"
+
+# RustFS configuration
+rustfs_access_key: "{{ vault_rustfs_access_key }}"
+rustfs_secret_key: "{{ vault_rustfs_secret_key }}"
