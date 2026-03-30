@@ -4,6 +4,6 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - rustfs-pvc.yaml
-  - outline-helmrepo.yaml
-  - outline-helmrelease.yaml
-  - outline-httproute.yaml
+  - rustfs-helmrepo.yaml
+  - rustfs-helmrelease.yaml
+  - rustfs-httproute.yaml
