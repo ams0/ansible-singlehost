@@ -15,7 +15,7 @@ spec:
     - matches:
         - path:
             type: PathPrefix
-            value: /dashboard
+            value: /rustfs/console
       backendRefs:
         - name: rustfs-rustfs-svc
           port: 9001
