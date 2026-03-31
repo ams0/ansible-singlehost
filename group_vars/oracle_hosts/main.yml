@@ -16,7 +16,7 @@ borg_ssh_host_key: "feynman.rhino-butterfly.ts.net ssh-ed25519 AAAAC3NzaC1lZDI1N
 borg_passphrase: "{{ vault_borg_passphrase }}"
 borg_ssh_key: "/home/ubuntu/.ssh/nas"  # SSH key for Mac Mini
 borg_version: "1.4.1"  # Latest stable with ARM64 support
-borg_remote_path: "borg"  # Use borg from PATH on Mac Mini
+borg_remote_path: "/opt/homebrew/bin/borg"  # Homebrew install on Mac Mini (Apple Silicon)
 borg_backup_paths:
   - /etc
   - /home
