@@ -283,3 +283,29 @@
   when:
     - alarik_secret_check.rc != 0
     - alarik_admin_password is defined
+
+- name: Create velero namespace if not exists
+  shell: kubectl create namespace velero --dry-run=client -o yaml | kubectl apply -f -
+  changed_when: false
+
+- name: Check if velero S3 credentials secret exists
+  shell: kubectl -n velero get secret velero-s3-credentials
+  register: velero_secret_check
+  failed_when: false
+  changed_when: false
+
+- name: Create velero S3 credentials secret
+  shell: |
+    cat <<'CREDEOF' > /tmp/velero-credentials
+    [default]
+    aws_access_key_id={{ velero_s3_access_key }}
+    aws_secret_access_key={{ velero_s3_secret_key }}
+    CREDEOF
+    kubectl -n velero create secret generic velero-s3-credentials \
+      --from-file=cloud=/tmp/velero-credentials
+    rm -f /tmp/velero-credentials
+  no_log: true
+  when:
+    - velero_secret_check.rc != 0
+    - velero_s3_access_key is defined
+    - velero_s3_secret_key is defined

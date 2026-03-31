@@ -27,26 +27,28 @@ spec:
       retries: 3
   values:
     initContainers:
-      - name: velero-plugin-local-volume
-        image: replicated/local-volume-provider:v0.6.7
+      - name: velero-plugin-for-aws
+        image: velero/velero-plugin-for-aws:v1.9.2
         imagePullPolicy: IfNotPresent
         volumeMounts:
           - mountPath: /target
             name: plugins
 
     credentials:
-      useSecret: false
+      useSecret: true
+      existingSecret: velero-s3-credentials
 
     configuration:
       backupStorageLocation:
         - name: feynman
-          provider: replicated.com/hostpath
-          bucket: velero-backups
+          provider: aws
+          bucket: velero
           default: true
           accessMode: ReadWrite
           config:
-            path: /mnt/feynman_velero
-            resticRepoPrefix: /var/velero-local-volume-provider/velero-backups/restic
+            region: us-east-1
+            s3ForcePathStyle: "true"
+            s3Url: http://feynman.rhino-butterfly.ts.net:9000
 
       volumeSnapshotLocation: []
       defaultVolumesToFsBackup: true
@@ -63,14 +65,6 @@ spec:
           memory: 256Mi
         limits:
           memory: 1Gi
-      extraVolumes:
-        - name: feynman-velero
-          hostPath:
-            path: /mnt/feynman_velero
-            type: DirectoryOrCreate
-      extraVolumeMounts:
-        - name: feynman-velero
-          mountPath: /mnt/feynman_velero
 
     resources:
       requests:
@@ -78,17 +72,6 @@ spec:
         memory: 128Mi
       limits:
         memory: 512Mi
-
-    # CIFS/SMB mount to Mac Mini — kernel-level mount, visible to containers
-    extraVolumes:
-      - name: feynman-velero
-        hostPath:
-          path: /mnt/feynman_velero
-          type: DirectoryOrCreate
-
-    extraVolumeMounts:
-      - name: feynman-velero
-        mountPath: /mnt/feynman_velero
 
     schedules:
       daily-all-apps:
