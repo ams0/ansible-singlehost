@@ -12,11 +12,11 @@ docker_users:
 borg_repository: "{{ vault_borg_repository }}"
 borg_ssh_user: "{{ vault_borg_ssh_user }}"
 borg_ssh_host: "{{ vault_borg_ssh_host }}"
-borg_ssh_host_key: "nas.rhino-butterfly.ts.net ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHz6cHjPcDCrVxdQYq6S+MYFSWxuv8LDF0QmEHYFEGxk"
+borg_ssh_host_key: "feynman.rhino-butterfly.ts.net ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMUtd+clmg3FHLP9SpSNNda7F0rdRTat3BvEA0LovbX+"
 borg_passphrase: "{{ vault_borg_passphrase }}"
-borg_ssh_key: "/home/ubuntu/.ssh/nas"  # Use existing SSH key
+borg_ssh_key: "/home/ubuntu/.ssh/nas"  # SSH key for Mac Mini
 borg_version: "1.4.1"  # Latest stable with ARM64 support
-borg_remote_path: "/usr/local/bin/borg"  # Full path to borg on Synology NAS
+borg_remote_path: "borg"  # Use borg from PATH on Mac Mini
 borg_backup_paths:
   - /etc
   - /home
