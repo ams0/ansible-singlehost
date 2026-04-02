@@ -5,18 +5,18 @@ resources:
   - keycloak
   - n8n
 #  - harbor
-  - minecraft
+#  - minecraft  # scaled to zero — resource savings
   - stakater
   - garage
   - forgejo
   - dashy
-  - rancher
+#  - rancher  # scaled to zero — resource savings
   - actual
   - supabase
   - openclaw
   - authentik
   - openwebui
-  - xwiki
+#  - xwiki  # scaled to zero — resource savings
   - coder
   - vikunja
   - waha
