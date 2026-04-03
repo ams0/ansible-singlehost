@@ -26,8 +26,10 @@ spec:
     remediation:
       retries: 3
   values:
-    endpoint: "wekan.vps.kubespaces.cloud"  # Change this to your actual domain
-    root_url: "https://wekan.vps.kubespaces.cloud"  # Change this to your actual domain
+    image:
+      tag: "v8.50"  # v8.45 is broken (Node.js v22 breaks @meteorjs/reify)
+    endpoint: "wekan.vps.kubespaces.cloud"
+    root_url: "https://wekan.vps.kubespaces.cloud"
     ingress:
       enabled: false
     sharedDataFolder:
