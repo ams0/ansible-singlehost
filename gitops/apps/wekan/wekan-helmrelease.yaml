@@ -31,6 +31,8 @@ spec:
     env:
       - name: "WRITABLE_PATH"
         value: "/data"
+      - name: "MONGO_URL"
+        value: "mongodb://wekan-wekan-mongodb:27017"
     endpoint: "wekan.vps.kubespaces.cloud"
     root_url: "https://wekan.vps.kubespaces.cloud"
     ingress:
