@@ -1,0 +1,40 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: wekan
+  namespace: flux-system
+  labels:
+    app: wekan
+spec:
+  interval: 10m
+  timeout: 5m
+  targetNamespace: wekan
+  chart:
+    spec:
+      chart: wekan
+      sourceRef:
+        kind: HelmRepository
+        name: wekan
+        namespace: flux-system
+      interval: 5m0s
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    endpoint: "wekan.vps.kubespaces.cloud"  # Change this to your actual domain
+    root_url: "https://wekan.vps.kubespaces.cloud"  # Change this to your actual domain
+    ingress:
+      enabled: false
+    sharedDataFolder:
+      enabled: true
+      path: /data
+      accessMode: ReadWriteOnce
+      storageClass: local-path
+      resources:
+        requests:
+          storage: 5Gi
