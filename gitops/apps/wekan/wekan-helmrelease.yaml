@@ -27,7 +27,7 @@ spec:
       retries: 3
   values:
     image:
-      tag: "v8.50"  # v8.45 is broken (Node.js v22 breaks @meteorjs/reify)
+      tag: "v8.42"  # v8.45+ broken (Node.js v22 / filesystem issues)
     env:
       - name: "WRITABLE_PATH"
         value: "/data"
