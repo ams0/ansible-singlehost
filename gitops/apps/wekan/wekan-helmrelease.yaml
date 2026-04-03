@@ -31,6 +31,10 @@ spec:
     env:
       - name: "WRITABLE_PATH"
         value: "/data"
+      - name: "MAIL_URL"
+        value: "smtp://localhost:25"
+      - name: "MAIL_FROM"
+        value: "wekan@vps.kubespaces.cloud"
     secretManaged: true
     secretEnv:
       - name: "MONGO_URL"
