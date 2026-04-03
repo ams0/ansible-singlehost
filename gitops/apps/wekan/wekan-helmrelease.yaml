@@ -28,6 +28,7 @@ spec:
   values:
     image:
       tag: "v8.50"  # v8.45 is broken (Node.js v22 breaks @meteorjs/reify)
+    mongo_url: "mongodb://wekan-wekan-mongodb-0.wekan-wekan-mongodb:27017/wekan"
     endpoint: "wekan.vps.kubespaces.cloud"
     root_url: "https://wekan.vps.kubespaces.cloud"
     ingress:
