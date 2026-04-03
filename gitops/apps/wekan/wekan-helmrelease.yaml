@@ -29,8 +29,9 @@ spec:
     image:
       tag: "v8.50"  # v8.45 is broken (Node.js v22 breaks @meteorjs/reify)
     env:
-      - name: "WRITABLE_PATH"
-        value: "/data"
+      - name: "MONGO_URL"
+        value: "mongodb://wekan-wekan-mongodb:27017/wekan"
+    secretEnv:
       - name: "MONGO_URL"
         value: "mongodb://wekan-wekan-mongodb:27017/wekan"
     endpoint: "wekan.vps.kubespaces.cloud"
