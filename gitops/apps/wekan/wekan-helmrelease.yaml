@@ -28,9 +28,7 @@ spec:
   values:
     image:
       tag: "v8.50"  # v8.45 is broken (Node.js v22 breaks @meteorjs/reify)
-    env:
-      - name: "MONGO_URL"
-        value: "mongodb://wekan-wekan-mongodb:27017/wekan"
+    secretManaged: true
     secretEnv:
       - name: "MONGO_URL"
         value: "mongodb://wekan-wekan-mongodb:27017/wekan"
