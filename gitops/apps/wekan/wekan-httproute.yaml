@@ -10,7 +10,7 @@ spec:
       namespace: istio-system
       sectionName: http   # listener name on the Gateway
   hostnames:
-    - "wiki.vps.kubespaces.cloud"  # Change this to your actual domain
+    - "wekan.vps.kubespaces.cloud"  # Change this to your actual domain
   rules:
     - matches:
         - path:
