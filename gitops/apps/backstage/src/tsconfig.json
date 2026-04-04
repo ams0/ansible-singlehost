@@ -6,6 +6,7 @@
     "outDir": "dist-types",
     "rootDir": ".",
     "jsx": "react-jsx",
-    "types": []
+    "types": [],
+    "skipLibCheck": true
   }
 }
