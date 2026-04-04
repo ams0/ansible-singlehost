@@ -29,6 +29,7 @@ spec:
     backstage:
       appConfig:
         app:
+          title: Backstage
           baseUrl: https://backstage.vps.kubespaces.cloud
         backend:
           baseUrl: https://backstage.vps.kubespaces.cloud

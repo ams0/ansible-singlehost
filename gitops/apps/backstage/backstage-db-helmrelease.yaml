@@ -42,5 +42,7 @@ spec:
         localeCType: C
         localeCollate: C
         owner: backstage
+        postInitSQL:
+          - ALTER USER backstage CREATEDB
     backups:
       enabled: false
