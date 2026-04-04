@@ -26,4 +26,5 @@ resources:
   - uptime-kuma
   - outline
   - rustfs
+  - backstage
 #  - wekan  # scaled to zero — resource savings
