@@ -27,6 +27,10 @@ spec:
       retries: 3
   values:
     backstage:
+      image:
+        registry: ghcr.io
+        repository: backstage/backstage
+        tag: "1.7.2"
       appConfig:
         app:
           title: Backstage
