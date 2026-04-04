@@ -1,0 +1,24 @@
+app:
+  title: Backstage
+  baseUrl: http://localhost:7007
+
+backend:
+  baseUrl: http://localhost:7007
+  listen:
+    port: 7007
+  database:
+    client: pg
+    connection:
+      host: localhost
+      port: 5432
+      user: backstage
+      password: backstage
+
+auth:
+  environment: development
+  providers:
+    oidc:
+      development:
+        metadataUrl: https://example.com/.well-known/openid-configuration
+        clientId: placeholder
+        clientSecret: placeholder

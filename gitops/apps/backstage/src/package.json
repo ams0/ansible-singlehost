@@ -1,0 +1,24 @@
+{
+  "name": "backstage",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": "22 || 24"
+  },
+  "scripts": {
+    "build:backend": "yarn workspace backend build",
+    "tsc": "tsc"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@backstage/cli": "^0.36.0",
+    "typescript": "~5.8.0"
+  },
+  "resolutions": {
+    "@types/react": "^18",
+    "@types/react-dom": "^18"
+  },
+  "packageManager": "yarn@4.4.1"
+}
