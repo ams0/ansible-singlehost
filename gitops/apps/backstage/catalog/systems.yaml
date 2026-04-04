@@ -1,0 +1,32 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: platform
+  description: Core platform infrastructure services
+spec:
+  owner: group:cloudlab
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: developer-tools
+  description: Developer productivity and collaboration tools
+spec:
+  owner: group:cloudlab
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: applications
+  description: User-facing applications
+spec:
+  owner: group:cloudlab
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: observability
+  description: Monitoring, logging, and alerting
+spec:
+  owner: group:cloudlab

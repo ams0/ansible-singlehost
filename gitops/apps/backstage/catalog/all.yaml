@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: cloudlab-catalog
+  description: CloudLab software catalog
+spec:
+  targets:
+    - https://raw.githubusercontent.com/ams0/cloudlab/main/gitops/apps/backstage/catalog/groups.yaml
+    - https://raw.githubusercontent.com/ams0/cloudlab/main/gitops/apps/backstage/catalog/users.yaml
+    - https://raw.githubusercontent.com/ams0/cloudlab/main/gitops/apps/backstage/catalog/systems.yaml
+    - https://raw.githubusercontent.com/ams0/cloudlab/main/gitops/apps/backstage/catalog/components.yaml

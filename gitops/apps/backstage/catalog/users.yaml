@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: alessandro
+spec:
+  profile:
+    displayName: Alessandro Vozza
+    email: alessandro@kubespaces.io
+  memberOf:
+    - cloudlab

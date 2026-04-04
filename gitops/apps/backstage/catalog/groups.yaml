@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: cloudlab
+  description: CloudLab platform team
+spec:
+  type: team
+  profile:
+    displayName: CloudLab
+  children: []

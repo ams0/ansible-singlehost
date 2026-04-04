@@ -40,12 +40,40 @@ spec:
               port: 5432
               user: backstage
               password: ${POSTGRES_PASSWORD}
+        auth:
+          environment: production
+          providers:
+            oidc:
+              production:
+                metadataUrl: https://auth.vps.kubespaces.cloud/realms/master/.well-known/openid-configuration
+                clientId: backstage
+                clientSecret: ${OIDC_CLIENT_SECRET}
+                prompt: auto
+                signIn:
+                  resolvers:
+                    - resolver: emailMatchingUserEntityProfileEmail
+        catalog:
+          import:
+            entityFilename: catalog-info.yaml
+            pullRequestBranchName: backstage-integration
+          rules:
+            - allow: [Component, System, API, Resource, Location, Group, User]
+          locations:
+            - type: url
+              target: https://raw.githubusercontent.com/ams0/cloudlab/main/gitops/apps/backstage/catalog/all.yaml
+              rules:
+                - allow: [Location, Component, System, Group, User]
       extraEnvVars:
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
               name: backstage-backstage-database-cluster-app
               key: password
+        - name: OIDC_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: backstage-oidc
+              key: clientSecret
     ingress:
       enabled: false
     postgresql:

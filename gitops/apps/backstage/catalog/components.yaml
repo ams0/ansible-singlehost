@@ -1,0 +1,337 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: keycloak
+  description: Identity and access management
+  annotations:
+    backstage.io/kubernetes-namespace: keycloak
+  links:
+    - url: https://auth.vps.kubespaces.cloud
+      title: Keycloak Admin
+spec:
+  type: service
+  lifecycle: production
+  owner: group:cloudlab
+  system: platform
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: authentik
+  description: Identity provider and SSO
+  annotations:
+    backstage.io/kubernetes-namespace: authentik
+  links:
+    - url: https://authentik.vps.kubespaces.cloud
+      title: Authentik
+spec:
+  type: service
+  lifecycle: production
+  owner: group:cloudlab
+  system: platform
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: tailscale
+  description: Mesh VPN
+  annotations:
+    backstage.io/kubernetes-namespace: tailscale
+spec:
+  type: service
+  lifecycle: production
+  owner: group:cloudlab
+  system: platform
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: stakater-reloader
+  description: Automatic deployment restarts on config/secret changes
+  annotations:
+    backstage.io/kubernetes-namespace: stakater
+spec:
+  type: service
+  lifecycle: production
+  owner: group:cloudlab
+  system: platform
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: garage
+  description: S3-compatible distributed object storage
+  annotations:
+    backstage.io/kubernetes-namespace: garage
+  links:
+    - url: https://s3.vps.kubespaces.cloud
+      title: Garage S3
+spec:
+  type: service
+  lifecycle: production
+  owner: group:cloudlab
+  system: platform
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: rustfs
+  description: Rust-based filesystem service
+  annotations:
+    backstage.io/kubernetes-namespace: rustfs
+spec:
+  type: service
+  lifecycle: production
+  owner: group:cloudlab
+  system: platform
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: backstage
+  description: Developer portal
+  annotations:
+    backstage.io/kubernetes-namespace: backstage
+  links:
+    - url: https://backstage.vps.kubespaces.cloud
+      title: Backstage Portal
+spec:
+  type: service
+  lifecycle: production
+  owner: group:cloudlab
+  system: developer-tools
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: forgejo
+  description: Self-hosted Git forge
+  annotations:
+    backstage.io/kubernetes-namespace: forgejo
+  links:
+    - url: https://code.vps.kubespaces.cloud
+      title: Forgejo
+spec:
+  type: service
+  lifecycle: production
+  owner: group:cloudlab
+  system: developer-tools
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: coder
+  description: Remote development environments
+  annotations:
+    backstage.io/kubernetes-namespace: coder
+  links:
+    - url: https://coder.vps.kubespaces.cloud
+      title: Coder
+spec:
+  type: service
+  lifecycle: production
+  owner: group:cloudlab
+  system: developer-tools
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: n8n
+  description: Workflow automation platform
+  annotations:
+    backstage.io/kubernetes-namespace: n8n
+  links:
+    - url: https://n8n.vps.kubespaces.cloud
+      title: n8n
+spec:
+  type: service
+  lifecycle: production
+  owner: group:cloudlab
+  system: applications
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: dashy
+  description: Dashboard and application launcher
+  annotations:
+    backstage.io/kubernetes-namespace: dashy
+  links:
+    - url: https://dash.vps.kubespaces.cloud
+      title: Dashy
+spec:
+  type: service
+  lifecycle: production
+  owner: group:cloudlab
+  system: applications
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: actual
+  description: Personal finance and budgeting
+  annotations:
+    backstage.io/kubernetes-namespace: actual
+  links:
+    - url: https://actual.vps.kubespaces.cloud
+      title: Actual Budget
+spec:
+  type: service
+  lifecycle: production
+  owner: group:cloudlab
+  system: applications
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: supabase
+  description: Open source Firebase alternative
+  annotations:
+    backstage.io/kubernetes-namespace: supabase
+  links:
+    - url: https://supabase.vps.kubespaces.cloud
+      title: Supabase
+spec:
+  type: service
+  lifecycle: production
+  owner: group:cloudlab
+  system: applications
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: openclaw
+  description: Legal document automation
+  annotations:
+    backstage.io/kubernetes-namespace: openclaw
+  links:
+    - url: https://claw.vps.kubespaces.cloud
+      title: OpenClaw
+spec:
+  type: service
+  lifecycle: production
+  owner: group:cloudlab
+  system: applications
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: open-webui
+  description: AI chat interface
+  annotations:
+    backstage.io/kubernetes-namespace: openwebui
+  links:
+    - url: https://chat.vps.kubespaces.cloud
+      title: Open WebUI
+spec:
+  type: service
+  lifecycle: production
+  owner: group:cloudlab
+  system: applications
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: vikunja
+  description: Task management and to-do lists
+  annotations:
+    backstage.io/kubernetes-namespace: vikunja
+  links:
+    - url: https://todo.vps.kubespaces.cloud
+      title: Vikunja
+spec:
+  type: service
+  lifecycle: production
+  owner: group:cloudlab
+  system: applications
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: waha
+  description: WhatsApp HTTP API
+  annotations:
+    backstage.io/kubernetes-namespace: waha
+spec:
+  type: service
+  lifecycle: production
+  owner: group:cloudlab
+  system: applications
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: omni
+  description: Kubernetes management platform
+  annotations:
+    backstage.io/kubernetes-namespace: omni
+spec:
+  type: service
+  lifecycle: production
+  owner: group:cloudlab
+  system: platform
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: alarik
+  description: Custom application
+  annotations:
+    backstage.io/kubernetes-namespace: alarik
+  links:
+    - url: https://alarik.vps.kubespaces.cloud
+      title: Alarik
+spec:
+  type: service
+  lifecycle: production
+  owner: group:cloudlab
+  system: applications
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: uptime-kuma
+  description: Uptime monitoring
+  annotations:
+    backstage.io/kubernetes-namespace: uptime-kuma
+  links:
+    - url: https://uptime.vps.kubespaces.cloud
+      title: Uptime Kuma
+spec:
+  type: service
+  lifecycle: production
+  owner: group:cloudlab
+  system: observability
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: outline
+  description: Team knowledge base and wiki
+  annotations:
+    backstage.io/kubernetes-namespace: outline
+  links:
+    - url: https://outline.vps.kubespaces.cloud
+      title: Outline
+spec:
+  type: service
+  lifecycle: production
+  owner: group:cloudlab
+  system: applications
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: grafana
+  description: Observability dashboards
+  annotations:
+    backstage.io/kubernetes-namespace: observability
+  links:
+    - url: https://grafana.vps.kubespaces.cloud
+      title: Grafana
+spec:
+  type: service
+  lifecycle: production
+  owner: group:cloudlab
+  system: observability
