@@ -41,10 +41,12 @@ spec:
               user: backstage
               password: ${POSTGRES_PASSWORD}
         auth:
-          environment: production
+          environment: development
           providers:
+            guest:
+              dangerouslyAllowOutsideDevelopment: true
             oidc:
-              production:
+              development:
                 metadataUrl: https://auth.vps.kubespaces.cloud/realms/master/.well-known/openid-configuration
                 clientId: backstage
                 clientSecret: ${OIDC_CLIENT_SECRET}
