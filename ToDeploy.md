@@ -1,67 +1,68 @@
 ## To deploy
 
 - [ ] Move Minecraft to use [PaperMC](https://papermc.io/)
-- [ ] https://tailscale.com/docs/features/kubernetes-operator
+- [ ] [Tailscale Kubernetes Operator](https://tailscale.com/docs/features/kubernetes-operator)
 - [ ] BookStack
 - [ ] Excalidraw
 - [ ] Pigsty
-- [ ] sonar/ nexus
-- [X] Tailscale operator
-- [ ] https://helm-chart.oneuptime.com/
-- [ ] Eclipse Che https://eclipse.dev/che/docs/stable/administration-guide/preparing-the-installation/
-- [X] Omni https://github.com/siderolabs/omni/tree/main/deploy/helm/omni
-- [X] https://alarik.io/docs
-- [ ] https://ozone.apache.org/
-- [ ] https://github.com/owncloud/helm-charts
-- [ ] n8n task runners https://docs.n8n.io/hosting/configuration/task-runners/#external-mode
-- [ ] https://github.com/openSUSE/osem/blob/master/INSTALL.md
+- [ ] Sonar / Nexus
+- [ ] Backstage
+- [ ] [OneUptime](https://helm-chart.oneuptime.com/)
+- [ ] [Eclipse Che](https://eclipse.dev/che/docs/stable/administration-guide/preparing-the-installation/)
+- [ ] [Apache Ozone](https://ozone.apache.org/)
+- [ ] [ownCloud](https://github.com/owncloud/helm-charts)
+- [ ] [n8n Task Runners](https://docs.n8n.io/hosting/configuration/task-runners/#external-mode)
+- [ ] [OSEM](https://github.com/openSUSE/osem/blob/master/INSTALL.md)
 - [ ] Nextcloud
 - [ ] Keycloak theme
-- [ ] RustFS (https://s3.vps.kubespaces.cloud/)
-- [ ] Element Community (https://github.com/element-hq/ess-helm)
+- [ ] [RustFS](https://s3.vps.kubespaces.cloud/)
+- [ ] [Element Community](https://github.com/element-hq/ess-helm)
 - [ ] Pretalx
-- [ ] Velero+restic to replace Borg
+- [ ] Velero + Restic to replace Borg
 - [ ] Restic Browser
-- [ ] Borgwarehouse / Backrest / https://github.com/axelhahn/restic-http-server-for-synology
-- [ ] https://github.com/documenso/documenso
+- [ ] [Borgwarehouse / Backrest / Restic HTTP Server](https://github.com/axelhahn/restic-http-server-for-synology)
+- [ ] [Documenso](https://github.com/documenso/documenso)
 - [ ] Sync secrets from external source (like forgejo-smtp secret)
-- [ ] Cloud lab velero forgejo recovery lint traefik
+- [ ] Cloud lab Velero Forgejo recovery lint Traefik
 - [ ] BorgUI and alerts
 - [ ] Argo Workflows, Notifications
-- [ ] Garage Operator: https://github.com/rajsinghtech/garage-operator
+- [ ] [Garage Operator](https://github.com/rajsinghtech/garage-operator)
 - [ ] NocoDB or Baserow (Airtable alternative)
 - [ ] Appwrite (Supabase alternative)
-- [ ] https://github.com/OvenMediaLabs/OvenMediaEngine
-- [ ] temporal.io
-- [ ] Kubernetes login with github
+- [ ] [OvenMediaEngine](https://github.com/OvenMediaLabs/OvenMediaEngine)
+- [ ] [Temporal](https://temporal.io)
+- [ ] Kubernetes login with GitHub
 
 ## Deployed
 
-- [X] Actual (budgeting)
-- [X] Authentik
-- [X] ArgoCD w/ agents
-- [X] Coder
-- [X] CodiMD
-- [X] Dashy
-- [X] Forgejo
-- [X] Mailer and runners for Forgejo
-- [X] Garage (S3)
-- [X] Grafana/Prometheus
-- [X] Harbor
-- [X] Keycloak
-- [X] Matrix
-- [X] Outline
-- [X] Minecraft server
-- [X] n8n
-- [X] Openclaw
-- [X] OpenWebUI
-- [X] Rancher
-- [X] Stakater
-- [X] Supabase
-- [X] Vikunja
-- [X] Uptime Kuma
-- [X] Waha
-- [X] XWiki
+- [x] Actual (budgeting)
+- [x] [Alarik](https://alarik.io/docs)
+- [x] Authentik
+- [x] ArgoCD w/ agents
+- [x] Coder
+- [x] CodiMD
+- [x] Dashy
+- [x] Forgejo
+- [x] Mailer and runners for Forgejo
+- [x] Garage (S3)
+- [x] Grafana / Prometheus
+- [x] Harbor
+- [x] Keycloak
+- [x] Matrix
+- [x] Minecraft server
+- [x] n8n
+- [x] [Omni](https://github.com/siderolabs/omni/tree/main/deploy/helm/omni)
+- [x] Openclaw
+- [x] OpenWebUI
+- [x] Outline
+- [x] Rancher
+- [x] Stakater
+- [x] Supabase
+- [x] Tailscale operator
+- [x] Uptime Kuma
+- [x] Vikunja
+- [x] Waha
+- [x] Wekan
+- [x] XWiki
 
-
-More stuff to consider: https://github.com/MaximUltimatum/talos-homelab/
+More stuff to consider: [Talos Homelab](https://github.com/MaximUltimatum/talos-homelab/)
