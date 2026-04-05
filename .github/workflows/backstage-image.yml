@@ -33,8 +33,8 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ams0
+          password: ${{ secrets.GHCR_PAT }}
 
       - name: Extract version from backstage.json
         id: version
