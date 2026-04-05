@@ -45,6 +45,8 @@ spec:
               user: backstage
               password: ${POSTGRES_PASSWORD}
         auth:
+          session:
+            secret: ${SESSION_SECRET}
           environment: development
           providers:
             oidc:
@@ -78,6 +80,11 @@ spec:
             secretKeyRef:
               name: backstage-oidc
               key: clientSecret
+        - name: SESSION_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: backstage-oidc
+              key: sessionSecret
     ingress:
       enabled: false
     postgresql:
