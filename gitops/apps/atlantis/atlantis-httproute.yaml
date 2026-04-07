@@ -17,5 +17,5 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: atlantis
+        - name: atlantis-atlantis
           port: 80
