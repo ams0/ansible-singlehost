@@ -1,0 +1,48 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: atlantis
+  namespace: flux-system
+  labels:
+    app: atlantis
+spec:
+  interval: 10m
+  timeout: 5m
+  targetNamespace: atlantis
+  chart:
+    spec:
+      chart: atlantis
+      sourceRef:
+        kind: HelmRepository
+        name: atlantis
+        namespace: flux-system
+      interval: 5m0s
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    image:
+      tag: "v0.36.0" # renovate: datasource=docker depName=ghcr.io/runatlantis/atlantis
+    orgAllowlist: "github.com/ams0/*"
+    atlantisUrl: "https://atlantis.vps.kubespaces.cloud"
+    github:
+      user: ams0
+    vcsSecretName: atlantis-vcs
+    # Use an existing PVC so data persists across Helm upgrades
+    volumeClaim:
+      enabled: true
+      existingClaim: atlantis-pvc
+    ingress:
+      enabled: false
+    service:
+      type: ClusterIP
+      port: 80
+    statefulSet:
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 100

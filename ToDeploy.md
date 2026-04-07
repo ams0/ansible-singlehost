@@ -4,6 +4,7 @@
 - [ ] [Tailscale Kubernetes Operator](https://tailscale.com/docs/features/kubernetes-operator)
 - [ ] BookStack
 - [ ] Excalidraw
+- [ ] Atlantis
 - [ ] Pigsty
 - [ ] Sonar / Nexus
 - [ ] Backstage

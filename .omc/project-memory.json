@@ -1,0 +1,161 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1775565765070,
+  "projectRoot": "/Users/alessandro/repos/production/cloudlab",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "charts": {
+      "path": "charts",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1775565765038,
+      "keyFiles": []
+    },
+    "gitops": {
+      "path": "gitops",
+      "purpose": null,
+      "fileCount": 3,
+      "lastAccessed": 1775565765039,
+      "keyFiles": [
+        "README.md",
+        "kustomization.yaml",
+        "namespace.yaml"
+      ]
+    },
+    "group_vars": {
+      "path": "group_vars",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1775565765040,
+      "keyFiles": []
+    },
+    "ingress": {
+      "path": "ingress",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1775565765041,
+      "keyFiles": [
+        "README.md",
+        "http-route.yaml"
+      ]
+    },
+    "roles": {
+      "path": "roles",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1775565765042,
+      "keyFiles": []
+    },
+    "terraform": {
+      "path": "terraform",
+      "purpose": null,
+      "fileCount": 9,
+      "lastAccessed": 1775565765043,
+      "keyFiles": [
+        "README.md",
+        "main.tf",
+        "outputs.tf",
+        "terraform.tfstate",
+        "terraform.tfstate.backup"
+      ]
+    },
+    "tmp": {
+      "path": "tmp",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1775565765043,
+      "keyFiles": []
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "gitops/apps/atlantis/kustomization.yaml",
+      "accessCount": 2,
+      "lastAccessed": 1775567991070,
+      "type": "file"
+    },
+    {
+      "path": "gitops/apps/atlantis/namespace.yaml",
+      "accessCount": 1,
+      "lastAccessed": 1775567958382,
+      "type": "file"
+    },
+    {
+      "path": "gitops/apps/backstage/backstage-helmrelease.yaml",
+      "accessCount": 1,
+      "lastAccessed": 1775567959156,
+      "type": "file"
+    },
+    {
+      "path": "gitops/apps/backstage/backstage-db-helmrelease.yaml",
+      "accessCount": 1,
+      "lastAccessed": 1775567965976,
+      "type": "file"
+    },
+    {
+      "path": "gitops/apps/backstage/backstage-helmrepo.yaml",
+      "accessCount": 1,
+      "lastAccessed": 1775567966390,
+      "type": "file"
+    },
+    {
+      "path": "gitops/apps/backstage/backstage-httproute.yaml",
+      "accessCount": 1,
+      "lastAccessed": 1775567966803,
+      "type": "file"
+    },
+    {
+      "path": "gitops/apps/atlantis/atlantis-helmrepo.yaml",
+      "accessCount": 1,
+      "lastAccessed": 1775567978551,
+      "type": "file"
+    },
+    {
+      "path": "gitops/apps/atlantis/atlantis-pvc.yaml",
+      "accessCount": 1,
+      "lastAccessed": 1775567980569,
+      "type": "file"
+    },
+    {
+      "path": "gitops/apps/atlantis/atlantis-httproute.yaml",
+      "accessCount": 1,
+      "lastAccessed": 1775567982618,
+      "type": "file"
+    },
+    {
+      "path": "gitops/apps/atlantis/atlantis-helmrelease.yaml",
+      "accessCount": 1,
+      "lastAccessed": 1775567989329,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

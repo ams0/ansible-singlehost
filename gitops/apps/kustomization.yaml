@@ -27,4 +27,5 @@ resources:
   - outline
   - rustfs
   - backstage
+  - atlantis
 #  - wekan  # scaled to zero — resource savings
