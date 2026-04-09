@@ -4,10 +4,12 @@
 - [ ] [Tailscale Kubernetes Operator](https://tailscale.com/docs/features/kubernetes-operator)
 - [ ] BookStack
 - [ ] Excalidraw
-- [ ] Atlantis
+- [X] Atlantis
 - [ ] Pigsty
 - [ ] Sonar / Nexus
-- [ ] Backstage
+- [ ] Loki Simple distributed
+- [ ] Falco
+- [X] Backstage
 - [ ] [OneUptime](https://helm-chart.oneuptime.com/)
 - [ ] [Eclipse Che](https://eclipse.dev/che/docs/stable/administration-guide/preparing-the-installation/)
 - [ ] [Apache Ozone](https://ozone.apache.org/)

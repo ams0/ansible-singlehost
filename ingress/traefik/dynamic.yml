@@ -222,6 +222,13 @@ http:
       tls:
         certResolver: letsencrypt
 
+    loki:
+      rule: "Host(`loki.vps.kubespaces.cloud`)"
+      entryPoints: [websecure]
+      service: backend-service
+      tls:
+        certResolver: letsencrypt
+
     dash:
       rule: "Host(`dash.vps.kubespaces.cloud`)"
 

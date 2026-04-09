@@ -53,3 +53,6 @@ terraform.rc
 crash.log
 crash.*.log
 .playwright-mcp/*
+
+# OMC state
+.omc/
