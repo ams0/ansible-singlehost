@@ -46,3 +46,10 @@ spec:
       securityContext:
         fsGroup: 1000
         runAsUser: 100
+    resources:
+      requests:
+        cpu: 50m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi

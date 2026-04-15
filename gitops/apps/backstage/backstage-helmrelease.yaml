@@ -10,6 +10,8 @@ spec:
   interval: 10m
   timeout: 5m
   targetNamespace: backstage
+  dependsOn:
+    - name: backstage-database
   chart:
     spec:
       chart: backstage
@@ -69,6 +71,13 @@ spec:
               target: https://raw.githubusercontent.com/ams0/cloudlab/main/gitops/apps/backstage/catalog/all.yaml
               rules:
                 - allow: [Location, Component, System, Group, User]
+      resources:
+        requests:
+          cpu: 200m
+          memory: 512Mi
+        limits:
+          cpu: 1500m
+          memory: 2Gi
       extraEnvVars:
         - name: POSTGRES_PASSWORD
           valueFrom:

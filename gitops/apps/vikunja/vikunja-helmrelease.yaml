@@ -10,6 +10,8 @@ spec:
   interval: 10m
   timeout: 5m
   targetNamespace: vikunja
+  dependsOn:
+    - name: vikunja-database
   chartRef:
     kind: OCIRepository
     name: vikunja-ocirepo
@@ -51,6 +53,13 @@ spec:
               name: vikunja-smtp
               key: password
         VIKUNJA_MAILER_FROMEMAIL: alessandro@kubespaces.io
+      resources:
+        requests:
+          cpu: 50m
+          memory: 128Mi
+        limits:
+          cpu: 500m
+          memory: 512Mi
 
 
 

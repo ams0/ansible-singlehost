@@ -11,6 +11,8 @@ spec:
   interval: 10m
   timeout: 5m
   targetNamespace: keycloak
+  dependsOn:
+    - name: keycloak-database
   chartRef:
     kind: OCIRepository
     name: keycloak-ocirepo
@@ -75,3 +77,10 @@ spec:
     extraVolumeMounts: |
       - name: themes
         mountPath: /opt/keycloak/themes
+    resources:
+      requests:
+        cpu: 200m
+        memory: 512Mi
+      limits:
+        cpu: 1500m
+        memory: 1536Mi

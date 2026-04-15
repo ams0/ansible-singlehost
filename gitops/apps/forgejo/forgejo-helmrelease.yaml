@@ -10,6 +10,8 @@ spec:
   interval: 10m
   timeout: 5m
   targetNamespace: forgejo
+  dependsOn:
+    - name: forgejo-database
   chartRef:
     kind: OCIRepository
     name: forgejo-ocirepo
@@ -27,6 +29,13 @@ spec:
       enabled: true
       claimName: forgejo-pvc
       size: 30Gi
+    resources:
+      requests:
+        cpu: 200m
+        memory: 512Mi
+      limits:
+        cpu: 1500m
+        memory: 1536Mi
     gitea:
       config:
         service:

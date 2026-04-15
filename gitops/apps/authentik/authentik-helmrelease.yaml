@@ -10,6 +10,8 @@ spec:
   interval: 10m
   timeout: 5m
   targetNamespace: authentik
+  dependsOn:
+    - name: authentik-database
   chart:
     spec:
       chart: authentik
@@ -43,6 +45,13 @@ spec:
             secretKeyRef:
               name: authentik-secret
               key: secret-key
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          cpu: 1000m
+          memory: 1Gi
       gateway:
         enabled: false
     worker:
@@ -57,3 +66,10 @@ spec:
             secretKeyRef:
               name: authentik-secret
               key: secret-key
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          cpu: 1000m
+          memory: 1Gi
