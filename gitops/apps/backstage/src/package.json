@@ -18,7 +18,10 @@
   },
   "resolutions": {
     "@types/react": "^18",
-    "@types/react-dom": "^18"
+    "@types/react-dom": "^18",
+    "axios": "^1.15.0",
+    "basic-ftp": "^5.2.2",
+    "follow-redirects": "^1.16.0"
   },
   "packageManager": "yarn@4.4.1"
 }
