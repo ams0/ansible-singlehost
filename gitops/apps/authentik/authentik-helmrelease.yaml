@@ -47,7 +47,7 @@ spec:
               key: secret-key
       resources:
         requests:
-          cpu: 100m
+          cpu: 50m
           memory: 256Mi
         limits:
           cpu: 1000m
@@ -68,7 +68,7 @@ spec:
               key: secret-key
       resources:
         requests:
-          cpu: 100m
+          cpu: 50m
           memory: 256Mi
         limits:
           cpu: 1000m
