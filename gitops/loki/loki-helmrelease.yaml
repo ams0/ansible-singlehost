@@ -9,7 +9,7 @@ metadata:
 spec:
   interval: 10m
   timeout: 10m
-  targetNamespace: loki
+  targetNamespace: logging
   chart:
     spec:
       chart: loki
