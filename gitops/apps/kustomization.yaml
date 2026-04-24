@@ -9,7 +9,7 @@ resources:
   - stakater
   - garage
   - forgejo
-  - dashy
+#  - dashy  # TODO: fix helm upgrade timeout, pod running but HelmRelease stalled
 #  - rancher  # scaled to zero — resource savings
   - actual
   - supabase
