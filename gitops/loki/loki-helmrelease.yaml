@@ -101,6 +101,12 @@ spec:
         - name: loki-logs
         - name: loki-compactor
 
+    # Disable cache sidecars on single-node cluster (resource constraints)
+    resultsCache:
+      replicas: 0
+    chunksCache:
+      replicas: 0
+
     # Zero out microservices mode replicas
     singleBinary:
       replicas: 0
