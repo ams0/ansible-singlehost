@@ -31,6 +31,13 @@ spec:
       pullPolicy: IfNotPresent
       # Overrides the image tag whose default is the chart appVersion.
       tag: "latest"
+    resources:
+      requests:
+        cpu: 25m
+        memory: 64Mi
+      limits:
+        cpu: 500m
+        memory: 256Mi
     static:
       enabled: true
       existingSecret: ""

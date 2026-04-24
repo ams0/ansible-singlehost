@@ -72,6 +72,14 @@ spec:
       size: 10Gi
       storageClassName: local-path
 
+    resources:
+      requests:
+        cpu: 50m
+        memory: 256Mi
+      limits:
+        cpu: 1000m
+        memory: 1Gi
+
     gatewayApi:
       ui:
         enabled: true

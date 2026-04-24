@@ -10,6 +10,8 @@ spec:
   interval: 10m
   timeout: 5m
   targetNamespace: backstage
+  dependsOn:
+    - name: backstage-database
   chart:
     spec:
       chart: backstage
@@ -30,7 +32,7 @@ spec:
       image:
         registry: ghcr.io
         repository: ams0/backstage
-        tag: "1.49.3" # renovate: datasource=docker depName=ghcr.io/ams0/backstage
+        tag: "1.50.1" # renovate: datasource=docker depName=ghcr.io/ams0/backstage
       appConfig:
         app:
           title: Backstage
@@ -69,6 +71,13 @@ spec:
               target: https://raw.githubusercontent.com/ams0/cloudlab/main/gitops/apps/backstage/catalog/all.yaml
               rules:
                 - allow: [Location, Component, System, Group, User]
+      resources:
+        requests:
+          cpu: 100m
+          memory: 512Mi
+        limits:
+          cpu: 1500m
+          memory: 2Gi
       extraEnvVars:
         - name: POSTGRES_PASSWORD
           valueFrom:

@@ -10,6 +10,8 @@ spec:
   interval: 10m
   timeout: 5m
   targetNamespace: outline
+  dependsOn:
+    - name: outline-database
   chart:
     spec:
       chart: outline
@@ -56,3 +58,10 @@ spec:
       username: "outline"
       existingSecret: "outline-outline-database-cluster-app"
       passwordSecretKey: "password"
+    resources:
+      requests:
+        cpu: 50m
+        memory: 256Mi
+      limits:
+        cpu: 1000m
+        memory: 1Gi

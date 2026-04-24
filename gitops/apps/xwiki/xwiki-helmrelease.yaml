@@ -10,6 +10,8 @@ spec:
   interval: 10m
   timeout: 5m
   targetNamespace: xwiki
+  dependsOn:
+    - name: xwiki-database
   chart:
     spec:
       chart: xwiki

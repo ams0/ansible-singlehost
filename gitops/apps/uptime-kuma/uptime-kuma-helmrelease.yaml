@@ -28,3 +28,10 @@ spec:
   values:
     volume:
       existingClaim: uptime-kuma-pvc
+    resources:
+      requests:
+        cpu: 10m
+        memory: 64Mi
+      limits:
+        cpu: 500m
+        memory: 256Mi

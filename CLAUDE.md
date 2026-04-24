@@ -359,10 +359,13 @@ GitHub Actions triggers on `roles/**` or `ingress/**` changes. Supports manual d
 ## Current Applications
 
 ### Active (deployed)
-Keycloak, n8n, Stakater Reloader, Garage, Forgejo, Dashy, Actual, Supabase, OpenClaw, Authentik, Open WebUI, Coder, Vikunja, WAHA, Omni, Tailscale, Alarik, Uptime Kuma, Outline, RustFS, Backstage
+Keycloak, n8n, Stakater Reloader, Garage, Forgejo, Dashy, Actual, Supabase, OpenClaw, Authentik, Open WebUI, Coder, Vikunja, WAHA, Omni, Tailscale, Alarik, Uptime Kuma, Outline, RustFS, Backstage, Atlantis
 
 ### Scaled to zero (commented out)
 Harbor, Minecraft, Rancher, XWiki, Wekan
+
+### In repo, not yet added to root kustomization
+Draw (Excalidraw), CodiMD, Nexus (stub — missing HelmRelease)
 
 ### Placeholder (not yet deployed)
 Matrix

@@ -10,6 +10,8 @@ spec:
   interval: 10m
   timeout: 5m
   targetNamespace: n8n
+  dependsOn:
+    - name: n8n-database
   chartRef:
     kind: OCIRepository
     name: n8n-ocirepo
