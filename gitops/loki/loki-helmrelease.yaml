@@ -60,7 +60,6 @@ spec:
           endpoint: loki-minio:9000
           insecure: true
           s3ForcePathStyle: true
-          bucketnames: loki-chunks,loki-index
       commonConfig:
         replication_factor: 1
 
@@ -94,6 +93,11 @@ spec:
       persistence:
         storageClass: local-path
         size: 20Gi
+      buckets:
+        - name: loki-chunks
+        - name: loki-index
+        - name: loki-logs
+        - name: loki-compactor
 
     # Zero out microservices mode replicas
     singleBinary:
