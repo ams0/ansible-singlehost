@@ -60,6 +60,7 @@ spec:
           endpoint: loki-minio:9000
           insecure: true
           s3ForcePathStyle: true
+          bucketnames: loki-chunks,loki-index
       commonConfig:
         replication_factor: 1
 
