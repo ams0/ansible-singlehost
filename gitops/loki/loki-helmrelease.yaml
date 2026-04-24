@@ -82,9 +82,12 @@ spec:
         type: ClusterIP
         port: 80
 
-    # Disable minio — use local filesystem
+    # Minio for S3-compatible object storage (required by SimpleScalable)
     minio:
-      enabled: false
+      enabled: true
+      persistence:
+        storageClass: local-path
+        size: 20Gi
 
     # Zero out microservices mode replicas
     singleBinary:
