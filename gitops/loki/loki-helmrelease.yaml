@@ -62,6 +62,8 @@ spec:
           s3ForcePathStyle: true
       commonConfig:
         replication_factor: 1
+      resultsCache:
+        enabled: false
 
     # Simple scalable components — single replica for single-node
     backend:
