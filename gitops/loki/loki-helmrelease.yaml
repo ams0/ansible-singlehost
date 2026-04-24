@@ -34,7 +34,7 @@ spec:
         configs:
           - from: "2024-04-01"
             store: tsdb
-            object_store: filesystem
+            object_store: s3
             schema: v13
             index:
               prefix: loki_index_
@@ -54,7 +54,11 @@ spec:
         working_directory: /var/loki/compactor
         compaction_interval: 10m
       storage:
-        type: filesystem
+        type: s3
+        s3:
+          endpoint: loki-minio:9000
+          insecure: true
+          s3ForcePathStyle: true
       commonConfig:
         replication_factor: 1
 
