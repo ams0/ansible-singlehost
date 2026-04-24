@@ -53,6 +53,7 @@ spec:
         retention_enabled: true
         working_directory: /var/loki/compactor
         compaction_interval: 10m
+        delete_request_store: s3
       storage:
         type: s3
         s3:
