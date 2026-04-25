@@ -39,11 +39,12 @@ spec:
     config:
       rustfs:
         region: "eu-oracle-1"
+    # Disable KMS — app tries local backend by default but requires key directory
     extraEnv:
       - name: RUSTFS_KMS_ENABLE
-        value: "true"
-      - name: RUSTFS_KMS_BACKEND
-        value: "local"
+        value: "false"
+    # KMS disabled — chart only supports vault, not local backend yet
+    # extraEnv: []
     ingress:
       enabled: false
     resources:
