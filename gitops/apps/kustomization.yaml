@@ -28,4 +28,5 @@ resources:
   - rustfs
   - backstage
   - atlantis
+#  - vault  # scaled to zero — awaiting initialization
 #  - wekan  # scaled to zero — resource savings

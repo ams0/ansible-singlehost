@@ -1,0 +1,49 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: vault
+  namespace: flux-system
+  labels:
+    app: vault
+spec:
+  interval: 10m
+  timeout: 5m
+  targetNamespace: vault
+  chart:
+    spec:
+      chart: vault
+      sourceRef:
+        kind: HelmRepository
+        name: vault
+        namespace: flux-system
+      interval: 5m0s
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    server:
+      replicaCount: 1
+      dataStorage:
+        size: 10Gi
+        storageClass: local-path
+        existingClaim: vault-pvc
+      ha:
+        enabled: false
+      ui:
+        enabled: true
+      ingress:
+        enabled: false
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          cpu: 500m
+          memory: 512Mi
+    ui:
+      enabled: true
