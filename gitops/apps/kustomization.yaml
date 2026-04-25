@@ -25,7 +25,7 @@ resources:
   - alarik
   - uptime-kuma
   - outline
-#  - rustfs  # scaled to zero — KMS init fails (app requires local KMS key dir, chart only supports vault)
+  - rustfs
   - backstage
   - atlantis
 #  - wekan  # scaled to zero — resource savings
