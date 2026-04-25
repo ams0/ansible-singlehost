@@ -64,6 +64,8 @@ spec:
         replication_factor: 1
       resultsCache:
         enabled: false
+      chunksCache:
+        enabled: false
 
     # Simple scalable components — single replica for single-node
     backend:

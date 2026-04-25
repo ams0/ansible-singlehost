@@ -3,10 +3,12 @@
 - [ ] Move Minecraft to use [PaperMC](https://papermc.io/)
 - [ ] [Tailscale Kubernetes Operator](https://tailscale.com/docs/features/kubernetes-operator)
 - [ ] BookStack
+- [ ] https://headscale.net/
 - [ ] Excalidraw
 - [X] Atlantis
 - [ ] Pigsty
 - [ ] Sonar / Nexus
+- [ ] https://github.com/xataio/xata
 - [ ] Loki Simple distributed
 - [ ] Falco
 - [X] Backstage
