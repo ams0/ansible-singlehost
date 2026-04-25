@@ -32,5 +32,16 @@
       "Bash(curl -s https://api.github.com/search/repositories?q=flux+mcp+in:name)"
     ]
   },
+  "mcpServers": {
+    "flux-operator-mcp": {
+      "command": "/opt/homebrew/bin/flux-operator-mcp",
+      "args": [
+        "serve"
+      ],
+      "env": {
+        "KUBECONFIG": "/Users/alessandro/repos/production/cloudlab/kubeconfig-remote"
+      }
+    }
+  },
   "enableAllProjectMcpServers": false
 }
