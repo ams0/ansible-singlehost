@@ -38,6 +38,11 @@ jobs:
           pip install ansible
           ansible-galaxy install -r requirements.yml
 
+      - name: Connect to Tailscale
+        uses: tailscale/github-action@v2
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTH_KEY }}
+
       - name: Create SSH key
         run: |
           mkdir -p ~/.ssh
