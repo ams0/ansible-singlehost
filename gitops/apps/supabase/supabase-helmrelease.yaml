@@ -8,7 +8,7 @@ metadata:
     app: supabase
 spec:
   interval: 10m
-  timeout: 5m
+  timeout: 10m
   targetNamespace: supabase
   chart:
     spec:
