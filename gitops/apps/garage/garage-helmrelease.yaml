@@ -8,7 +8,7 @@ metadata:
     app: garage
 spec:
   interval: 10m
-  timeout: 5m
+  timeout: 10m
   targetNamespace: garage
   chart:
     spec:
