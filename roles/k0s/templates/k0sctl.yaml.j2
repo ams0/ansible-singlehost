@@ -38,6 +38,19 @@ spec:
           type: etcd
         telemetry:
           enabled: true
+        extensions:
+          helm:
+            repositories:
+              - name: tailscale
+                url: https://pkgs.tailscale.com/helmrepo
+            charts:
+              - name: tailscale
+                chartname: tailscale/tailscale
+                version: ">=1.0.0"
+                namespace: tailscale
+                values: |
+                  operator:
+                    enabled: true
         workerProfiles:
           - name: default
             values:
