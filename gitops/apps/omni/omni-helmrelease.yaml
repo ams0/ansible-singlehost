@@ -9,7 +9,7 @@ metadata:
     app: omni
 spec:
   interval: 10m
-  timeout: 5m
+  timeout: 10m
   targetNamespace: omni
   chartRef:
     kind: OCIRepository
