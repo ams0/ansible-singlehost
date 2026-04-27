@@ -18,5 +18,5 @@ resources:
 - velero
 - system
 
-patchesStrategicMerge:
-- system/coredns-tailscale-patch.yaml
+# Removed coredns-tailscale-patch — k0s manages CoreDNS as a static pod,
+# not a Deployment. Strategic merge patches cannot match it.
