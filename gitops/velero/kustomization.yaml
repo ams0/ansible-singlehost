@@ -6,5 +6,5 @@ resources:
   - velero-helmrepo.yaml
   - velero-helmrelease.yaml
 
-patchesStrategicMerge:
-  - velero-dns-patch.yaml
+# patchesStrategicMerge:
+#   - velero-dns-patch.yaml
