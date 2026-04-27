@@ -55,6 +55,7 @@ spec:
       uploaderType: kopia
 
     snapshotsEnabled: false
+    deployLocalVolumeProvider: false
     deployNodeAgent: true
 
     nodeAgent:
