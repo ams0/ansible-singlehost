@@ -1,0 +1,1 @@
+- [Omni fs.file-max Sysctl Fix via k0s WorkerProfiles](omni_sysctl_fix_workerprofiles.md) — Fixed SysctlForbidden errors by configuring kubelet allowedUnsafeSysctls in k0s workerProfiles

@@ -38,6 +38,8 @@ spec:
           type: etcd
         telemetry:
           enabled: true
-        kubelet:
-          allowedUnsafeSysctls:
-            - fs.file-max
+        workerProfiles:
+          - name: default
+            values:
+              allowedUnsafeSysctls:
+                - fs.file-max

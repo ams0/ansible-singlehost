@@ -16,3 +16,7 @@ resources:
 - local-path-provisioner/local-path-provisioner.yaml
 - argocd
 - velero
+- system
+
+patchesStrategicMerge:
+- system/coredns-tailscale-patch.yaml
