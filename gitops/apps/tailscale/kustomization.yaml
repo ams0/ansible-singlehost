@@ -7,5 +7,5 @@ resources:
   - tailscale-helmrelease.yaml
   - tailscale-dnsconfig.yaml
 
-patchesStrategicMerge:
-  - coredns-patch.yaml
+# Removed coredns-patch.yaml — k0s manages CoreDNS ConfigMap directly.
+# Manual configuration of ts.net forwarding is already applied via k0s.
