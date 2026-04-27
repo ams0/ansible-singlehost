@@ -80,10 +80,6 @@ spec:
         cpu: 1000m
         memory: 1Gi
 
-    podSecurityContext:
-      sysctls:
-        - name: fs.file-max
-          value: "2097152"
 
     gatewayApi:
       ui:
