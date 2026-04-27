@@ -6,4 +6,6 @@ resources:
   - tailscale-helmrepo.yaml
   - tailscale-helmrelease.yaml
   - tailscale-dnsconfig.yaml
+
+patchesStrategicMerge:
   - coredns-patch.yaml
