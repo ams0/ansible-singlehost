@@ -5,3 +5,6 @@ resources:
   - namespace.yaml
   - velero-helmrepo.yaml
   - velero-helmrelease.yaml
+
+patchesStrategicMerge:
+  - velero-dns-patch.yaml

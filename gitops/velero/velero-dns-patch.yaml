@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: velero
+  namespace: velero
+spec:
+  template:
+    spec:
+      dnsPolicy: None
+      dnsConfig:
+        nameservers:
+          - 10.106.144.140
+          - 10.96.0.10
+        searches:
+          - ts.net
+          - svc.cluster.local
+          - cluster.local
+        options:
+          - name: ndots
+            value: "2"
