@@ -40,7 +40,7 @@ spec:
 
     configuration:
       backupStorageLocation:
-        - name: feynman
+        - name: garage
           provider: aws
           bucket: velero
           default: true
@@ -48,7 +48,7 @@ spec:
           config:
             region: us-east-1
             s3ForcePathStyle: "true"
-            s3Url: http://feynman.rhino-butterfly.ts.net:9000
+            s3Url: http://garage-garage.garage.svc.cluster.local:3900
 
       volumeSnapshotLocation: []
       defaultVolumesToFsBackup: true
@@ -81,7 +81,7 @@ spec:
         useOwnerReferencesInBackup: false
         template:
           ttl: "336h"
-          storageLocation: feynman
+          storageLocation: garage
           includedNamespaces:
             - n8n
             - forgejo
@@ -102,7 +102,7 @@ spec:
         useOwnerReferencesInBackup: false
         template:
           ttl: "2160h"
-          storageLocation: feynman
+          storageLocation: garage
           includedNamespaces:
             - n8n
             - forgejo
