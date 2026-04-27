@@ -12,7 +12,7 @@ resources:
 #  - dashy  # TODO: fix helm upgrade timeout, pod running but HelmRelease stalled
 #  - rancher  # scaled to zero — resource savings
   - actual
-  - supabase
+  #  - supabase  # temporarily disabled — HelmRelease StatefulSet immutable field error blocking Flux
   - openclaw
   - authentik
   - openwebui
