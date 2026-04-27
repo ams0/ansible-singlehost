@@ -1,5 +1,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-patchesStrategicMerge:
-- coredns-tailscale-patch.yaml
+# Removed coredns-tailscale-patch — k0s manages CoreDNS as a static pod,
+# not a Deployment. Strategic merge patches cannot match it.
