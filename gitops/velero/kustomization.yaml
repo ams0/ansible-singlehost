@@ -6,5 +6,6 @@ resources:
   - velero-helmrepo.yaml
   - velero-helmrelease.yaml
 
-patchesStrategicMerge:
-  - velero-dns-patch.yaml
+# DNS patch applied manually via kubectl to avoid kustomization validation errors
+# patchesStrategicMerge:
+#   - velero-dns-patch.yaml
