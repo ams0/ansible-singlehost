@@ -38,3 +38,6 @@ spec:
           type: etcd
         telemetry:
           enabled: true
+        kubelet:
+          allowedUnsafeSysctls:
+            - fs.file-max
