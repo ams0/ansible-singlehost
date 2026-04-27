@@ -39,6 +39,7 @@ spec:
     garage:
       s3:
         api:
+          region: "us-east-1"
           rootDomain: "s3.vps.kubespaces.cloud"
     resources:
       requests:
