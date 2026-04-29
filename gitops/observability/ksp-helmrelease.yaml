@@ -69,7 +69,7 @@ spec:
         # Thanos sidecar configuration for local storage
         thanos:
           # Enable Thanos sidecar
-          image: quay.io/thanos/thanos:v0.34.1
+          image: quay.io/thanos/thanos:v0.41.0
           version: v0.34.1
 
           # Object storage configuration for local filesystem
