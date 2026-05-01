@@ -39,6 +39,9 @@ spec:
           baseUrl: https://backstage.vps.kubespaces.cloud
         backend:
           baseUrl: https://backstage.vps.kubespaces.cloud
+          reading:
+            allow:
+              - host: raw.githubusercontent.com
           database:
             client: pg
             connection:
