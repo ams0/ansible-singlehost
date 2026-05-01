@@ -5,6 +5,6 @@ metadata:
 spec:
   profile:
     displayName: Alessandro Vozza
-    email: alessandro@kubespaces.io
+    email: alessandro@lovelace.nl
   memberOf:
     - cloudlab
