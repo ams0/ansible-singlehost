@@ -68,8 +68,10 @@ spec:
 
         # Thanos sidecar configuration for local storage
         thanos:
-          # Enable Thanos sidecar
-          image: quay.io/thanos/thanos:v0.34.1
+          # NOTE: do not set `image:` here — kube-prometheus-stack 84.3.0 has a
+          # template bug that renders `image:` twice when this is set, causing
+          # "mapping key 'image' already defined" YAML errors. The operator
+          # uses its default base image (quay.io/thanos/thanos) with `version`.
           version: v0.34.1
 
           # Object storage configuration for local filesystem
