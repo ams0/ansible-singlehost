@@ -8,7 +8,7 @@ on:
       - 'ingress/**'
       - 'roles/**'
   schedule:
-    - cron: '0 * * * *'
+    - cron: '0 */6 * * *'
   workflow_dispatch:
     inputs:
       tags:
@@ -20,9 +20,14 @@ on:
         required: false
         default: ''
 
+concurrency:
+  group: deploy-with-ansible
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     
     steps:
       - name: Checkout repository

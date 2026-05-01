@@ -1,8 +1,9 @@
 ---
 - name: Wait for apt locks to be released
-  shell: while fuser /var/lib/dpkg/lock-frontend /var/lib/apt/lists/lock /var/cache/apt/archives/lock >/dev/null 2>&1; do sleep 5; done
+  command: >
+    timeout 600 sh -c
+    'while fuser /var/lib/dpkg/lock-frontend /var/lib/apt/lists/lock /var/cache/apt/archives/lock >/dev/null 2>&1; do sleep 5; done'
   changed_when: false
-  timeout: 300
 
 - name: Update apt cache
   apt:

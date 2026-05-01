@@ -3,6 +3,14 @@
   hosts: oracle_hosts
   become: yes
   gather_facts: yes
+  module_defaults:
+    ansible.builtin.apt:
+      lock_timeout: 600
+      update_cache_retries: 5
+      update_cache_retry_max_delay: 30
+    ansible.builtin.apt_repository:
+      update_cache_retries: 5
+      update_cache_retry_max_delay: 30
   
   roles:
     - role: common
