@@ -52,19 +52,39 @@
   changed_when: false
   when: api_cert.stat.exists
 
-- name: Update k0s configuration and regenerate certificates
+- name: Apply k0s configuration changes
   block:
     - name: Extract k0s config from k0sctl
       shell: |
         grep -A 1000 "kind: ClusterConfig" /etc/k0s/k0sctl.yaml > /etc/k0s/k0s.yaml
       changed_when: true
 
+    - name: Read SAN list from existing API server cert
+      shell: |
+        openssl x509 -in /var/lib/k0s/pki/server.crt -noout -ext subjectAltName 2>/dev/null \
+          | grep -oE '(DNS|IP Address):[^,[:space:]]+' \
+          | sed -E 's/^(DNS|IP Address):[[:space:]]*//' \
+          | sort -u
+      register: existing_sans
+      changed_when: false
+      failed_when: false
+      when: api_cert.stat.exists and cert_status.stdout == "valid"
+
+    - name: Decide whether API server certs must be regenerated
+      set_fact:
+        regen_api_certs: >-
+          {{
+            (not api_cert.stat.exists) or
+            (cert_status is defined and cert_status.stdout == "expired") or
+            ((k0s_api_sans | difference(existing_sans.stdout_lines | default([]))) | length > 0)
+          }}
+
     - name: Stop k0s controller
       systemd:
         name: k0scontroller
         state: stopped
 
-    - name: Remove old API server certificates
+    - name: Remove API server certificates (forces regeneration)
       file:
         path: "/var/lib/k0s/pki/{{ item }}"
         state: absent
@@ -74,18 +94,19 @@
         - apiserver-kubelet-client.crt
         - apiserver-kubelet-client.key
         - admin.conf
+      when: regen_api_certs | bool
 
     - name: Start k0s controller
       systemd:
         name: k0scontroller
         state: started
 
-    - name: Wait for API server to regenerate certificates
+    - name: Wait for API server to be ready
       wait_for:
         port: "{{ k0s_api_port }}"
         host: localhost
-        timeout: 120
-        delay: 10
+        timeout: 180
+        delay: 5
   when: >
     (k0sctl_config.changed and k0s_installed.stat.exists) or
     (api_cert.stat.exists and cert_status.stdout == "expired")
