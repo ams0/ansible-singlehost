@@ -96,6 +96,11 @@
         - admin.conf
       when: regen_api_certs | bool
 
+    - name: Remove stale local worker-profile cache
+      file:
+        path: /var/lib/k0s/worker-profile.yaml
+        state: absent
+
     - name: Start k0s controller
       systemd:
         name: k0scontroller
