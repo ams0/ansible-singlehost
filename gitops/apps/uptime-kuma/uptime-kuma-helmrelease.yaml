@@ -28,10 +28,12 @@ spec:
   values:
     volume:
       existingClaim: uptime-kuma-pvc
+    strategy:
+      type: Recreate
     resources:
       requests:
         cpu: 10m
-        memory: 64Mi
+        memory: 256Mi
       limits:
         cpu: 500m
-        memory: 256Mi
+        memory: 1Gi

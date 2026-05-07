@@ -152,7 +152,7 @@ spec:
               {
                 "gateway": {
                   "port": 18789,
-                  "mode": "lan",
+                  "mode": "local",
                   "trustedProxies": ["10.244.0.169"],
                   "controlUi": {
                     "allowedOrigins": ["https://claw.vps.kubespaces.cloud","app://localhost"]
