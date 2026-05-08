@@ -137,6 +137,9 @@ spec:
           # Picks up ConfigMaps labeled grafana_datasource: "1" cluster-wide
           # (additional datasources live in their own ConfigMaps for hot-reload)
           searchNamespace: ALL
+          # Authenticate the reload POST so Grafana actually picks up new files
+          # without a pod restart (sidecar default is anonymous → 403).
+          reloadURL: http://admin:admin@localhost:3000/api/admin/provisioning/datasources/reload
 
       # Grafana ingress disabled (we'll use HTTPRoute instead)
       ingress:
