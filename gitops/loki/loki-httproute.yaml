@@ -23,5 +23,5 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: loki-gateway
+        - name: logging-loki-gateway
           port: 80

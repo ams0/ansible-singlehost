@@ -92,6 +92,11 @@ spec:
     #     loki-gateway-auth -n logging --from-file=.htpasswd=/dev/stdin
     gateway:
       enabled: true
+      # Recreate on upgrade — single-node cluster can't satisfy pod anti-affinity
+      # for a RollingUpdate (the default), so the new replica stays Pending
+      # forever waiting for the old one to vacate.
+      deploymentStrategy:
+        type: Recreate
       service:
         type: ClusterIP
         port: 80
