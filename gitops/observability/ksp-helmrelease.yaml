@@ -164,7 +164,10 @@ spec:
             - name: Loki
               type: loki
               uid: loki
-              url: http://logging-loki-gateway.logging.svc.cluster.local
+              # Bypass logging-loki-gateway (basic-auth-protected for the
+              # public endpoint) and read directly from the SimpleScalable
+              # read pool. Caches are disabled in this single-node setup.
+              url: http://loki-read.logging.svc.cluster.local:3100
               access: proxy
               jsonData:
                 maxLines: 1000
