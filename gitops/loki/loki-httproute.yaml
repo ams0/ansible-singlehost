@@ -1,80 +1,14 @@
 ---
-# Query path — Grafana and LogCLI read from here
+# Public endpoint for Loki — both read (Grafana, LogCLI) and write (external
+# log shippers) traffic. Routes through the nginx loki-gateway, which enforces
+# basic auth via the loki-gateway-auth secret.
+#
+# In-cluster collectors (Alloy DaemonSet) write directly to
+# loki-write.logging.svc:3100 and bypass auth.
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: loki-query
-  namespace: logging
-spec:
-  parentRefs:
-    - name: gateway
-      namespace: istio-system
-      sectionName: http
-  hostnames:
-    - "loki.vps.kubespaces.cloud"
-  rules:
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /loki/api/v1/query
-        - path:
-            type: PathPrefix
-            value: /loki/api/v1/query_range
-        - path:
-            type: PathPrefix
-            value: /loki/api/v1/labels
-        - path:
-            type: PathPrefix
-            value: /loki/api/v1/label
-        - path:
-            type: PathPrefix
-            value: /loki/api/v1/series
-        - path:
-            type: PathPrefix
-            value: /loki/api/v1/index
-        - path:
-            type: PathPrefix
-            value: /loki/api/v1/tail
-        - path:
-            type: PathPrefix
-            value: /loki/api/v1/patterns
-        - path:
-            type: PathPrefix
-            value: /loki/api/v1/detected_fields
-      backendRefs:
-        - name: loki-read
-          port: 3100
----
-# Push/ingest path — Promtail, Alloy, agents write here
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
-metadata:
-  name: loki-push
-  namespace: logging
-spec:
-  parentRefs:
-    - name: gateway
-      namespace: istio-system
-      sectionName: http
-  hostnames:
-    - "loki.vps.kubespaces.cloud"
-  rules:
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /loki/api/v1/push
-        - path:
-            type: PathPrefix
-            value: /otlp
-      backendRefs:
-        - name: loki-write
-          port: 3100
----
-# Catch-all for other API paths (ready, config, metrics, ring, etc.)
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
-metadata:
-  name: loki-default
+  name: loki
   namespace: logging
 spec:
   parentRefs:

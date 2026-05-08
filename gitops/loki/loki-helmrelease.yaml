@@ -46,7 +46,7 @@ spec:
       querier:
         max_concurrent: 2
       limits_config:
-        retention_period: 168h
+        retention_period: 72h        # 3 days — keep MinIO disk usage bounded
         allow_structured_metadata: true
         volume_enabled: true
       compactor:
@@ -84,12 +84,20 @@ spec:
         storageClass: local-path
         size: 10Gi
 
-    # Gateway (nginx) fronts read+write on port 80
+    # Gateway (nginx) fronts read+write on port 80.
+    # Basic auth is required for the public endpoint (loki.vps.kubespaces.cloud).
+    # In-cluster collectors write directly to loki-write:3100 and bypass auth.
+    # Create the htpasswd secret manually before reconcile:
+    #   htpasswd -nb <user> <pass> | kubectl create secret generic \
+    #     loki-gateway-auth -n logging --from-file=.htpasswd=/dev/stdin
     gateway:
       enabled: true
       service:
         type: ClusterIP
         port: 80
+      basicAuth:
+        enabled: true
+        existingSecret: loki-gateway-auth
 
     # Minio for S3-compatible object storage (required by SimpleScalable)
     minio:

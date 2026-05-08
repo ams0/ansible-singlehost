@@ -8,6 +8,7 @@ resources:
 - istio
 - observability
 - loki
+- alloy
 - cnpg
 - databases
 - apps
