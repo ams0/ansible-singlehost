@@ -1,6 +1,6 @@
 services:
   traefik:
-    image: traefik:v2.11
+    image: traefik:{{ traefik_version }}
     container_name: traefik
     restart: unless-stopped
     security_opt:
@@ -14,12 +14,23 @@ services:
       - "host.docker.internal:host-gateway"
     environment:
       # Configure your email for LetsEncrypt
-      - TRAEFIK_CERTIFICATESRESOLVERS_LETSENCRYPT_ACME_EMAIL=admin@kubespaces.cloud
+      - TRAEFIK_CERTIFICATESRESOLVERS_LETSENCRYPT_ACME_EMAIL={{ traefik_acme_email }}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./traefik.yml:/traefik.yml:ro
       - ./dynamic.yml:/dynamic.yml:ro
       - ./acme.json:/acme.json
+{% if traefik_loki_enabled %}
+    logging:
+      driver: loki
+      options:
+        loki-url: "https://{{ loki_username }}:{{ loki_password }}@{{ traefik_loki_url | regex_replace('^https?://', '') }}"
+        loki-retries: "{{ traefik_loki_retries }}"
+        loki-batch-size: "{{ traefik_loki_batch_size }}"
+        loki-external-labels: "job=traefik,host={{ inventory_hostname }},container={% raw %}{{.Name}}{% endraw %}"
+        mode: non-blocking
+        max-buffer-size: 4m
+{% endif %}
     labels:
       # Enable Traefik for this container
       - "traefik.enable=true"

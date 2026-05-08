@@ -8,6 +8,11 @@ locale: "en_US.UTF-8"
 docker_users:
   - "{{ ansible_user }}"
 
+# Loki credentials for the public push endpoint (used by host-level
+# log shippers like the Traefik Docker logging driver).
+loki_username: "{{ vault_loki_username }}"
+loki_password: "{{ vault_loki_password }}"
+
 # Borg Backup configuration
 borg_repository: "{{ vault_borg_repository }}"
 borg_ssh_user: "{{ vault_borg_ssh_user }}"

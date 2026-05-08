@@ -25,13 +25,29 @@
     mode: '0644'
   notify: Reload Traefik
 
-- name: Copy Docker Compose file
-  ansible.builtin.copy:
-    src: "{{ playbook_dir }}/ingress/traefik/docker-compose.yml"
+- name: Check if Loki Docker plugin is installed
+  ansible.builtin.command: docker plugin inspect loki
+  register: loki_plugin_check
+  changed_when: false
+  failed_when: false
+  when: traefik_loki_enabled | default(false)
+
+- name: Install Loki Docker plugin
+  ansible.builtin.command: >-
+    docker plugin install grafana/loki-docker-driver:{{ traefik_loki_plugin_version }}
+    --alias loki --grant-all-permissions
+  when:
+    - traefik_loki_enabled | default(false)
+    - loki_plugin_check.rc | default(1) != 0
+  notify: Reload Traefik
+
+- name: Render Docker Compose file
+  ansible.builtin.template:
+    src: "{{ playbook_dir }}/ingress/traefik/docker-compose.yml.j2"
     dest: "{{ traefik_dir }}/docker-compose.yml"
     owner: ubuntu
     group: ubuntu
-    mode: '0644'
+    mode: '0600'   # contains the Loki push credential
   notify: Reload Traefik
 
 - name: Check if acme.json exists
