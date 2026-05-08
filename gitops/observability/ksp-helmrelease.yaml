@@ -135,6 +135,16 @@ spec:
           defaultDatasourceEnabled: true
           uid: prometheus
 
+      additionalDataSources:
+        - name: Loki
+          type: loki
+          uid: loki
+          access: proxy
+          url: http://logging-loki-gateway.logging.svc.cluster.local
+          jsonData:
+            maxLines: 1000
+            timeout: 60
+
       # Grafana ingress disabled (we'll use HTTPRoute instead)
       ingress:
         enabled: false
