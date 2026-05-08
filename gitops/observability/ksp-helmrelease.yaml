@@ -134,12 +134,20 @@ spec:
           enabled: true
           defaultDatasourceEnabled: true
           uid: prometheus
-          # Picks up ConfigMaps labeled grafana_datasource: "1" cluster-wide.
-          # Grafana 10+ RBAC strips provisioning:reload from server admin, so the
-          # sidecar's POST always 403s — skip it. Adding a new datasource needs
-          # a one-time `kubectl rollout restart` of the grafana deployment.
-          searchNamespace: ALL
-          skipReload: true
+
+      # Additional datasources (Loki etc.) live here, not in sidecar-watched
+      # ConfigMaps: the sidecar runs in parallel with Grafana so files land
+      # AFTER provisioning has already scanned, and Grafana 10+ RBAC blocks
+      # the reload API even with admin creds (no provisioning:reload role).
+      additionalDataSources:
+        - name: Loki
+          type: loki
+          uid: loki
+          access: proxy
+          url: http://logging-loki-gateway.logging.svc.cluster.local
+          jsonData:
+            maxLines: 1000
+            timeout: 60
 
       # Grafana ingress disabled (we'll use HTTPRoute instead)
       ingress:
