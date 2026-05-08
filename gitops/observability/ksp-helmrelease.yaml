@@ -140,9 +140,6 @@ spec:
           # a one-time `kubectl rollout restart` of the grafana deployment.
           searchNamespace: ALL
           skipReload: true
-          # Run sidecar as init container so ConfigMaps are written to disk
-          # before Grafana reads provisioning files at startup.
-          initDatasources: true
 
       # Grafana ingress disabled (we'll use HTTPRoute instead)
       ingress:
