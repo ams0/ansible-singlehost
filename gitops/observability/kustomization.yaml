@@ -8,3 +8,4 @@ resources:
 - thanos-storage-pvc.yaml
 - ksp-helmrelease.yaml
 - grafana-httproute.yaml
+- loki-datasource.yaml
