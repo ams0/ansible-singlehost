@@ -128,17 +128,15 @@ spec:
       defaultDashboardsEnabled: true
       defaultDashboardsTimezone: UTC
 
-      # Datasources
+      # Datasources: keep dashboards on the sidecar pattern but render the
+      # datasource ConfigMap directly into Grafana's provisioning dir. The
+      # sidecar+Grafana race meant Loki landed AFTER provisioning had scanned.
       sidecar:
         datasources:
-          enabled: true
+          enabled: false
           defaultDatasourceEnabled: true
           uid: prometheus
 
-      # Additional datasources (Loki etc.) live here, not in sidecar-watched
-      # ConfigMaps: the sidecar runs in parallel with Grafana so files land
-      # AFTER provisioning has already scanned, and Grafana 10+ RBAC blocks
-      # the reload API even with admin creds (no provisioning:reload role).
       additionalDataSources:
         - name: Loki
           type: loki
