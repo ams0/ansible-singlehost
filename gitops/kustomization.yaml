@@ -10,6 +10,7 @@ resources:
 - loki
 - alloy
 - cnpg
+- clickhouse
 - databases
 - apps
 - gateways/configmap.yaml
