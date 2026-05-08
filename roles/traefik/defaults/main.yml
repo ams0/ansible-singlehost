@@ -34,6 +34,6 @@ traefik_fail2ban_maxretry: 4
 # backed by vault_loki_* in the encrypted vault).
 traefik_loki_enabled: true
 traefik_loki_url: "https://loki.vps.kubespaces.cloud/loki/api/v1/push"
-traefik_loki_plugin_version: "latest"
+traefik_loki_plugin_version: "3.7.1-arm64"   # ARM64 host needs arch-specific tag
 traefik_loki_batch_size: "400"
 traefik_loki_retries: "5"
