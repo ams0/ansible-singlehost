@@ -128,24 +128,47 @@ spec:
       defaultDashboardsEnabled: true
       defaultDashboardsTimezone: UTC
 
-      # Datasources: keep dashboards on the sidecar pattern but render the
-      # datasource ConfigMap directly into Grafana's provisioning dir. The
-      # sidecar+Grafana race meant Loki landed AFTER provisioning had scanned.
+      # Datasources: provision via the grafana sub-chart's `datasources` map
+      # (mounted directly via subPath at /etc/grafana/provisioning/datasources/).
+      # The sidecar mode is off because:
+      #   - kube-prometheus-stack's datasource ConfigMap is gated by
+      #     `sidecar.datasources.enabled OR forceDeployDatasources` and
+      #     consumes `additionalDataSources` only there
+      #   - sidecar+emptyDir created a race where the file landed after Grafana
+      #     scanned, and the reload API is blocked by Grafana 10+ RBAC
       sidecar:
         datasources:
           enabled: false
-          defaultDatasourceEnabled: true
-          uid: prometheus
 
-      additionalDataSources:
-        - name: Loki
-          type: loki
-          uid: loki
-          access: proxy
-          url: http://logging-loki-gateway.logging.svc.cluster.local
-          jsonData:
-            maxLines: 1000
-            timeout: 60
+      datasources:
+        datasources.yaml:
+          apiVersion: 1
+          datasources:
+            - name: Prometheus
+              type: prometheus
+              uid: prometheus
+              url: http://observability-prometheus-s-prometheus.observability:9090/
+              access: proxy
+              isDefault: true
+              jsonData:
+                httpMethod: POST
+                timeInterval: 30s
+            - name: Alertmanager
+              type: alertmanager
+              uid: alertmanager
+              url: http://observability-prometheus-s-alertmanager.observability:9093/
+              access: proxy
+              jsonData:
+                handleGrafanaManagedAlerts: false
+                implementation: prometheus
+            - name: Loki
+              type: loki
+              uid: loki
+              url: http://logging-loki-gateway.logging.svc.cluster.local
+              access: proxy
+              jsonData:
+                maxLines: 1000
+                timeout: 60
 
       # Grafana ingress disabled (we'll use HTTPRoute instead)
       ingress:
