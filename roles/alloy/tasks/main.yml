@@ -1,0 +1,54 @@
+---
+- name: Create Alloy directory
+  ansible.builtin.file:
+    path: "{{ alloy_dir }}"
+    state: directory
+    owner: ubuntu
+    group: ubuntu
+    mode: '0755'
+
+- name: Create Alloy data directory
+  ansible.builtin.file:
+    path: "{{ alloy_dir }}/data"
+    state: directory
+    owner: root        # container runs as root
+    group: root
+    mode: '0755'
+
+- name: Detect volatile journal directory
+  ansible.builtin.stat:
+    path: /run/log/journal
+  register: alloy_volatile_journal
+
+- name: Set volatile-journal fact
+  ansible.builtin.set_fact:
+    alloy_journal_volatile_present: "{{ alloy_volatile_journal.stat.exists | default(false) }}"
+
+- name: Render Alloy River config
+  ansible.builtin.template:
+    src: config.alloy.j2
+    dest: "{{ alloy_dir }}/config.alloy"
+    owner: root
+    group: root
+    mode: '0600'        # contains the Loki push credential
+  notify: Reload Alloy
+
+- name: Render Alloy Docker Compose
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: "{{ alloy_dir }}/docker-compose.yml"
+    owner: ubuntu
+    group: ubuntu
+    mode: '0644'
+  notify: Reload Alloy
+
+- name: Deploy Alloy with Docker Compose
+  community.docker.docker_compose_v2:
+    project_src: "{{ alloy_dir }}"
+    state: present
+    pull: always
+  register: alloy_deployment
+
+- name: Display Alloy status
+  ansible.builtin.debug:
+    msg: "Alloy is shipping host logs to {{ alloy_loki_url }}"

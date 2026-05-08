@@ -1,0 +1,58 @@
+// Host-level Alloy config: ship systemd journal + selected /var/log files
+// to the public Loki endpoint using HTTP basic auth.
+
+// ----- Systemd journal -----
+discovery.relabel "journal" {
+  targets = []
+  rule {
+    source_labels = ["__journal__systemd_unit"]
+    target_label  = "unit"
+  }
+  rule {
+    source_labels = ["__journal__hostname"]
+    target_label  = "hostname"
+  }
+  rule {
+    source_labels = ["__journal_priority_keyword"]
+    target_label  = "level"
+  }
+  rule {
+    source_labels = ["__journal__transport"]
+    target_label  = "transport"
+  }
+}
+
+loki.source.journal "journal" {
+  format_as_json = false
+  path           = "/var/log/journal"
+  max_age        = "{{ alloy_journal_max_age }}"
+  labels         = {
+    job  = "systemd-journal",
+    host = "{{ inventory_hostname }}",
+  }
+  relabel_rules  = discovery.relabel.journal.rules
+  forward_to     = [loki.write.default.receiver]
+}
+
+// ----- Plain-text log files under /var/log -----
+// Pass targets directly (skipping local.file_match) so explicit non-glob
+// paths are honored without glob expansion.
+loki.source.file "varlog" {
+  targets = [
+{% for f in alloy_log_files %}
+    {__path__ = "{{ f.path }}", job = "{{ f.job }}", host = "{{ inventory_hostname }}"},
+{% endfor %}
+  ]
+  forward_to = [loki.write.default.receiver]
+}
+
+// ----- Loki write -----
+loki.write "default" {
+  endpoint {
+    url = "{{ alloy_loki_url }}"
+    basic_auth {
+      username = "{{ loki_username }}"
+      password = "{{ loki_password }}"
+    }
+  }
+}

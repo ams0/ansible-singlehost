@@ -1,0 +1,8 @@
+---
+- name: Reload Alloy
+  # Restart container so the new config.alloy is read on startup. The
+  # /-/reload endpoint is unreliable without auth, and a restart is
+  # cheap (Alloy resumes journal cursor from saved state).
+  community.docker.docker_container:
+    name: alloy
+    restart: true

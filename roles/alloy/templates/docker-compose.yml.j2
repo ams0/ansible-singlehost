@@ -1,0 +1,21 @@
+services:
+  alloy:
+    image: {{ alloy_image }}
+    container_name: alloy
+    restart: unless-stopped
+    # Need root to read /var/log/syslog, /var/log/auth.log, journal files
+    user: "0:0"
+    volumes:
+      - ./config.alloy:/etc/alloy/config.alloy:ro
+      - ./data:/var/lib/alloy/data
+      - /var/log:/var/log:ro
+{% if alloy_journal_volatile_present | default(false) %}
+      - /run/log/journal:/run/log/journal:ro
+{% endif %}
+      - /etc/machine-id:/etc/machine-id:ro
+    command:
+      - run
+      - /etc/alloy/config.alloy
+      - --storage.path=/var/lib/alloy/data
+      - --server.http.listen-addr=0.0.0.0:12345
+    # No host network needed: Loki target is reached via public DNS

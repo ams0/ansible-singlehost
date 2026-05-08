@@ -1,0 +1,26 @@
+---
+# Where Alloy is deployed on the remote host (compose dir + config)
+alloy_dir: /home/ubuntu/alloy
+
+# Alloy image (multi-arch, includes linux/arm64)
+alloy_image: grafana/alloy:v1.13.1
+
+# Loki target — uses the same public push endpoint and credentials as
+# the Traefik docker logging driver. loki_username / loki_password come
+# from group_vars (backed by vault_loki_*).
+alloy_loki_url: "https://loki.vps.kubespaces.cloud/loki/api/v1/push"
+
+# Files Alloy will tail in /var/log (besides the systemd journal).
+# Ubuntu 24.04 uses journald only — no rsyslog/syslog/auth.log files.
+# These are useful host log files that exist outside the journal.
+alloy_log_files:
+  - { path: "/var/log/fail2ban.log",                                 job: "fail2ban" }
+  - { path: "/var/log/borg-backup.log",                              job: "borg-backup" }
+  - { path: "/var/log/borg-verify.log",                              job: "borg-verify" }
+  - { path: "/var/log/velero-rsync.log",                             job: "velero-rsync" }
+  - { path: "/var/log/cloud-init.log",                               job: "cloud-init" }
+  - { path: "/var/log/dpkg.log",                                     job: "dpkg" }
+  - { path: "/var/log/unattended-upgrades/unattended-upgrades.log",  job: "unattended-upgrades" }
+
+# How far back into the journal Alloy should read on first start
+alloy_journal_max_age: "12h"
