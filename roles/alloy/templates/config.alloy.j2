@@ -43,7 +43,31 @@ loki.source.file "varlog" {
     {__path__ = "{{ f.path }}", job = "{{ f.job }}", host = "{{ inventory_hostname }}"},
 {% endfor %}
   ]
+  forward_to = [loki.process.host_logs.receiver]
+}
+
+// Per-job line parsers. Captured fields land as structured metadata —
+// queryable but not promoted to labels (which would explode cardinality
+// for high-arity values like IPs).
+loki.process "host_logs" {
   forward_to = [loki.write.default.receiver]
+
+  // fail2ban: jail, action (Found/Ban/Unban), and source IP
+  stage.match {
+    selector = "{job=\"fail2ban\"}"
+
+    stage.regex {
+      expression = `INFO\s+\[(?P<jail>[^\]]+)\]\s+(?P<action>Found|Ban|Unban|Already banned|Restore Ban)(?:\s+(?P<ip>\d+\.\d+\.\d+\.\d+))?`
+    }
+
+    stage.structured_metadata {
+      values = {
+        ip     = "",
+        action = "",
+        jail   = "",
+      }
+    }
+  }
 }
 
 // ----- Loki write -----

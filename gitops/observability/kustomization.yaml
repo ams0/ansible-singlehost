@@ -8,3 +8,4 @@ resources:
 - thanos-storage-pvc.yaml
 - ksp-helmrelease.yaml
 - grafana-httproute.yaml
+- dashboards/fail2ban-dashboard.yaml
