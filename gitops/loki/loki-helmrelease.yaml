@@ -67,22 +67,45 @@ spec:
       chunksCache:
         enabled: false
 
-    # Simple scalable components — single replica for single-node
+    # Simple scalable components — single replica for single-node.
+    # Resource limits are required on this 24G node — without them, Loki
+    # write was consuming 7G+ and starving other workloads (eviction cascade).
     backend:
       replicas: 1
       persistence:
         storageClass: local-path
         size: 10Gi
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          cpu: 500m
+          memory: 1Gi
     read:
       replicas: 1
       persistence:
         storageClass: local-path
         size: 10Gi
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          cpu: 500m
+          memory: 1Gi
     write:
       replicas: 1
       persistence:
         storageClass: local-path
         size: 10Gi
+      resources:
+        requests:
+          cpu: 200m
+          memory: 512Mi
+        limits:
+          cpu: 1000m
+          memory: 2Gi
 
     # Gateway (nginx) fronts read+write on port 80.
     # Basic auth is required for the public endpoint (loki.vps.kubespaces.cloud).
@@ -115,6 +138,13 @@ spec:
         - name: loki-index
         - name: loki-logs
         - name: loki-compactor
+      resources:
+        requests:
+          cpu: 50m
+          memory: 128Mi
+        limits:
+          cpu: 500m
+          memory: 512Mi
 
     # Disable cache sidecars on single-node cluster (resource constraints)
     resultsCache:
