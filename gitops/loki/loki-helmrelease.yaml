@@ -104,8 +104,8 @@ spec:
           cpu: 200m
           memory: 512Mi
         limits:
-          cpu: 1000m
-          memory: 2Gi
+          cpu: 1500m
+          memory: 3Gi
 
     # Gateway (nginx) fronts read+write on port 80.
     # Basic auth is required for the public endpoint (loki.vps.kubespaces.cloud).
