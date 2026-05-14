@@ -56,8 +56,15 @@ spec:
         delete_request_store: filesystem
       storage:
         type: s3
+        bucketNames:
+          chunks: loki
+          ruler: loki
+          admin: loki
         s3:
-          endpoint: loki-minio:9000
+          # NAS over Tailscale — credentials injected via loki-s3-credentials
+          # secret (AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY env vars).
+          endpoint: 100.98.210.38:9000
+          region: us-east-1
           insecure: true
           s3ForcePathStyle: true
       commonConfig:
@@ -75,6 +82,9 @@ spec:
       persistence:
         storageClass: local-path
         size: 10Gi
+      extraEnvFrom:
+        - secretRef:
+            name: loki-s3-credentials
       resources:
         requests:
           cpu: 100m
@@ -87,6 +97,9 @@ spec:
       persistence:
         storageClass: local-path
         size: 10Gi
+      extraEnvFrom:
+        - secretRef:
+            name: loki-s3-credentials
       resources:
         requests:
           cpu: 100m
@@ -99,6 +112,9 @@ spec:
       persistence:
         storageClass: local-path
         size: 10Gi
+      extraEnvFrom:
+        - secretRef:
+            name: loki-s3-credentials
       resources:
         requests:
           cpu: 200m
@@ -127,24 +143,11 @@ spec:
         enabled: true
         existingSecret: loki-gateway-auth
 
-    # Minio for S3-compatible object storage (required by SimpleScalable)
+    # In-cluster MinIO disabled — Loki now writes to the home NAS over
+    # Tailscale (see loki.storage.s3.endpoint above). This frees ~20Gi of
+    # local-path storage and avoids the broken bucket-creation issue.
     minio:
-      enabled: true
-      persistence:
-        storageClass: local-path
-        size: 20Gi
-      buckets:
-        - name: loki-chunks
-        - name: loki-index
-        - name: loki-logs
-        - name: loki-compactor
-      resources:
-        requests:
-          cpu: 50m
-          memory: 128Mi
-        limits:
-          cpu: 500m
-          memory: 512Mi
+      enabled: false
 
     # Disable cache sidecars on single-node cluster (resource constraints)
     resultsCache:
