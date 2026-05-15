@@ -3,6 +3,6 @@ on:
   workflow_dispatch:
 jobs:
   test:
-    runs-on: volt-cyso-infra-docker
+    runs-on: docker
     steps:
       - run: echo All good!
