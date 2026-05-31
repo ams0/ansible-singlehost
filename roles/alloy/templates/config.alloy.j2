@@ -70,6 +70,44 @@ loki.process "host_logs" {
   }
 }
 
+// ----- Docker container logs -----
+// Discover all running containers via the Docker API and tail their logs.
+// Replaces the per-container loki-docker-driver (fragile across reboots and
+// blocks shutdown when Loki is unreachable). Alloy buffers locally and never
+// blocks the containers it reads from.
+discovery.docker "containers" {
+  host = "unix:///var/run/docker.sock"
+}
+
+discovery.relabel "containers" {
+  targets = discovery.docker.containers.targets
+
+  // Container name (strip the leading "/") -> `container` label.
+  rule {
+    source_labels = ["__meta_docker_container_name"]
+    regex         = "/?(.*)"
+    target_label  = "container"
+  }
+
+  // Drop Alloy's own logs to avoid a self-ingestion feedback loop.
+  rule {
+    source_labels = ["__meta_docker_container_name"]
+    regex         = "/?alloy"
+    action        = "drop"
+  }
+}
+
+loki.source.docker "containers" {
+  host          = "unix:///var/run/docker.sock"
+  targets       = discovery.docker.containers.targets
+  relabel_rules = discovery.relabel.containers.rules
+  labels        = {
+    job  = "docker",
+    host = "{{ inventory_hostname }}",
+  }
+  forward_to = [loki.write.default.receiver]
+}
+
 // ----- Loki write -----
 loki.write "default" {
   endpoint {

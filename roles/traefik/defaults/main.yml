@@ -3,7 +3,7 @@
 traefik_dir: /home/ubuntu/traefik
 
 # Traefik version
-traefik_version: v2.11
+traefik_version: v3.7.1
 
 # Email for Let's Encrypt
 traefik_acme_email: admin@kubespaces.cloud
@@ -29,11 +29,7 @@ traefik_fail2ban_bantime: 3h
 traefik_fail2ban_findtime: 10m
 traefik_fail2ban_maxretry: 4
 
-# Ship Traefik container logs to Loki via the public push endpoint.
-# Credentials come from group_vars (loki_username / loki_password,
-# backed by vault_loki_* in the encrypted vault).
-traefik_loki_enabled: true
-traefik_loki_url: "https://loki.vps.kubespaces.cloud/loki/api/v1/push"
-traefik_loki_plugin_version: "3.7.1-arm64"   # ARM64 host needs arch-specific tag
-traefik_loki_batch_size: "400"
-traefik_loki_retries: "5"
+# Traefik container logs use Docker's json-file driver (with rotation) and are
+# shipped to Loki by the host-level Alloy agent (roles/alloy, loki.source.docker).
+# The previous loki-docker-driver was removed: it was disabled on reboot (Traefik
+# could not start) and blocked container shutdown when Loki was unreachable.

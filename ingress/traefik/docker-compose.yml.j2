@@ -20,17 +20,16 @@ services:
       - ./traefik.yml:/traefik.yml:ro
       - ./dynamic.yml:/dynamic.yml:ro
       - ./acme.json:/acme.json
-{% if traefik_loki_enabled %}
+    # Local json-file logging with rotation. Logs are shipped to Loki by the
+    # host-level Alloy agent (loki.source.docker), not by a Docker log driver.
+    # This avoids the loki-docker-driver's failure modes: it gets disabled on
+    # reboot (Traefik then can't start) and blocks container shutdown when the
+    # Loki endpoint is unreachable (Loki is reached *through* Traefik itself).
     logging:
-      driver: loki
+      driver: json-file
       options:
-        loki-url: "https://{{ loki_username }}:{{ loki_password }}@{{ traefik_loki_url | regex_replace('^https?://', '') }}"
-        loki-retries: "{{ traefik_loki_retries }}"
-        loki-batch-size: "{{ traefik_loki_batch_size }}"
-        loki-external-labels: "job=traefik,host={{ inventory_hostname }},container={% raw %}{{.Name}}{% endraw %}"
-        mode: non-blocking
-        max-buffer-size: 4m
-{% endif %}
+        max-size: "10m"
+        max-file: "3"
     labels:
       # Enable Traefik for this container
       - "traefik.enable=true"

@@ -13,6 +13,9 @@ services:
       - /run/log/journal:/run/log/journal:ro
 {% endif %}
       - /etc/machine-id:/etc/machine-id:ro
+      # Read-only access to the Docker API so Alloy can discover and tail
+      # container logs (e.g. Traefik) via loki.source.docker.
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     command:
       - run
       - /etc/alloy/config.alloy
