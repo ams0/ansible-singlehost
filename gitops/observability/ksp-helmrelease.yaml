@@ -57,9 +57,9 @@ spec:
           translationStrategy: NoUTF8EscapingWithSuffixes
           convertHistogramsToNHCB: false
 
-        # Retention configuration - 7 days
-        retention: 7d
-        retentionSize: ""
+        # Retention configuration - cap by time and size to bound PVC growth
+        retention: 15d
+        retentionSize: 3GB
 
         # TSDB configuration
         tsdb:
