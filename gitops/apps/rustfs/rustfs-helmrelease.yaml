@@ -39,6 +39,19 @@ spec:
     config:
       rustfs:
         region: "eu-oracle-1"
+        # The rustfs logger defaults to INFO + "development", which emits
+        # tracing span enter/exit/close events for routine internal ops
+        # (storage_info, rebalance) — ~30MB/hour of noise. Drop to warn +
+        # production to keep only actionable log lines.
+        log_level: "warn"
+        obs_environment: "production"
+        # Without keep_files the hourly-rotated logs are never pruned and
+        # the (256Mi) logs PVC grew unbounded to 1.7G on the host fs.
+        # Bound retention: keep at most 7 rotated files.
+        log_rotation:
+          size: 100
+          time: hour
+          keep_files: 7
     kms:
       enabled: false
     ingress:
