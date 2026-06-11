@@ -113,13 +113,20 @@
     - "/tmp/gitrepository-{{ flux_git_repository_name }}.yaml"
     - "/tmp/kustomization-{{ flux_kustomization_name }}.yaml"
 
-- name: Wait for Flux to reconcile
-  shell: flux reconcile kustomization {{ flux_kustomization_name }} --namespace {{ flux_namespace }}
+- name: Trigger Flux reconciliation
+  # Bounded wait: flux reconcile blocks up to --timeout (default 5m) until the
+  # root Kustomization reports healthy. A single failed HelmRelease keeps it
+  # unhealthy indefinitely, so the long block on the small ARM VM starved the
+  # SSH channel and reddened CI with UNREACHABLE. Cap the wait and tolerate a
+  # transient transport drop — Flux reconciles every 10m regardless, and Ansible
+  # reopens a fresh connection for the next task.
+  shell: flux reconcile kustomization {{ flux_kustomization_name }} --namespace {{ flux_namespace }} --timeout 60s
   environment:
     KUBECONFIG: /var/lib/k0s/pki/admin.conf
   register: flux_reconcile
   failed_when: false
   changed_when: false
+  ignore_unreachable: true
 
 - name: Get Flux status
   shell: flux get all -A
