@@ -43,8 +43,8 @@ In the target repositories, add a webhook:
 
 ## Storage
 
-- **PVC**: `atlantis-pvc` (5Gi, `local-path`) — persists Terraform working directories and plan outputs across pod restarts and Helm upgrades
-- Referenced via `volumeClaim.existingClaim`
+- **PVC**: chart-managed `atlantis-atlantis-data` (`local-path`, via `volumeClaim.enabled: true`) — persists Terraform working directories and plan outputs across pod restarts and Helm upgrades
+- A standalone `atlantis-pvc` was removed: the chart never bound it, so it stayed perpetually `Pending` and failed the root Kustomization health check
 
 ## Routing
 
@@ -58,6 +58,5 @@ In the target repositories, add a webhook:
 |------|---------|
 | `namespace.yaml` | Namespace definition |
 | `atlantis-helmrepo.yaml` | Helm chart source |
-| `atlantis-pvc.yaml` | Persistent volume for Terraform working dirs |
-| `atlantis-helmrelease.yaml` | Application deployment |
+| `atlantis-helmrelease.yaml` | Application deployment (chart-managed PVC) |
 | `atlantis-httproute.yaml` | Gateway API routing |

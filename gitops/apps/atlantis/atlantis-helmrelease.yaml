@@ -33,10 +33,12 @@ spec:
     github:
       user: ams0
     vcsSecretName: atlantis-vcs
-    # Use an existing PVC so data persists across Helm upgrades
+    # Chart-managed PVC (atlantis-atlantis-data) persists data across pod
+    # restarts and Helm upgrades. (A standalone atlantis-pvc existingClaim was
+    # removed: the chart never bound it, leaving it perpetually Pending and
+    # failing the root Kustomization health check.)
     volumeClaim:
       enabled: true
-      existingClaim: atlantis-pvc
     ingress:
       enabled: false
     service:

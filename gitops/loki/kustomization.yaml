@@ -4,6 +4,5 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - loki-helmrepo.yaml
-- loki-pvc.yaml
 - loki-helmrelease.yaml
 - loki-httproute.yaml
