@@ -30,6 +30,15 @@ spec:
   releaseName: istiod
   values:
     profile: ambient
+    pilot:
+      # Single-node cluster: the node lacks CPU headroom to run two istiod
+      # pods at once. Default rolling-update surge keeps the old pod while
+      # scheduling the new one, which stays Pending (Insufficient cpu) until
+      # the 10m timeout and the upgrade fails. Remove the old pod first so
+      # the new one fits. Brief istiod (control-plane) blip on upgrade; the
+      # ambient data plane (ztunnel) keeps forwarding with last-known config.
+      rollingMaxSurge: 0
+      rollingMaxUnavailable: 1
     meshConfig:
       accessLogFile: /dev/stdout
       defaultConfig:
