@@ -44,7 +44,7 @@ spec:
           name: "outline-smtp"
           usernameKey: "username"
           passwordKey: "password"
-      secure: true
+      secure: false
     fileStorage:
       mode: "local"
 
