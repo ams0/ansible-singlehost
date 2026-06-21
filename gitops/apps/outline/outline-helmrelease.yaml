@@ -36,7 +36,7 @@ spec:
         persistence:
           enabled: true
     smtp:
-      host: "smtp-relay.gmail.com"
+      host: "smtp.gmail.com"
       port: 587
       fromEmail: "outline@kubespaces.io"
       replyEmail: "no-reply@kubespaces.io"
