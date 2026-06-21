@@ -28,6 +28,13 @@ spec:
   values:
     image:
       tag: "v8.42"  # v8.45+ broken (Node.js v22 / filesystem issues)
+    resources:        # lowered cpu request — single node is ~94% allocated
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 1Gi
     env:
       - name: "WRITABLE_PATH"
         value: "/data"
