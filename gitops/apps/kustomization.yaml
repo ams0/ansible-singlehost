@@ -29,4 +29,4 @@ resources:
   - backstage
   - atlantis
 #  - vault  # scaled to zero — awaiting initialization
-  - wekan
+#  - wekan  # scaled to zero — resource savings
