@@ -38,10 +38,13 @@ spec:
     env:
       - name: "WRITABLE_PATH"
         value: "/data"
-      - name: "MAIL_URL"
-        value: "smtp://localhost:25"
       - name: "MAIL_FROM"
-        value: "wekan@vps.kubespaces.cloud"
+        value: "wekan@kubespaces.io"
+    # MAIL_URL injected from the wekan-smtp secret (not committed to git);
+    # authenticated smtp.gmail.com STARTTLS — same pattern as outline.
+    extraEnvFrom: |
+      - secretRef:
+          name: wekan-smtp
     secretManaged: true
     secretEnv:
       - name: "MONGO_URL"
