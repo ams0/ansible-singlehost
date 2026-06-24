@@ -26,8 +26,8 @@ spec:
     remediation:
       retries: 3
   values:
-    openclawVersion: "2026.6.10" # renovate: datasource=github-releases depName=openclaw/openclaw
     app-template:
+      openclawVersion: "2026.6.10" # renovate: datasource=github-releases depName=openclaw/openclaw
       configMode: overwrite
       controllers:
         main:
