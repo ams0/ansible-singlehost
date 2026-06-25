@@ -56,3 +56,7 @@ crash.*.log
 
 # OMC state
 .omc/
+
+
+# ENV
+.env
