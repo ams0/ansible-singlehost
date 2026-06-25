@@ -8,11 +8,12 @@ metadata:
     app: dashy
 spec:
   interval: 10m
-  timeout: 5m
+  timeout: 10m            # dashy rebuilds the SPA on start; startup probe can take ~5m — give Flux headroom
   targetNamespace: dashy
   chart:
     spec:
       chart: dashy
+      version: "1.0.0"    # renovate: registryUrl=https://vyrtualsynthese.github.io/selfhosted-helmcharts
       sourceRef:
         kind: HelmRepository
         name: dashy
@@ -38,6 +39,15 @@ spec:
       limits:
         cpu: 500m
         memory: 256Mi
+    # Finer-grained probes: detect readiness within ~15s instead of the coarse 90s
+    # default, while keeping a generous startup window (30 + 20*15 = 330s) for the
+    # slow first-boot SPA rebuild. Well under the HelmRelease 10m timeout.
+    probs:
+      path: "/"
+      initialDelaySeconds: 30
+      periodSeconds: 15
+      timeoutSeconds: 5
+      failureThreshold: 20
     static:
       enabled: true
       existingSecret: ""
