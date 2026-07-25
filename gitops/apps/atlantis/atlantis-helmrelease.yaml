@@ -27,7 +27,7 @@ spec:
       retries: 3
   values:
     image:
-      tag: "v0.36.0" # renovate: datasource=docker depName=ghcr.io/runatlantis/atlantis
+      tag: "v0.46.0" # renovate: datasource=docker depName=ghcr.io/runatlantis/atlantis
     orgAllowlist: "github.com/ams0/*"
     atlantisUrl: "https://atlantis.vps.kubespaces.cloud"
     github:
