@@ -23,5 +23,5 @@
     "basic-ftp": "^5.2.2",
     "follow-redirects": "^1.16.0"
   },
-  "packageManager": "yarn@4.4.1"
+  "packageManager": "yarn@4.17.1"
 }
