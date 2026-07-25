@@ -4876,14 +4876,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/plugin-signals@npm:^0.0.31":
-  version: 0.0.31
-  resolution: "@backstage/plugin-signals@npm:0.0.31"
+"@backstage/plugin-signals-react@npm:^0.0.24":
+  version: 0.0.24
+  resolution: "@backstage/plugin-signals-react@npm:0.0.24"
   dependencies:
-    "@backstage/core-components": "npm:^0.18.10"
-    "@backstage/core-plugin-api": "npm:^1.12.6"
-    "@backstage/frontend-plugin-api": "npm:^0.17.0"
-    "@backstage/plugin-signals-react": "npm:^0.0.22"
+    "@backstage/core-plugin-api": "npm:^1.12.8"
+    "@backstage/types": "npm:^1.2.2"
+    "@material-ui/core": "npm:^4.12.4"
+  peerDependencies:
+    "@types/react": ^17.0.0 || ^18.0.0
+    react: ^17.0.0 || ^18.0.0
+    react-dom: ^17.0.0 || ^18.0.0
+    react-router-dom: ^6.30.2
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 10c0/3f886d6dbf589dcb81fda31bc971d32ce4afb01fca78db7f2723ef9250823ca0ca6625b1373a9ee85fe71ffb8d48e9a708e494ecf8044a67d783f32e77e4c2ad
+  languageName: node
+  linkType: hard
+
+"@backstage/plugin-signals@npm:^0.0.33":
+  version: 0.0.33
+  resolution: "@backstage/plugin-signals@npm:0.0.33"
+  dependencies:
+    "@backstage/core-components": "npm:^0.18.12"
+    "@backstage/core-plugin-api": "npm:^1.12.8"
+    "@backstage/frontend-plugin-api": "npm:^0.17.3"
+    "@backstage/plugin-signals-react": "npm:^0.0.24"
     "@backstage/theme": "npm:^0.7.3"
     "@backstage/types": "npm:^1.2.2"
     "@material-ui/core": "npm:^4.12.4"
@@ -4896,7 +4915,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10c0/b8479d368494a55b904a270e2720ab82b8429be43493bb1f8e364bc7f23a61a11181da455daad7a6de9a4ed69e77f27b71a9f27cf1bf2becc402f1d9907d24fe
+  checksum: 10c0/2656bd5ebdc83dfeb2b7333a12c698f17292036aea281ffe2b49f5df347c59fdeee577406ae0d8047379ba3f660787e941bbf7f831ee656c4770aa1c130a8a02
   languageName: node
   linkType: hard
 
@@ -15603,7 +15622,7 @@ __metadata:
     "@backstage/plugin-scaffolder": "npm:^1.36.2"
     "@backstage/plugin-search": "npm:^1.7.1"
     "@backstage/plugin-search-react": "npm:^1.11.1"
-    "@backstage/plugin-signals": "npm:^0.0.31"
+    "@backstage/plugin-signals": "npm:^0.0.33"
     "@backstage/plugin-techdocs": "npm:^1.17.3"
     "@backstage/plugin-techdocs-module-addons-contrib": "npm:^1.1.35"
     "@backstage/plugin-techdocs-react": "npm:^1.3.10"
