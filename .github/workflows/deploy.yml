@@ -1,14 +1,16 @@
 name: Deploy with Ansible
 
+# Automatic triggers disabled: the target VM/cluster were destroyed.
+# Re-enable the push/schedule triggers below once infrastructure is provisioned again.
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'ingress/**'
-      - 'roles/**'
-  schedule:
-    - cron: '0 */6 * * *'
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'ingress/**'
+  #     - 'roles/**'
+  # schedule:
+  #   - cron: '0 */6 * * *'
   workflow_dispatch:
     inputs:
       tags:
