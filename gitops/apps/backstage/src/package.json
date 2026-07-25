@@ -20,7 +20,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "axios": "^1.15.0",
-    "basic-ftp": "^5.2.2",
+    "basic-ftp": "^6.0.0",
     "follow-redirects": "^1.16.0"
   },
   "packageManager": "yarn@4.17.1"
