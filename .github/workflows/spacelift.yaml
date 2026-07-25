@@ -1,9 +1,11 @@
   name: Deploy with Spacelift
+  # Automatic triggers disabled: the target VM/cluster were destroyed.
+  # Re-enable the pull_request trigger below once infrastructure is provisioned again.
   on:
     workflow_dispatch:
-    pull_request:
-      branches: [ 'main' ]
-      types: [opened, synchronize, reopened, closed, labeled, unlabeled]
+    # pull_request:
+    #   branches: [ 'main' ]
+    #   types: [opened, synchronize, reopened, closed, labeled, unlabeled]
 
   jobs:
     infrastructure:
