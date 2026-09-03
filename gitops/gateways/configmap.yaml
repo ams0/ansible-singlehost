@@ -4,6 +4,17 @@ metadata:
   name: gw-options
   namespace: istio-system
 data:
+  # The host-level Traefik (ingress/traefik/dynamic.yml) proxies to this
+  # gateway by NodePort at a hardcoded host.docker.internal:30963. Left
+  # unpinned, Kubernetes allocates a random nodePort, so every cluster
+  # rebuild silently breaks every route with a 502. Pin it.
   service: |
     spec:
       type: NodePort
+      ports:
+        - name: http
+          port: 80
+          nodePort: 30963
+        - name: https
+          port: 443
+          nodePort: 30443
