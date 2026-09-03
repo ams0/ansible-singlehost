@@ -1,32 +1,43 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+
+# ── Rebuild 2026-09-03 ──────────────────────────────────────────────
+# Cluster recreated after the OCI VM reset. Apps are being re-enabled
+# one at a time; entries marked "rebuild:" were healthy before the reset
+# and just need turning back on. Entries with their own reason were
+# already off beforehand — check that reason before re-enabling.
+# ────────────────────────────────────────────────────────────────────
+
 resources:
   - keycloak
-  - n8n
+
+#  - n8n            # rebuild: off
+#  - stakater       # rebuild: off
+#  - garage         # rebuild: off
+#  - forgejo        # rebuild: off
+#  - dashy          # rebuild: off
+#  - actual         # rebuild: off
+#  - openclaw       # rebuild: off
+#  - authentik      # rebuild: off
+#  - openwebui      # rebuild: off
+#  - coder          # rebuild: off
+#  - vikunja        # rebuild: off
+#  - waha           # rebuild: off
+#  - omni           # rebuild: off
+#  - tailscale      # rebuild: off
+#  - alarik         # rebuild: off
+#  - uptime-kuma    # rebuild: off
+#  - outline        # rebuild: off
+#  - rustfs         # rebuild: off
+#  - backstage      # rebuild: off
+#  - atlantis       # rebuild: off
+
+# Off before the reset — reason still applies:
 #  - harbor
-#  - minecraft  # scaled to zero — resource savings
-  - stakater
-  - garage
-  - forgejo
-  - dashy
-#  - rancher  # scaled to zero — resource savings
-  - actual
-  #  - supabase  # temporarily disabled — HelmRelease StatefulSet immutable field error blocking Flux
-  - openclaw
-  - authentik
-  - openwebui
-#  - xwiki  # scaled to zero — resource savings
-  - coder
-  - vikunja
-  - waha
-  - omni
-  - tailscale
-  - alarik
-  - uptime-kuma
-  - outline
-  - rustfs
-  - backstage
-  - atlantis
-#  - vault  # scaled to zero — awaiting initialization
-#  - wekan  # scaled to zero — resource savings
+#  - minecraft      # scaled to zero — resource savings
+#  - rancher        # scaled to zero — resource savings
+#  - supabase       # HelmRelease StatefulSet immutable field error blocking Flux
+#  - xwiki          # scaled to zero — resource savings
+#  - vault          # scaled to zero — awaiting initialization
+#  - wekan          # scaled to zero — resource savings

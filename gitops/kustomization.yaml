@@ -28,8 +28,9 @@ resources:
 #- argocd
 #- velero
 
-# --- applications (off during rebuild) ---
-#- apps
+# --- applications (re-enabling one at a time) ---
+# Which apps are live is controlled in apps/kustomization.yaml
+- apps
 
 # Removed coredns-tailscale-patch — k0s manages CoreDNS as a static pod,
 # not a Deployment. Strategic merge patches cannot match it.
