@@ -139,6 +139,18 @@
   debug:
     msg: "{{ flux_status.stdout_lines }}"
 
+# These namespaces are normally created by Flux reconciling the apps, but
+# this role runs immediately after applying the Kustomization — and the
+# apps may be commented out of gitops/kustomization.yaml entirely. Create
+# them up front, as is already done for omni/tailscale/openclaw/etc.
+- name: Create keycloak namespace if not exists
+  shell: kubectl create namespace keycloak --dry-run=client -o yaml | kubectl apply -f -
+  changed_when: false
+
+- name: Create forgejo namespace if not exists
+  shell: kubectl create namespace forgejo --dry-run=client -o yaml | kubectl apply -f -
+  changed_when: false
+
 - name: Check if keycloak bootstrap admin secret exists
   shell: kubectl -n keycloak get secret keycloak-bootstrap-admin
   register: keycloak_secret_check
@@ -149,8 +161,21 @@
   shell: |
     kubectl -n keycloak create secret generic keycloak-bootstrap-admin \
       --from-literal=username=admin \
-      --from-literal=password={{ vault_keycloak_admin_password }}
-  when: keycloak_secret_check.rc != 0
+      --from-literal=password={{ vault_keycloak_admin_password | quote }}
+  when:
+    - keycloak_secret_check.rc != 0
+    - vault_keycloak_admin_password | default('') | trim | length > 0
+
+- name: Warn that the keycloak admin password is unset
+  debug:
+    msg: >-
+      vault_keycloak_admin_password is empty in vault.yml, so the
+      keycloak-bootstrap-admin secret was NOT created. Set it with
+      'ansible-vault edit group_vars/oracle_hosts/vault.yml' before
+      enabling keycloak, or it will bootstrap with a blank admin password.
+  when:
+    - keycloak_secret_check.rc != 0
+    - vault_keycloak_admin_password | default('') | trim | length == 0
 
 - name: Check if forgejo smtp secret exists
   shell: kubectl -n forgejo get secret forgejo-smtp
@@ -161,7 +186,7 @@
 - name: Create forgejo smtp secret
   shell: |
     kubectl -n forgejo create secret generic forgejo-smtp \
-      --from-literal=passwd={{ vault_forgejo_smtp_password }}
+      --from-literal=passwd={{ vault_forgejo_smtp_password | quote }}
   when: forgejo_smtp_secret_check.rc != 0
 
 - name: Check if keycloak smtp secret exists
@@ -173,7 +198,7 @@
 - name: Create keycloak smtp secret
   shell: |
     kubectl -n keycloak create secret generic keycloak-smtp \
-      --from-literal=password={{ vault_forgejo_smtp_password }}
+      --from-literal=password={{ vault_forgejo_smtp_password | quote }}
   when: keycloak_smtp_secret_check.rc != 0
 
 - name: Create omni namespace if not exists
@@ -189,7 +214,7 @@
 - name: Create omni etcd encryption key secret
   shell: |
     kubectl -n omni create secret generic omni-etcd-encryption-key \
-      --from-literal=omni.asc="{{ omni_etcd_encryption_key }}"
+      --from-literal=omni.asc={{ omni_etcd_encryption_key | quote }}
   no_log: true
   when: omni_etcd_key_check.rc != 0
 
@@ -222,8 +247,8 @@
 - name: Create tailscale OAuth secret
   shell: |
     kubectl -n flux-system create secret generic tailscale-oauth \
-      --from-literal=oauth.clientId="{{ tailscale_operator_oauth_client_id }}" \
-      --from-literal=oauth.clientSecret="{{ tailscale_operator_oauth_client_secret }}"
+      --from-literal=oauth.clientId={{ tailscale_operator_oauth_client_id | quote }} \
+      --from-literal=oauth.clientSecret={{ tailscale_operator_oauth_client_secret | quote }}
   no_log: true
   when: tailscale_oauth_check.rc != 0
 
@@ -240,8 +265,8 @@
 - name: Create openclaw env secret
   shell: |
     kubectl -n openclaw create secret generic openclaw-env-secret \
-      --from-literal=ANTHROPIC_API_KEY={{ vault_openclaw_anthropic_api_key }} \
-      --from-literal=OPENCLAW_GATEWAY_TOKEN={{ vault_openclaw_gateway_token }}
+      --from-literal=ANTHROPIC_API_KEY={{ vault_openclaw_anthropic_api_key | quote }} \
+      --from-literal=OPENCLAW_GATEWAY_TOKEN={{ vault_openclaw_gateway_token | quote }}
   when:
     - openclaw_secret_check.rc != 0
     - vault_openclaw_anthropic_api_key is defined
@@ -260,8 +285,8 @@
 - name: Create rustfs auth secret
   shell: |
     kubectl -n rustfs create secret generic rustfs-auth \
-      --from-literal=RUSTFS_ACCESS_KEY={{ rustfs_access_key }} \
-      --from-literal=RUSTFS_SECRET_KEY={{ rustfs_secret_key }}
+      --from-literal=RUSTFS_ACCESS_KEY={{ rustfs_access_key | quote }} \
+      --from-literal=RUSTFS_SECRET_KEY={{ rustfs_secret_key | quote }}
   no_log: true
   when:
     - rustfs_secret_check.rc != 0
@@ -281,11 +306,11 @@
 - name: Create alarik credentials secret
   shell: |
     kubectl -n alarik create secret generic alarik-credentials \
-      --from-literal=ADMIN_USERNAME={{ alarik_admin_username }} \
-      --from-literal=ADMIN_PASSWORD={{ alarik_admin_password }} \
-      --from-literal=JWT={{ alarik_jwt_key }} \
-      --from-literal=DEFAULT_ACCESS_KEY={{ alarik_default_access_key }} \
-      --from-literal=DEFAULT_SECRET_KEY={{ alarik_default_secret_key }}
+      --from-literal=ADMIN_USERNAME={{ alarik_admin_username | quote }} \
+      --from-literal=ADMIN_PASSWORD={{ alarik_admin_password | quote }} \
+      --from-literal=JWT={{ alarik_jwt_key | quote }} \
+      --from-literal=DEFAULT_ACCESS_KEY={{ alarik_default_access_key | quote }} \
+      --from-literal=DEFAULT_SECRET_KEY={{ alarik_default_secret_key | quote }}
   no_log: true
   when:
     - alarik_secret_check.rc != 0

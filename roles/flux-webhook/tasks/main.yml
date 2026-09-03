@@ -17,8 +17,22 @@
 - name: Create webhook token secret
   shell: |
     kubectl -n flux-system create secret generic webhook-token \
-      --from-literal=token={{ webhook_token }}
+      --from-literal=token={{ webhook_token | quote }}
   when: secret_check.rc != 0
+  register: webhook_secret_created
+
+# The flux role applies the Kustomization — which contains the Receiver —
+# before this role creates the token it needs, so on a fresh cluster the
+# Receiver reconciles once, fails with TokenNotFound and holds the whole
+# flux-system Kustomization in 'Reconciliation in progress' until its next
+# retry. Nudge it as soon as the secret exists.
+- name: Force Receiver reconciliation now that the token exists
+  shell: >
+    kubectl -n flux-system annotate receiver github-webhook-receiver
+    reconcile.fluxcd.io/requestedAt="$(date +%s)" --overwrite
+  when: webhook_secret_created.changed | default(false)
+  failed_when: false
+  changed_when: false
 
 - name: Display webhook token
   debug:
