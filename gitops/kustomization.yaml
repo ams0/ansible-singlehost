@@ -1,24 +1,35 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+# ── Rebuild 2026-09-03 ──────────────────────────────────────────────
+# Cluster is being recreated after an OCI VM reset. Bring up cluster
+# plumbing only; platform services and apps stay off until the base is
+# proven healthy. Re-enable by uncommenting, bottom block first.
+# ────────────────────────────────────────────────────────────────────
+
 resources:
+# --- core plumbing (enabled) ---
 - namespace.yaml
 - flux-receiver
 - gateway-api/experimental-install-v1.4.0.yaml
 - istio
-- observability
-- loki
-- alloy
 - cnpg
-- clickhouse
 - databases
-- apps
 - gateways/configmap.yaml
 - gateways/gateway.yaml
 - local-path-provisioner/local-path-provisioner.yaml
-- argocd
-- velero
 - system
+
+# --- platform services (off during rebuild) ---
+#- observability
+#- loki
+#- alloy
+#- clickhouse
+#- argocd
+#- velero
+
+# --- applications (off during rebuild) ---
+#- apps
 
 # Removed coredns-tailscale-patch — k0s manages CoreDNS as a static pod,
 # not a Deployment. Strategic merge patches cannot match it.
