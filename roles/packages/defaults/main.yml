@@ -1,0 +1,33 @@
+---
+# Apply all pending package upgrades on every run (apt full-upgrade).
+# This is how Docker and other third-party packages get updated: on a
+# deliberate deploy, not unattended at 02:00.
+packages_full_upgrade: true
+
+# Manage unattended-upgrades on the host.
+packages_unattended_enabled: true
+
+# Take non-security ${distro_codename}-updates as well, not just -security.
+packages_unattended_include_updates: true
+
+# Include the Docker apt origin in unattended upgrades.
+# Off by default: upgrading docker-ce restarts the daemon, which bounces
+# every container on the host. Docker still gets upgraded by the
+# packages_full_upgrade step during a normal deploy.
+packages_unattended_include_docker: false
+
+# Reboot automatically when an upgrade requires it.
+# Off by default: this host is a single-node k0s cluster and all app data
+# lives on local-path volumes here, so an unannounced reboot takes the
+# whole lab down. Set true (with a time below) to let kernel updates land
+# on their own.
+packages_unattended_auto_reboot: false
+packages_unattended_auto_reboot_time: "02:00"
+
+# Let unattended-upgrades clean up superseded kernels and orphaned deps.
+packages_unattended_autoremove: true
+packages_unattended_remove_unused_kernels: true
+
+# Allow this play to reboot the host when /var/run/reboot-required exists.
+# Off by default; pass -e packages_allow_reboot=true for a maintenance run.
+packages_allow_reboot: false

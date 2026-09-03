@@ -1,0 +1,24 @@
+// Managed by Ansible (roles/packages) — do not edit by hand.
+// Sorts after 50unattended-upgrades, so these values win.
+
+Unattended-Upgrade::Allowed-Origins {
+    "${distro_id}:${distro_codename}";
+    "${distro_id}:${distro_codename}-security";
+    "${distro_id}ESMApps:${distro_codename}-apps-security";
+    "${distro_id}ESM:${distro_codename}-infra-security";
+{% if packages_unattended_include_updates %}
+    "${distro_id}:${distro_codename}-updates";
+{% endif %}
+{% if packages_unattended_include_docker %}
+    "Docker:${distro_codename}";
+{% endif %}
+};
+
+Unattended-Upgrade::AutoFixInterruptedDpkg "true";
+Unattended-Upgrade::MinimalSteps "true";
+Unattended-Upgrade::Remove-Unused-Kernel-Packages "{{ packages_unattended_remove_unused_kernels | ternary('true', 'false') }}";
+Unattended-Upgrade::Remove-Unused-Dependencies "{{ packages_unattended_autoremove | ternary('true', 'false') }}";
+Unattended-Upgrade::Automatic-Reboot "{{ packages_unattended_auto_reboot | ternary('true', 'false') }}";
+Unattended-Upgrade::Automatic-Reboot-WithUsers "false";
+Unattended-Upgrade::Automatic-Reboot-Time "{{ packages_unattended_auto_reboot_time }}";
+Unattended-Upgrade::SyslogEnable "true";

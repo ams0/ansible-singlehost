@@ -17,6 +17,88 @@
     state: absent
   when: packages_to_remove is defined
 
+# ── Full system upgrade ──────────────────────────────────────────────
+# Runs on every deploy so Ubuntu and third-party packages (Docker) are
+# upgraded deliberately, while a human is watching, rather than at 02:00.
+
+- name: Upgrade all packages
+  apt:
+    upgrade: full
+    update_cache: yes
+    cache_valid_time: 0
+    autoremove: "{{ packages_unattended_autoremove }}"
+  register: packages_upgrade_result
+  when: packages_full_upgrade | bool
+
+- name: Report upgrade outcome
+  debug:
+    msg: "{{ packages_upgrade_result.stdout_lines[-3:] | default(['no changes']) }}"
+  when:
+    - packages_full_upgrade | bool
+    - packages_upgrade_result.changed | default(false)
+
+# ── Unattended upgrades ──────────────────────────────────────────────
+
+- name: Install unattended-upgrades
+  apt:
+    name:
+      - unattended-upgrades
+      - apt-listchanges
+    state: present
+  when: packages_unattended_enabled | bool
+
+- name: Configure apt periodic tasks
+  template:
+    src: 20auto-upgrades.j2
+    dest: /etc/apt/apt.conf.d/20auto-upgrades
+    owner: root
+    group: root
+    mode: '0644'
+  when: packages_unattended_enabled | bool
+
+- name: Configure unattended-upgrades policy
+  template:
+    src: 52-cloudlab-unattended-upgrades.j2
+    dest: /etc/apt/apt.conf.d/52-cloudlab-unattended-upgrades
+    owner: root
+    group: root
+    mode: '0644'
+    validate: 'apt-config -c %s dump'
+  when: packages_unattended_enabled | bool
+
+- name: Enable unattended-upgrades service
+  systemd:
+    name: unattended-upgrades
+    enabled: yes
+    state: started
+    daemon_reload: yes
+  when: packages_unattended_enabled | bool
+
+# ── Reboot handling ──────────────────────────────────────────────────
+
+- name: Check whether a reboot is required
+  stat:
+    path: /var/run/reboot-required
+  register: packages_reboot_required
+
+- name: Reboot the host to finish applying upgrades
+  reboot:
+    msg: "Reboot triggered by Ansible after package upgrades"
+    reboot_timeout: 600
+    post_reboot_delay: 15
+  when:
+    - packages_reboot_required.stat.exists
+    - packages_allow_reboot | bool
+
+- name: Warn that a reboot is pending
+  debug:
+    msg: >-
+      A reboot is required to finish applying upgrades (kernel or libc).
+      Re-run with -e packages_allow_reboot=true, or reboot the host manually.
+  when:
+    - packages_reboot_required.stat.exists
+    - not (packages_allow_reboot | bool)
+
 - name: Autoremove unused packages
   apt:
     autoremove: yes
